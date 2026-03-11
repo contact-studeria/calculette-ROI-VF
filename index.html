@@ -7,7 +7,242 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<style>
+:root{--p:#7c3aed;--pd:#5b21b6;--pl:#8b5cf6;--pll:#a78bfa;--p100:#ede9fe;--p50:#f5f3ff;--pink:#ec4899;--bg:#f8f9fc;--white:#fff;--t900:#0f172a;--t700:#334155;--t500:#64748b;--t400:#94a3b8;--t300:#cbd5e1;--border:#e2e8f0;--borderl:#f1f5f9;--green:#059669;--greenl:#d1fae5;--red:#dc2626;--redl:#fef2f2;--yellow:#d97706;--yellowl:#fffbeb;--shp:0 4px 24px rgba(124,58,237,.2);--r8:8px;--r12:12px;--r16:16px;--r24:24px;--rf:9999px;--hdr:64px}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--t700);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── HEADER ─────────────────────────────────────────── */
+.lhdr{position:sticky;top:0;z-index:200;height:var(--hdr);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-size:20px;font-weight:800;color:var(--t900);letter-spacing:.3px}
+.logo-sub{font-size:10px;color:var(--t400);font-weight:500;letter-spacing:.5px;margin-top:-2px}
+.hdr-r{display:flex;align-items:center;gap:12px}
+.badge-live{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:var(--rf);background:var(--p50);border:1px solid var(--p100);color:var(--p);font-size:11px;font-weight:700;letter-spacing:.5px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.btn-ghost{padding:9px 20px;border:2px solid var(--border);border-radius:var(--r12);font-size:13px;font-weight:700;color:var(--t700);background:white;cursor:pointer;font-family:inherit;transition:all .2s}
+.btn-ghost:hover{border-color:var(--pll);color:var(--p)}
+
+/* ── SPLIT LAYOUT ────────────────────────────────────── */
+#landing{background:white}
+.split{display:grid;grid-template-columns:1fr 420px;align-items:start;min-height:calc(100vh - var(--hdr))}
+
+/* ── LEFT FORM ───────────────────────────────────────── */
+.lf{padding:52px 60px 140px;background:var(--bg);border-right:1px solid var(--border)}
+.lf-hero{margin-bottom:52px}
+.lf-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:var(--rf);background:var(--p50);border:1px solid var(--p100);color:var(--p);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+.lf-h1{font-size:38px;font-weight:900;line-height:1.1;color:var(--t900);letter-spacing:-1.5px;margin-bottom:10px}
+.grad{background:linear-gradient(135deg,var(--p),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.lf-sub{font-size:15px;color:var(--t500);line-height:1.6}
+
+/* Form sections */
+.fs{background:white;border:1px solid var(--border);border-radius:var(--r24);padding:36px;margin-bottom:20px;transition:box-shadow .2s}
+.fs:focus-within{box-shadow:0 4px 32px rgba(124,58,237,.08);border-color:var(--p100)}
+.fs-hdr{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.fs-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pd));color:white;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fs-title{font-size:18px;font-weight:800;color:var(--t900);letter-spacing:-.3px}
+.fs-desc{font-size:13px;color:var(--t400);margin-top:2px}
+
+/* Inputs */
+.fl{font-size:11px;font-weight:700;color:var(--t500);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px}
+.txt{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:var(--r12);font-size:15px;font-family:inherit;color:var(--t900);background:white;outline:none;transition:all .25s}
+.txt:focus{border-color:var(--p);box-shadow:0 0 0 4px rgba(124,58,237,.08)}
+.txt::placeholder{color:var(--t300)}
+.field{margin-bottom:24px}
+
+/* Sector grid */
+.sc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.sc{padding:14px 6px;border:2px solid var(--border);border-radius:var(--r12);text-align:center;cursor:pointer;background:white;transition:all .2s;user-select:none}
+.sc:hover{border-color:var(--pll);background:var(--p50)}.sc.sel{border-color:var(--p);background:var(--p50);box-shadow:0 0 0 3px rgba(124,58,237,.08)}
+.sc svg{display:block;margin:0 auto 6px;color:var(--pll)}.sc.sel svg{color:var(--p)}.sc-n{font-size:10px;font-weight:700;color:var(--t700);line-height:1.3}.sc.sel .sc-n{color:var(--p)}
+
+/* Sliders */
+.sl2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.sl-block{margin-bottom:0}
+.sl-hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.sl-lbl{font-size:13px;font-weight:600;color:var(--t500)}
+.sl-val{font-size:26px;font-weight:900;color:var(--p);letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:3px;outline:none;cursor:pointer;background:var(--border)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--p);cursor:pointer;box-shadow:0 2px 8px rgba(124,58,237,.3);transition:box-shadow .15s,transform .15s}
+input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 4px 16px rgba(124,58,237,.4);transform:scale(1.12)}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--p);cursor:pointer}
+.sl-marks{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--t400);font-weight:500}
+.s1v{font-size:28px;font-weight:900;color:var(--p);letter-spacing:-1px;font-variant-numeric:tabular-nums}
+
+/* Domain grid */
+.dom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.dom-card{background:var(--bg);border:2px solid var(--border);border-radius:var(--r16);padding:18px 16px;cursor:pointer;transition:all .2s;user-select:none}
+.dom-card:hover{border-color:var(--pll);background:white;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.dom-card.sel{border-color:var(--p);background:white;box-shadow:0 0 0 3px rgba(124,58,237,.08)}
+.dom-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
+.dom-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dom-chk{width:20px;height:20px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}.dom-card.sel .dom-chk{background:var(--p);border-color:var(--p)}
+.dom-n{font-size:13px;font-weight:700;color:var(--t900);margin-bottom:3px}.dom-d{font-size:11px;color:var(--t400);line-height:1.35;margin-bottom:6px}.dom-c{font-size:10px;font-weight:700;color:var(--p);text-transform:uppercase;letter-spacing:.5px}
+
+/* UC list */
+.fbar{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+.fc{padding:6px 14px;border-radius:var(--rf);font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--t400);font-family:inherit;transition:all .2s}.fc:hover{border-color:var(--pll);color:var(--t700)}.fc.on{background:var(--p);border-color:var(--p);color:white}
+.ball{margin-left:auto;padding:6px 14px;border-radius:var(--rf);font-size:11px;font-weight:700;cursor:pointer;background:white;border:1.5px solid var(--pll);color:var(--p);font-family:inherit;transition:all .2s;text-transform:uppercase;letter-spacing:.3px}.ball:hover{background:var(--p);color:white;border-color:var(--p)}
+.uc-cnt{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-radius:var(--r12);background:var(--p50);border:1px solid var(--p100);margin-bottom:12px;font-size:13px;font-weight:600;color:var(--t700)}.uc-g{color:var(--p);font-weight:800}
+.ucg{margin-bottom:18px}.ucgh{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.ucgt{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--p)}
+.ucgb{font-size:11px;color:var(--p);cursor:pointer;font-weight:600;background:none;border:none;padding:3px 8px;border-radius:6px;transition:all .2s;font-family:inherit}.ucgb:hover{background:var(--p50)}
+.ucc{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r12);background:white;cursor:pointer;margin-bottom:5px;transition:all .18s;user-select:none}
+.ucc:hover{border-color:var(--pll)}.ucc.on{border-color:var(--p);background:var(--p50)}.ucc.hide{display:none}
+.uchk{width:20px;height:20px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}.ucc.on .uchk{background:var(--p);border-color:var(--p)}
+.uchk svg{display:none;width:11px;height:11px;color:white}.ucc.on .uchk svg{display:block}
+.ucb{flex:1;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.ucn{font-weight:600;font-size:13px;color:var(--t900);margin-bottom:3px}.ucm{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.badge{padding:2px 8px;border-radius:var(--rf);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.bf{background:var(--greenl);color:var(--green)}.bm{background:var(--yellowl);color:var(--yellow)}.ba{background:var(--redl);color:var(--red)}
+.ucos{font-size:11px;color:var(--t400)}.ucgr{text-align:right;flex-shrink:0}.ucgv{font-weight:700;color:var(--p);font-size:12px}.ucgl{font-size:10px;color:var(--t400);margin-top:2px}
+.uc-empty{text-align:center;color:var(--t400);padding:28px 0;font-size:14px}
+
+/* CTA section */
+.lf-cta{background:white;border:1px solid var(--border);border-radius:var(--r24);padding:36px;text-align:center;margin-top:4px}
+.lf-cta-t{font-size:20px;font-weight:800;color:var(--t900);margin-bottom:8px}
+.lf-cta-d{font-size:14px;color:var(--t500);margin-bottom:24px}
+.btn-report{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:17px 40px;background:linear-gradient(135deg,var(--p),var(--pd));color:white;border:none;border-radius:var(--r12);font-size:16px;font-weight:700;cursor:pointer;box-shadow:var(--shp);transition:all .3s;font-family:inherit;width:100%}
+.btn-report:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(124,58,237,.32)}
+.btn-report-sub{font-size:12px;color:var(--t400);margin-top:12px}
+
+/* ── RIGHT STICKY PANEL ───────────────────────────────── */
+.rs{position:sticky;top:var(--hdr);margin:12px 12px 12px 0;border-radius:20px;height:calc(100vh - var(--hdr) - 24px);overflow-y:auto;background:linear-gradient(160deg,#0f0620 0%,#1a0835 50%,#0d041a 100%);display:flex;flex-direction:column;padding:32px 28px}
+.rs::-webkit-scrollbar{width:4px}.rs::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+
+/* Company name in panel */
+.rp-co{font-size:12px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:28px;display:flex;align-items:center;gap:8px}
+.rp-co-name{color:rgba(255,255,255,.85);font-weight:800}
+.rp-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 1.8s ease-in-out infinite}
+
+/* Big ROI number */
+.rp-main{text-align:center;padding:8px 0 24px;border-bottom:1px solid rgba(255,255,255,.08)}
+.rp-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:16px}
+.rp-big{font-size:64px;font-weight:900;color:white;letter-spacing:-3px;line-height:1;font-variant-numeric:tabular-nums;transition:color .3s}
+.rp-big.pos{color:#a78bfa}
+.rp-currency{font-size:28px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:0;vertical-align:super;margin-left:2px}
+.rp-sub{font-size:14px;font-weight:500;color:rgba(255,255,255,.4);margin-top:10px;letter-spacing:.2px}
+
+/* Stats row */
+.rp-stats{display:grid;grid-template-columns:1fr 1px 1fr;margin:24px 0;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08)}
+.rp-stat{text-align:center;padding:0 8px}
+.rp-stat-val{font-size:32px;font-weight:900;color:white;letter-spacing:-1px;line-height:1;font-variant-numeric:tabular-nums}
+.rp-stat-lbl{font-size:11px;color:rgba(255,255,255,.4);font-weight:500;margin-top:6px;line-height:1.3}
+.rp-sep{background:rgba(255,255,255,.1)}
+
+/* Monthly breakdown */
+.rp-monthly{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:4px}
+.rp-m-lbl{font-size:12px;color:rgba(255,255,255,.45);font-weight:500}
+.rp-m-val{font-size:16px;font-weight:800;color:rgba(255,255,255,.8);font-variant-numeric:tabular-nums}
+
+/* Domain mini bars */
+.rp-doms-lbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:1px;margin:20px 0 12px}
+.rp-doms{display:flex;flex-direction:column;gap:8px;flex:1}
+.rp-dom-row{display:flex;align-items:center;gap:10px}
+.rp-dom-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.rp-dom-name{font-size:11px;font-weight:600;color:rgba(255,255,255,.6);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rp-dom-bar-wrap{width:64px;height:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;flex-shrink:0}
+.rp-dom-bar{height:100%;border-radius:2px;transition:width .5s ease}
+.rp-dom-cnt{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);width:18px;text-align:right;flex-shrink:0}
+
+/* CTA in panel */
+.rp-cta-wrap{margin-top:auto;padding-top:24px}
+.rp-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px 24px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;border:none;border-radius:var(--r12);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .3s;box-shadow:0 4px 24px rgba(124,58,237,.4)}
+.rp-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,58,237,.5);background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+.rp-cta-note{text-align:center;font-size:11px;color:rgba(255,255,255,.3);margin-top:10px}
+
+/* Number pop animation */
+@keyframes numFlash{0%{opacity:.4;transform:translateY(-4px)}100%{opacity:1;transform:translateY(0)}}
+.num-flash{animation:numFlash .25s ease-out}
+
+/* ── REPORT PAGE ──────────────────────────────────────── */
+#report{display:none;min-height:100vh;background:var(--bg)}
+.r-hdr{background:white;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:0 24px}
+.r-inn{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.r-back{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--t500);cursor:pointer;border:none;background:none;font-family:inherit;padding:8px 0;transition:color .2s}.r-back:hover{color:var(--p)}
+.r-main{padding:40px 24px 80px}
+.r-cont{max-width:960px;margin:0 auto}
+
+/* PDF cover */
+.pdf-cover{display:none;text-align:center;padding:60px 40px;border-bottom:3px solid var(--p);margin-bottom:40px}
+.pdc-logo{font-size:28px;font-weight:900;color:var(--p);letter-spacing:3px;margin-bottom:24px}
+.pdc-title{font-size:40px;font-weight:900;color:var(--t900);letter-spacing:-1px;margin-bottom:16px}
+.pdc-co{font-size:22px;font-weight:700;color:var(--p);margin-bottom:8px}
+.pdc-date{font-size:14px;color:var(--t400);margin-bottom:16px}
+.pdc-tagline{font-size:15px;color:var(--t500);font-style:italic}
+body.pdf-mode .pdf-cover{display:block!important}
+
+/* PDF */
+.pdf-hdr{display:none;padding:20px 0;margin-bottom:20px;border-bottom:2px solid var(--border);text-align:center}
+.pdf-logo{font-size:22px;font-weight:900;color:var(--p);letter-spacing:2px}.pdf-sub{font-size:12px;color:var(--t400);margin-top:4px}
+
+/* Dashboard */
+.dhero{background:white;border:1px solid var(--border);border-radius:var(--r24);padding:40px;margin-bottom:24px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+.dco{font-size:26px;font-weight:800;color:var(--t900);margin-bottom:4px}.dsec{font-size:14px;color:var(--t400);margin-bottom:18px}
+.dverd{font-size:15px;color:var(--t500);line-height:1.75;max-width:600px;margin:0 auto 28px}.dverd strong{color:var(--p);font-weight:700}
+.hkpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.hkpi{background:var(--bg);border-radius:var(--r16);padding:24px 16px;border:1px solid var(--borderl)}
+.hkl{font-size:10px;color:var(--t400);text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:7px}
+.hkv{font-size:32px;font-weight:900;color:var(--p);letter-spacing:-.5px;font-variant-numeric:tabular-nums}.hkv.g{color:var(--green)}.hks{font-size:11px;color:var(--t400);margin-top:4px}
+.sect{font-size:16px;font-weight:700;color:var(--t900);margin:28px 0 14px;display:flex;align-items:center;gap:8px}.sect svg{width:16px;height:16px;color:var(--p);flex-shrink:0}
+.kgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px}
+.kcard{background:white;border:1px solid var(--border);border-radius:var(--r12);padding:18px;text-align:center}
+.kl{font-size:10px;color:var(--t400);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:6px}
+.kv{font-size:20px;font-weight:800;margin-bottom:2px;font-variant-numeric:tabular-nums}.kv.pos{color:var(--green)}.kv.neg{color:var(--red)}.kv.neu{color:var(--p)}.ks{font-size:10px;color:var(--t400)}
+.crow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.cbox{background:white;border:1px solid var(--border);border-radius:var(--r16);padding:22px}.cbox.full{grid-column:1/-1}
+.cl{font-size:11px;font-weight:700;color:var(--t700);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
+.cw{position:relative;height:240px}.cw.tall{height:280px}
+.tw{overflow-x:auto;border-radius:var(--r16);border:1px solid var(--border);background:white;margin-bottom:4px}
+.st{width:100%;border-collapse:collapse;font-size:13px}
+.st th{background:var(--bg);padding:11px 14px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--t400);border-bottom:1px solid var(--border)}
+.st td{padding:10px 14px;border-bottom:1px solid var(--borderl);color:var(--t700)}.st tr:last-child td{border-bottom:none}.st tr:hover td{background:var(--p50)}
+.tdg{color:var(--green);font-weight:700}.tdc{color:var(--red);font-weight:600}
+.bgrid{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}.btag{background:var(--p50);border:1px solid var(--p100);border-radius:var(--rf);padding:8px 16px;font-size:13px;color:var(--pd);font-weight:600}
+.ctabox{background:linear-gradient(135deg,#0f0620,#1a0835);border-radius:var(--r24);padding:40px;text-align:center;margin-top:28px;color:white}
+.ctat{font-size:22px;font-weight:800;color:white;margin-bottom:8px}.ctad{font-size:14px;color:rgba(255,255,255,.55);margin-bottom:28px}
+.ctabs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{padding:13px 28px;border:none;border-radius:var(--r12);font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;font-family:inherit;display:inline-flex;align-items:center;gap:8px}
+.bp{background:linear-gradient(135deg,var(--p),var(--pd));color:white;box-shadow:var(--shp)}.bp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,58,237,.28)}
+.bs{background:rgba(255,255,255,.1);color:white;border:1.5px solid rgba(255,255,255,.15)}.bs:hover{background:rgba(255,255,255,.18)}
+.bg{background:var(--green);color:white;box-shadow:0 4px 16px rgba(5,150,105,.2)}.bg:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(5,150,105,.28)}
+
+/* Modal */
+.mov{display:none;position:fixed;inset:0;background:rgba(15,23,42,.6);backdrop-filter:blur(6px);z-index:1000;justify-content:center;align-items:center;padding:20px}
+.mov.open{display:flex;animation:fadeUp .25s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.mo{background:white;border-radius:var(--r24);padding:36px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.mo h3{font-size:20px;font-weight:800;color:var(--t900);margin-bottom:8px}.mo p{font-size:14px;color:var(--t500);margin-bottom:22px;line-height:1.7}
+.mi{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:var(--r12);font-size:14px;margin-bottom:12px;font-family:inherit;color:var(--t900);outline:none;transition:border-color .2s}.mi:focus{border-color:var(--p);box-shadow:0 0 0 4px rgba(124,58,237,.08)}.mi::placeholder{color:var(--t300)}
+.moa{display:flex;gap:10px}.moa .btn{flex:1}.moa .bs{background:var(--bg);color:var(--t700);border-color:var(--border)}.moa .bs:hover{border-color:var(--pll);color:var(--p);background:var(--p50)}
+
+/* Methodology box */
+.r-methodology{margin-bottom:24px}
+.method-box{background:linear-gradient(135deg,#f5f3ff,#fdf4fc);border:1px solid var(--p100);border-radius:var(--r16);padding:20px 24px}
+.method-title{font-size:13px;font-weight:700;color:var(--p);margin-bottom:8px}
+.method-body{font-size:13px;color:var(--t500);line-height:1.7}
+.method-body strong{color:var(--t900);font-weight:700}
+
+/* Domain summary */
+.dom-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.dom-sum-card{background:white;border:1px solid var(--border);border-radius:var(--r12);padding:16px;transition:box-shadow .2s}
+.dom-sum-name{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.dom-sum-val{font-size:22px;font-weight:900;color:var(--t900);font-variant-numeric:tabular-nums;line-height:1}
+.dom-sum-val span{font-size:12px;font-weight:500;color:var(--t400)}
+.dom-sum-net{font-size:12px;font-weight:700;color:var(--green);margin-top:4px}
+.dom-sum-uc{font-size:11px;color:var(--t400);margin-top:4px}
+@media(max-width:640px){.dom-summary{grid-template-columns:1fr 1fr}}
+
+/* PDF mode */
+body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!important}body.pdf-mode .r-cont{max-width:none}body.pdf-mode .pdf-hdr{display:block!important}body.pdf-mode .ctabox{display:none!important}body.pdf-mode canvas.pfh{display:none!important}body.pdf-mode{background:white!important}
+
+/* Responsive */
+@media(max-width:1100px){.split{grid-template-columns:1fr 380px}.lf{padding:40px 40px 120px}}
+@media(max-width:900px){.split{grid-template-columns:1fr}.rs{display:none}.lf{padding:32px 24px 100px}.sc-grid{grid-template-columns:repeat(3,1fr)}.dom-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.lf-h1{font-size:28px}.sc-grid{grid-template-columns:repeat(2,1fr)}.dom-grid{grid-template-columns:1fr}.hkpis,.kgrid,.crow{grid-template-columns:1fr}.sl2{grid-template-columns:1fr}.lhdr{padding:0 20px}.ucb{flex-direction:column}.ucgr{text-align:left}}
+
+</style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
@@ -134,7 +369,7 @@
           Voir mon rapport ROI détaillé
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
-        <p class="btn-report-sub">Analyse complète · 40 cas d'usage · Gratuit · Export PDF</p>
+        <p class="btn-report-sub">Analyse complète · 38 cas d'usage · Gratuit · Export PDF</p>
       </div>
     </div>
 
@@ -158,7 +393,7 @@
         </div>
         <div class="rp-sep"></div>
         <div class="rp-stat">
-          <div class="rp-stat-val" id="rp-uc">40</div>
+          <div class="rp-stat-val" id="rp-uc">38</div>
           <div class="rp-stat-lbl">Cas d'usage<br>applicables</div>
         </div>
       </div>
@@ -268,6 +503,662 @@
   <div class="moa"><button class="btn bs" onclick="closeMo()">Annuler</button><button class="btn bp" onclick="subContact()">Envoyer</button></div>
 </div></div>
 
-<script src="app.js"></script>
+<script>
+// Données initiales (fallback si le sheet est inaccessible)
+const UC=[
+{ID:"UC-001",Dom:"PROSPECTION & VENTE",T:"Recherche de prospects ciblés",D:"Moyen",G:"2 000 – 3 500 €/mois",Mn:2000,Mx:3500,B:"Efficacité",C:180,J:2},
+{ID:"UC-002",Dom:"PROSPECTION & VENTE",T:"Enrichissement de données prospects",D:"Facile",G:"1 500 – 2 000 €/mois",Mn:1500,Mx:2000,B:"Qualité",C:100,J:2},
+{ID:"UC-003",Dom:"PROSPECTION & VENTE",T:"Qualification et scoring de leads",D:"Moyen",G:"1 800 – 2 500 €/mois",Mn:1800,Mx:2500,B:"Qualité",C:150,J:3},
+{ID:"UC-004",Dom:"PROSPECTION & VENTE",T:"Séquences de prospection automatisées",D:"Facile",G:"3 000 – 4 500 €/mois",Mn:3000,Mx:4500,B:"Croissance",C:150,J:2},
+{ID:"UC-005",Dom:"PROSPECTION & VENTE",T:"Suivi réponses et intégration des leads",D:"Facile",G:"1 200 – 1 800 €/mois",Mn:1200,Mx:1800,B:"Efficacité",C:100,J:3},
+{ID:"UC-006",Dom:"PROSPECTION & VENTE",T:"Veille prospect avant RDV",D:"Facile",G:"800 – 1 200 €/mois",Mn:800,Mx:1200,B:"Efficacité",C:80,J:2},
+{ID:"UC-007",Dom:"PROSPECTION & VENTE",T:"Prise de notes et CR de réunion commerciale",D:"Facile",G:"1 000 – 1 500 €/mois",Mn:1000,Mx:1500,B:"Efficacité",C:60,J:1},
+{ID:"UC-008",Dom:"PROSPECTION & VENTE",T:"Email de suivi post-réunion personnalisé",D:"Facile",G:"600 – 1 000 €/mois",Mn:600,Mx:1000,B:"Efficacité",C:50,J:1},
+{ID:"UC-009",Dom:"PROSPECTION & VENTE",T:"Génération de propositions commerciales",D:"Moyen",G:"1 500 – 2 500 €/mois",Mn:1500,Mx:2500,B:"Efficacité",C:120,J:2},
+{ID:"UC-010",Dom:"PROSPECTION & VENTE",T:"Analyse post-appel et coaching commercial",D:"Moyen",G:"+15 à 25% taux de closing",Mn:800,Mx:1500,B:"Croissance",C:150,J:3},
+{ID:"UC-011",Dom:"PROSPECTION & VENTE",T:"Génération de devis automatisée",D:"Moyen",G:"1 200 – 2 000 €/mois",Mn:1200,Mx:2000,B:"Efficacité",C:100,J:2},
+{ID:"UC-012",Dom:"PROSPECTION & VENTE",T:"Prévisions de vente",D:"Avancé",G:"+20 à 30% précision forecast",Mn:800,Mx:1500,B:"Fiabilité",C:200,J:3},
+{ID:"UC-013",Dom:"PROSPECTION & VENTE",T:"Reporting commercial automatisé",D:"Facile",G:"800 – 1 200 €/mois",Mn:800,Mx:1200,B:"Efficacité",C:80,J:3},
+{ID:"UC-015",Dom:"MARKETING & CONTENU",T:"Rédaction posts réseaux sociaux multicanaux",D:"Facile",G:"1 500 – 2 500 €/mois",Mn:1500,Mx:2500,B:"Visibilité",C:80,J:2},
+{ID:"UC-016",Dom:"MARKETING & CONTENU",T:"Articles de blog SEO",D:"Facile",G:"2 000 – 3 000 €/mois",Mn:2000,Mx:3000,B:"Visibilité",C:100,J:3},
+{ID:"UC-017",Dom:"MARKETING & CONTENU",T:"Newsletters personnalisées",D:"Facile",G:"1 200 – 2 000 €/mois",Mn:1200,Mx:2000,B:"Engagement",C:80,J:2},
+{ID:"UC-018",Dom:"MARKETING & CONTENU",T:"Création d'images et visuels marketing",D:"Facile",G:"1 000 – 1 800 €/mois",Mn:1000,Mx:1800,B:"Efficacité",C:60,J:1},
+{ID:"UC-019",Dom:"MARKETING & CONTENU",T:"Calendrier éditorial automatisé",D:"Facile",G:"600 – 1 000 €/mois",Mn:600,Mx:1000,B:"Organisation",C:50,J:1},
+{ID:"UC-020",Dom:"MARKETING & CONTENU",T:"Analytics et reporting campagnes",D:"Moyen",G:"800 – 1 500 €/mois",Mn:800,Mx:1500,B:"Performance",C:100,J:3},
+{ID:"UC-021",Dom:"MARKETING & CONTENU",T:"Veille & synthèse concurrentielle",D:"Moyen",G:"800 – 1 500 €/mois",Mn:800,Mx:1500,B:"Performance",C:100,J:3},
+{ID:"UC-022",Dom:"SAV & RELATION CLIENT",T:"Chatbot IA support client 24/7",D:"Moyen",G:"2 500 – 4 000 €/mois",Mn:2500,Mx:4000,B:"Satisfaction",C:150,J:4},
+{ID:"UC-023",Dom:"SAV & RELATION CLIENT",T:"Tri et routage intelligent des tickets",D:"Moyen",G:"1 500 – 2 500 €/mois",Mn:1500,Mx:2500,B:"Efficacité",C:120,J:2},
+{ID:"UC-024",Dom:"SAV & RELATION CLIENT",T:"Prédiction churn et alertes proactives",D:"Moyen",G:"-30 à 50% churn",Mn:800,Mx:1500,B:"Rétention",C:150,J:3},
+{ID:"UC-026",Dom:"SAV & RELATION CLIENT",T:"Base de connaissances auto-générée",D:"Facile",G:"800 – 1 200 €/mois",Mn:800,Mx:1200,B:"Satisfaction",C:80,J:3},
+{ID:"UC-027",Dom:"SAV & RELATION CLIENT",T:"Réponse automatique aux avis clients",D:"Facile",G:"500 – 800 €/mois",Mn:500,Mx:800,B:"Réputation",C:50,J:1},
+{ID:"UC-028",Dom:"RH",T:"Rédaction de contenus RH",D:"Facile",G:"1 000 – 1 800 €/mois",Mn:1000,Mx:1800,B:"Efficacité",C:60,J:1},
+{ID:"UC-029",Dom:"RH",T:"Tri et scoring de CV automatique",D:"Moyen",G:"1 500 – 2 500 €/mois",Mn:1500,Mx:2500,B:"Efficacité",C:120,J:3},
+{ID:"UC-030",Dom:"RH",T:"Chatbot RH interne (questions collaborateurs)",D:"Moyen",G:"1 000 – 1 500 €/mois",Mn:1000,Mx:1500,B:"Satisfaction",C:100,J:2},
+{ID:"UC-031",Dom:"FINANCE & ADMINISTRATION",T:"Saisie comptable automatisée (OCR)",D:"Moyen",G:"1 800 – 3 000 €/mois",Mn:1800,Mx:3000,B:"Efficacité",C:120,J:2},
+{ID:"UC-032",Dom:"FINANCE & ADMINISTRATION",T:"Génération et envoi de factures",D:"Facile",G:"1 000 – 1 800 €/mois",Mn:1000,Mx:1800,B:"Efficacité",C:80,J:3},
+{ID:"UC-033",Dom:"FINANCE & ADMINISTRATION",T:"Traitement automatisé notes de frais",D:"Facile",G:"500 – 800 €/mois",Mn:500,Mx:800,B:"Efficacité",C:60,J:2},
+{ID:"UC-034",Dom:"FINANCE & ADMINISTRATION",T:"Relance impayés automatisée",D:"Facile",G:"1 500 – 3 000 €/mois",Mn:1500,Mx:3000,B:"Trésorerie",C:80,J:3},
+{ID:"UC-035",Dom:"PRODUCTIVITÉ",T:"Synthèses et comptes-rendus automatiques",D:"Facile",G:"1 000 – 1 500 €/mois",Mn:1000,Mx:1500,B:"Efficacité",C:60,J:1},
+{ID:"UC-036",Dom:"PRODUCTIVITÉ",T:"Tri et gestion intelligente des emails",D:"Facile",G:"800 – 1 200 €/mois",Mn:800,Mx:1200,B:"Efficacité",C:50,J:1},
+{ID:"UC-037",Dom:"PRODUCTIVITÉ",T:"Gestion intelligente de l'agenda",D:"Facile",G:"500 – 800 €/mois",Mn:500,Mx:800,B:"Efficacité",C:30,J:1},
+{ID:"UC-038",Dom:"PRODUCTIVITÉ",T:"Extraction et synthèse de documents longs",D:"Facile",G:"800 – 1 500 €/mois",Mn:800,Mx:1500,B:"Efficacité",C:50,J:1}
+];
+const DOMS=[
+{id:"PROSPECTION & VENTE",n:"Trouver + de clients",d:"Prospection, leads, CRM",col:"#7c3aed",bg:"#f5f3ff",ic:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>'},
+{id:"MARKETING & CONTENU",n:"Créer du contenu",d:"Réseaux sociaux, SEO",col:"#db2777",bg:"#fdf2f8",ic:'<path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>'},
+{id:"SAV & RELATION CLIENT",n:"Fidéliser ses clients",d:"Support, satisfaction",col:"#0891b2",bg:"#ecfeff",ic:'<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>'},
+{id:"RH",n:"Gérer les RH",d:"Recrutement, formation",col:"#d97706",bg:"#fffbeb",ic:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'},
+{id:"FINANCE & ADMINISTRATION",n:"Optimiser finance",d:"Facturation, comptabilité",col:"#059669",bg:"#ecfdf5",ic:'<path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>'},
+{id:"PRODUCTIVITÉ",n:"Gagner en productivité",d:"Emails, réunions, auto.",col:"#6366f1",bg:"#eef2ff",ic:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'}
+];
+const SECS=[
+{v:"Conseil & Services B2B",i:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>'},
+{v:"Commerce & Distribution",i:'<path d="M6 2L3 7v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-3-5H6z"/><path d="M3 7h18"/><path d="M16 11a4 4 0 0 1-8 0"/>'},
+{v:"Industrie & Fabrication",i:'<path d="M2 20h20"/><path d="M5 20V8l5 4V8l5 4V4l5 4v12"/>'},
+{v:"BTP & Construction",i:'<path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/>'},
+{v:"Hôtellerie & Restauration",i:'<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3"/><path d="M18 22V15"/>'},
+{v:"Santé & Bien-être",i:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>'},
+{v:"Immobilier",i:'<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'},
+{v:"Tech & SaaS",i:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>'},
+{v:"Finance & Assurance",i:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M2 11h20"/>'},
+{v:"Éducation & Formation",i:'<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>'},
+{v:"Autre / Non listé",i:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>'}
+];
+const DC={'PROSPECTION & VENTE':'#7c3aed','MARKETING & CONTENU':'#db2777','SAV & RELATION CLIENT':'#0891b2','RH':'#d97706','FINANCE & ADMINISTRATION':'#059669','PRODUCTIVITÉ':'#6366f1'};
+const CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+const RATE=800;
+let sector='',selD=[],selUC=[],dCh=null,bCh=null;
+
+/* ── Slider helpers ── */
+function empSlider(v){return Math.round(Math.pow(10,3*parseInt(v)/100));}
+function fEmpS(n){if(n>=1000)return'1 000+';if(n>=100)return''+Math.round(n/10)*10;return''+n;}
+function s1eu(){document.getElementById('s1ev').textContent=fEmpS(empSlider(document.getElementById('s1e').value));slBg('s1e');}
+function caF(v){const a=Math.log(1e5),b=Math.log(1e9+1);return Math.round(Math.exp(a+(b-a)*parseInt(v)/100));}
+function fCA(n){if(n>1e9)return'1 Md€+';if(n>=1e6)return(n<1e7?(n/1e6).toFixed(1):Math.round(n/1e6))+'M€';return Math.round(n/1000)+'K€';}
+function slBg(id){const e=document.getElementById(id);if(!e)return;const p=((e.value-e.min)/(e.max-e.min))*100;e.style.background=`linear-gradient(to right,#7c3aed ${p}%,#e2e8f0 ${p}%)`;}
+function s1cu(){document.getElementById('s1cv').textContent=fCA(caF(document.getElementById('s1c').value));slBg('s1c');}
+
+/* ── Number animation (slot machine feel) ── */
+function animN(el,target,suffix='',prefix=''){
+  if(!el)return;
+  const prev=parseFloat(el.dataset.val||'0')||0;
+  el.dataset.val=target;
+  el.classList.remove('num-flash');
+  void el.offsetWidth;
+  el.classList.add('num-flash');
+  const dur=500,steps=20;let i=0;
+  clearInterval(el._iv);
+  el._iv=setInterval(()=>{
+    i++;const p=Math.min(i/steps,1),ease=1-Math.pow(1-p,3);
+    const v=prev+(target-prev)*ease;
+    el.textContent=prefix+Math.round(v).toLocaleString('fr-FR')+suffix;
+    if(p>=1)clearInterval(el._iv);
+  },dur/steps);
+}
+
+/* ── Live preview update ── */
+function updatePreview(){
+  // Company name
+  const co=document.getElementById('coName').value.trim();
+  document.getElementById('rp-co').textContent=co||'Votre entreprise';
+
+  // Sliders
+  const sal=parseInt(document.getElementById('sl-sal').value);
+  const pct=parseInt(document.getElementById('sl-pct').value);
+  document.getElementById('v-sal').textContent=sal.toLocaleString('fr-FR')+' €';
+  document.getElementById('v-pct').textContent=pct+'%';
+  ['sl-sal','sl-pct'].forEach(id=>slBg(id));
+
+  const yrEl=document.getElementById('rp-year');
+  const pbEl=document.getElementById('rp-pb');
+
+  if(selUC.length===0){
+    // Aucun cas d'usage sélectionné → on n'affiche rien de financier
+    yrEl.textContent='—';
+    document.getElementById('rp-sub').textContent='Sélectionnez vos cas d\'usage';
+    pbEl.textContent='—';
+    document.getElementById('rp-uc').textContent=UC.length;
+    document.getElementById('rp-monthly-row').style.display='none';
+    document.getElementById('rp-tool-row').style.display='none';
+  } else {
+    // Calcul basé sur les UC sélectionnés
+    let gn=0,gx=0,tC=0,tJ=0;
+    selUC.forEach(u=>{gn+=u.Mn;gx+=u.Mx;tC+=u.C;tJ+=u.J;});
+    const avg=(gn+gx)/2;
+    const net=Math.round(avg-tC);
+    const monthly=Math.round(avg);
+    const impl=tJ*RATE;
+    const pb=net>0?impl/net:999;
+    const yr=net*12;
+
+    animN(yrEl,yr,' €');
+    document.getElementById('rp-sub').textContent='d\'économies nettes par an · '+selUC.length+' cas d\'usage';
+
+    if(pb<999){
+      const pbEl2=document.getElementById('rp-pb');
+      pbEl2.classList.remove('num-flash');void pbEl2.offsetWidth;pbEl2.classList.add('num-flash');
+      pbEl2.textContent=pb.toFixed(1)+' mois';
+    } else {pbEl.textContent='∞';}
+
+    animN(document.getElementById('rp-uc'),selUC.length,'');
+    document.getElementById('rp-monthly-row').style.display='flex';
+    document.getElementById('rp-tool-row').style.display='flex';
+    animN(document.getElementById('rp-monthly'),monthly,' €');
+    animN(document.getElementById('rp-tool'),tC,' €');
+  }
+
+  // Domain bars
+  const counts=DOMS.map(d=>{
+    if(selD.length>0)return selUC.filter(u=>u.Dom===d.id).length||UC.filter(u=>u.Dom===d.id).length;
+    return UC.filter(u=>u.Dom===d.id).length;
+  });
+  const maxC=Math.max(...counts,1);
+  document.getElementById('rp-doms').innerHTML=DOMS.map((d,i)=>{
+    const pct2=Math.round(counts[i]/maxC*100);
+    const active=selD.includes(d.id)||selD.length===0;
+    return`<div class="rp-dom-row" style="opacity:${active?.9:.3}"><div class="rp-dom-dot" style="background:${d.col}"></div><div class="rp-dom-name">${d.n}</div><div class="rp-dom-bar-wrap"><div class="rp-dom-bar" style="width:${pct2}%;background:${d.col}"></div></div><div class="rp-dom-cnt">${counts[i]}</div></div>`;
+  }).join('');
+}
+
+/* ── Navigation ── */
+function showReport(){
+  document.getElementById('landing').style.display='none';
+  document.getElementById('report').style.display='block';
+  window.scrollTo(0,0);
+  renderROI();
+}
+function backToLanding(){
+  document.getElementById('report').style.display='none';
+  document.getElementById('landing').style.display='';
+}
+
+/* ── Sectors ── */
+function renderSectors(){
+  document.getElementById('scGrid').innerHTML=SECS.map(s=>
+    `<div class="sc" onclick="pickSec('${s.v}',this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${s.i}</svg><div class="sc-n">${s.v}</div></div>`
+  ).join('');
+}
+function pickSec(v,el){sector=v;document.querySelectorAll('.sc').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');updatePreview();}
+
+/* ── Domains ── */
+function renderDoms(){
+  document.getElementById('domGrid').innerHTML=DOMS.map(d=>{
+    const cnt=UC.filter(u=>u.Dom===d.id).length;
+    const s=selD.includes(d.id);
+    return`<div class="dom-card${s?' sel':''}" onclick="togDom('${d.id}',this)">
+      <div class="dom-top"><div class="dom-ico" style="background:${d.bg}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${d.col}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d.ic}</svg></div><div class="dom-chk">${s?CHK:''}</div></div>
+      <div class="dom-n">${d.n}</div><div class="dom-d">${d.d}</div><div class="dom-c">${cnt} cas d'usage</div>
+    </div>`;
+  }).join('');
+}
+function togDom(id,card){
+  const i=selD.indexOf(id);
+  if(i>=0){selD.splice(i,1);card.classList.remove('sel');card.querySelector('.dom-chk').innerHTML='';}
+  else{selD.push(id);card.classList.add('sel');card.querySelector('.dom-chk').innerHTML=CHK;}
+  renderUC();updatePreview();
+}
+
+/* ── Use cases ── */
+function renderUC(){
+  const f=UC.filter(u=>selD.includes(u.Dom));
+  if(!f.length){
+    document.getElementById('ucCont').innerHTML='<p class="uc-empty">Sélectionnez un domaine ci-dessus pour afficher les cas d\'usage</p>';
+    updCnt();return;
+  }
+  const g={};f.forEach(u=>{(g[u.Dom]=g[u.Dom]||[]).push(u);});
+  let h='';
+  for(const[dom,ucs]of Object.entries(g)){
+    h+=`<div class="ucg"><div class="ucgh"><div class="ucgt">${dom}</div><button class="ucgb" onclick="grpS('${dom}',this)">Tout sélectionner</button></div>`;
+    ucs.forEach(u=>{
+      const ck=selUC.some(s=>s.ID===u.ID);
+      h+=`<div class="ucc${ck?' on':''}" data-id="${u.ID}" data-diff="${u.D}" onclick="togUC(this,'${u.ID}')"><div class="uchk">${CHK}</div><div class="ucb"><div><div class="ucn">${u.T}</div><div class="ucm"><span class="badge ${bCl(u.D)}">${u.D}</span><span class="ucos">${u.C}€/mois · ${u.J}j</span></div></div><div class="ucgr"><div class="ucgv">${u.G}</div><div class="ucgl">gain estimé</div></div></div></div>`;
+    });
+    h+='</div>';
+  }
+  document.getElementById('ucCont').innerHTML=h;
+  document.querySelectorAll('.fc').forEach(c=>{if(c.classList.contains('on'))fD(c.dataset.d,c);});
+  updCnt();
+}
+function togUC(card,id){
+  const i=selUC.findIndex(s=>s.ID===id);
+  if(i>=0){selUC.splice(i,1);card.classList.remove('on');}else{selUC.push(UC.find(u=>u.ID===id));card.classList.add('on');}
+  updCnt();updatePreview();
+}
+function grpS(dom,btn){
+  const du=UC.filter(u=>u.Dom===dom);
+  const all=du.every(u=>selUC.some(s=>s.ID===u.ID));
+  du.forEach(u=>{
+    const c=document.querySelector(`.ucc[data-id="${u.ID}"]`);if(!c||c.classList.contains('hide'))return;
+    if(all){if(selUC.some(s=>s.ID===u.ID)){selUC=selUC.filter(s=>s.ID!==u.ID);c.classList.remove('on');}}
+    else{if(!selUC.some(s=>s.ID===u.ID)){selUC.push(UC.find(x=>x.ID===u.ID));c.classList.add('on');}}
+  });
+  btn.textContent=all?'Tout sélectionner':'Tout désélectionner';updCnt();updatePreview();
+}
+function togAll(){
+  const vis=[...document.querySelectorAll('.ucc:not(.hide)')];
+  const all=vis.every(c=>c.classList.contains('on'));
+  vis.forEach(card=>{
+    const id=card.dataset.id;
+    if(all){if(selUC.some(s=>s.ID===id)){selUC=selUC.filter(s=>s.ID!==id);card.classList.remove('on');}}
+    else{if(!selUC.some(s=>s.ID===id)){selUC.push(UC.find(u=>u.ID===id));card.classList.add('on');}}
+  });
+  updCnt();updatePreview();
+}
+function fD(d,chip){document.querySelectorAll('.fc').forEach(c=>c.classList.remove('on'));chip.classList.add('on');document.querySelectorAll('.ucc').forEach(c=>c.classList.toggle('hide',d!=='all'&&c.dataset.diff!==d));}
+function updCnt(){
+  const n=selUC.length;let mn=0,mx=0;selUC.forEach(u=>{mn+=u.Mn;mx+=u.Mx;});
+  document.getElementById('ucTxt').textContent=n+' cas d\'usage sélectionné'+(n>1?'s':'');
+  document.getElementById('ucG').textContent=n?mn.toLocaleString('fr-FR')+' – '+mx.toLocaleString('fr-FR')+' €/mois':'';
+}
+function bCl(d){return 'b'+d[0].toLowerCase();}
+
+/* ── ROI Report ── */
+function renderROI(){
+  const co=document.getElementById('coName').value||'Votre entreprise';
+  let gn=0,gx=0,tC=0,tJ=0;
+  const byD={},ben=new Set();
+
+  if(selUC.length>0){
+    selUC.forEach(u=>{gn+=u.Mn;gx+=u.Mx;tC+=u.C;tJ+=u.J;if(!byD[u.Dom])byD[u.Dom]={min:0,max:0,cost:0};byD[u.Dom].min+=u.Mn;byD[u.Dom].max+=u.Mx;byD[u.Dom].cost+=u.C;if(u.B)ben.add(u.B);});
+  } else {
+    // Fallback: use slider formula
+    const emp=empSlider(document.getElementById('s1e').value);
+    const sal=parseInt(document.getElementById('sl-sal').value);
+    const pct=parseInt(document.getElementById('sl-pct').value);
+    const monthly=Math.round(emp*sal*(pct/100)*0.38);
+    const tool=Math.round(emp*32);
+    gn=monthly*0.8;gx=monthly;tC=tool;
+    DOMS.forEach(d=>{const cnt=UC.filter(u=>u.Dom===d.id).length;byD[d.id]={min:Math.round(gn*cnt/UC.length),max:Math.round(gx*cnt/UC.length),cost:Math.round(tC*cnt/UC.length)};});
+    ben.add('Productivité');ben.add('Efficacité');ben.add('Qualité');
+  }
+
+  const nMin=gn-tC,nMax=gx-tC,nAvg=(nMin+nMax)/2;
+  const impl=tJ*RATE||Math.round(empSlider(document.getElementById('s1e').value)*480);
+  const pb=nAvg>0?impl/nAvg:Infinity;
+  const ai=impl+tC*12,rm=ai>0?(nMax*12)/ai:0;
+
+  document.getElementById('dCo').textContent=co;
+  document.getElementById('dSec').textContent=[sector||'—',fEmpS(empSlider(document.getElementById('s1e').value))+' collaborateurs · CA '+fCA(caF(document.getElementById('s1c').value))].join(' · ');
+  document.getElementById('pdfDate').textContent=new Date().toLocaleDateString('fr-FR');
+  const ucTxt=selUC.length>0?`<strong>${selUC.length} cas d'usage</strong>`:'<strong>tous les domaines</strong>';
+  document.getElementById('dV').innerHTML=`Avec ${ucTxt}, votre entreprise peut économiser entre <strong>${Math.round(gn).toLocaleString('fr-FR')}€</strong> et <strong>${Math.round(gx).toLocaleString('fr-FR')}€ par mois</strong>. L'investissement sera amorti en <strong>${pb<100?pb.toFixed(1)+' mois':'∞'}</strong>.`;
+
+  document.getElementById('r-method').innerHTML = '<div class="method-box"><div class="method-title">💡 Comment sont calculés ces chiffres ?</div><div class="method-body">Ces estimations sont basées sur <strong>'+selUC.length+' cas d\'usage IA</strong> sélectionnés. Les <strong>gains</strong> représentent le temps homme libéré valorisé au coût salarial moyen. Les <strong>coûts outils</strong> sont les abonnements mensuels des solutions IA. Le <strong>payback</strong> est le délai pour amortir l\'investissement d\'implémentation ('+impl.toLocaleString('fr-FR')+'€) avec les gains nets mensuels.</div></div>';
+
+  const pdcCo = document.getElementById('pdc-co');
+  const pdcDate = document.getElementById('pdc-date');
+  if(pdcCo) pdcCo.textContent = co + (sector ? ' · ' + sector : '');
+  if(pdcDate) pdcDate.textContent = 'Rapport généré le ' + new Date().toLocaleDateString('fr-FR');
+
+  an('hN',nMax,'€');document.getElementById('hNY').textContent=(nMax*12).toLocaleString('fr-FR')+'€/an';
+  an('hM',rm,'','x',true);document.getElementById('hML').textContent=rm>=5?'Exceptionnel':rm>=3?'Excellent':rm>=2?'Très bon':rm>=1?'Bon':'À évaluer';
+  document.getElementById('hP').textContent=pb<100?pb.toFixed(1)+' mois':'∞';
+  kp('kGn',gn,'kGnY',gn*12);kp('kGx',gx,'kGxY',gx*12);kp('kCo',tC,'kCoY',tC*12);kp('kNn',nMin,'kNnY',nMin*12);kp('kNx',nMax,'kNxY',nMax*12);
+  document.getElementById('kDy').textContent=tJ+'j';document.getElementById('kIm').textContent='~'+impl.toLocaleString('fr-FR')+'€';
+  drDonut(byD);drBar(byD);
+
+  document.getElementById('domSummary').innerHTML = Object.entries(byD).map(([dom,v])=>{
+    const col=DC[dom]||'#7c3aed';
+    const avg=Math.round((v.min+v.max)/2);
+    const net=avg-v.cost;
+    return`<div class="dom-sum-card" style="border-top:3px solid ${col}">
+      <div class="dom-sum-name" style="color:${col}">${dom}</div>
+      <div class="dom-sum-val">${avg.toLocaleString('fr-FR')}€<span>/mois</span></div>
+      <div class="dom-sum-net">Net: ${net.toLocaleString('fr-FR')}€/mois</div>
+      <div class="dom-sum-uc">${selUC.filter(u=>u.Dom===dom).length} cas d'usage</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('tblB').innerHTML=selUC.map(u=>`<tr style="border-left:3px solid ${DC[u.Dom]||'#7c3aed'}"><td><div style="font-weight:600;color:var(--t900)">${u.T}</div><div style="font-size:11px;color:var(--t400);margin-top:2px">${u.B}</div></td><td><span style="display:inline-block;padding:2px 8px;background:${DC[u.Dom]||'#7c3aed'}22;color:${DC[u.Dom]||'#7c3aed'};border-radius:4px;font-size:10px;font-weight:700">${u.Dom.split(' & ')[0]}</span></td><td><span class="badge ${bCl(u.D)}">${u.D}</span></td><td class="tdg" style="font-weight:800">${u.G}</td><td class="tdc">${u.C}€/mois</td><td>${u.J}j</td></tr>`).join('');
+  document.getElementById('benL').innerHTML=[...ben].map(b=>`<div class="btag">${b}</div>`).join('');
+}
+function kp(vi,v,si,sv){an(vi,v,'€');document.getElementById(si).textContent=Math.round(sv).toLocaleString('fr-FR')+'€/an';}
+function an(id,target,sf='',pr='',isF=false){
+  const el=document.getElementById(id);if(!el)return;
+  const fmt=v=>isF?pr+v.toFixed(1)+sf:pr+Math.round(v).toLocaleString('fr-FR')+sf;
+  const dur=800,steps=24;let i=0;
+  const iv=setInterval(()=>{i++;const p=Math.min(i/steps,1),e=1-Math.pow(1-p,3);el.textContent=fmt(e*target);if(p>=1)clearInterval(iv);},dur/steps);
+}
+
+/* ── Charts ── */
+function drDonut(byD){
+  const ctx=document.getElementById('donutChart').getContext('2d');if(dCh)dCh.destroy();
+  const lb=Object.keys(byD),dt=lb.map(d=>Math.round((byD[d].min+byD[d].max)/2));
+  const tot=dt.reduce((a,b)=>a+b,0);
+  dCh=new Chart(ctx,{type:'doughnut',data:{labels:lb,datasets:[{data:dt,backgroundColor:lb.map(d=>DC[d]||'#7c3aed'),borderWidth:0,hoverOffset:8}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'64%',
+      plugins:{legend:{position:'bottom',labels:{color:'#64748b',font:{family:'Inter',size:10},padding:8,usePointStyle:true}},
+        tooltip:{backgroundColor:'#1e293b',padding:10,cornerRadius:8,callbacks:{label:c=>' '+c.label+': '+c.parsed.toLocaleString('fr-FR')+'€/mois'}}},
+      plugins:[{id:'ct',beforeDraw(chart){const{ctx:c,width:w,height:h}=chart;c.save();c.font='800 18px Inter';c.fillStyle='#0f172a';c.textAlign='center';c.textBaseline='middle';c.fillText(tot.toLocaleString('fr-FR')+'€',w/2,h/2-8);c.font='500 10px Inter';c.fillStyle='#94a3b8';c.fillText('moy./mois',w/2,h/2+10);c.restore();}}]
+    }});
+}
+function drBar(byD){
+  const ctx=document.getElementById('barChart').getContext('2d');if(bCh)bCh.destroy();
+  const e=Object.entries(byD).sort((a,b)=>b[1].max-a[1].max);
+  bCh=new Chart(ctx,{type:'bar',data:{labels:e.map(([d])=>d.length>18?d.slice(0,16)+'…':d),datasets:[
+    {label:'Gains max',data:e.map(([,v])=>v.max),backgroundColor:'rgba(124,58,237,.75)',borderRadius:4},
+    {label:'Gains min',data:e.map(([,v])=>v.min),backgroundColor:'rgba(124,58,237,.35)',borderRadius:4},
+    {label:'Coûts',data:e.map(([,v])=>v.cost),backgroundColor:'rgba(220,38,38,.55)',borderRadius:4}
+  ]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
+    scales:{x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{color:'#94a3b8',font:{size:9},callback:v=>v.toLocaleString('fr-FR')+'€'}},y:{grid:{display:false},ticks:{color:'#334155',font:{size:9}}}},
+    plugins:{legend:{labels:{color:'#64748b',font:{size:10},usePointStyle:true}},tooltip:{backgroundColor:'#1e293b',padding:10,cornerRadius:8}}}});
+}
+
+/* ── PDF ── */
+async function genPDF(){
+  const btn=document.querySelector('.btn.bg');
+  const orig=btn?btn.innerHTML:'';
+  if(btn)btn.innerHTML='⏳ Génération...';
+
+  const co=document.getElementById('coName').value||'Votre entreprise';
+  const sec=sector||'—';
+  const emp=fEmpS(empSlider(document.getElementById('s1e').value));
+  const ca=fCA(caF(document.getElementById('s1c').value));
+  const sal=parseInt(document.getElementById('sl-sal').value);
+  const pct=parseInt(document.getElementById('sl-pct').value);
+  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+
+  let gn=0,gx=0,tC=0,tJ=0;
+  const byD={},ben=new Set();
+  if(selUC.length>0){
+    selUC.forEach(u=>{
+      gn+=u.Mn;gx+=u.Mx;tC+=u.C;tJ+=u.J;
+      if(!byD[u.Dom])byD[u.Dom]={min:0,max:0,cost:0,ucs:[]};
+      byD[u.Dom].min+=u.Mn;byD[u.Dom].max+=u.Mx;byD[u.Dom].cost+=u.C;
+      byD[u.Dom].ucs.push(u);
+      if(u.B)ben.add(u.B);
+    });
+  }
+  const nMin=gn-tC,nMax=gx-tC,nAvg=(nMin+nMax)/2;
+  const impl=tJ*RATE||Math.round(empSlider(document.getElementById('s1e').value)*480);
+  const pb=nAvg>0?impl/nAvg:Infinity;
+  const ai=impl+tC*12,rm=ai>0?(nMax*12)/ai:0;
+
+  const F=n=>Math.round(n).toLocaleString('fr-FR');
+  const Z=i=>i%2===0?'white':'#f8f9fc';
+
+  // 3-column helper using inline-block (html2canvas-safe, no flex/grid)
+  const kpi3=(a,b,c)=>`<div style="font-size:0;margin-bottom:18px">
+    <div style="display:inline-block;width:31%;margin-right:3%;vertical-align:top;font-size:12px;background:${a.bg};border:2px solid ${a.bd};border-radius:10px;padding:13px;text-align:center">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:${a.c};margin-bottom:5px">${a.lbl}</div>
+      <div style="font-size:20px;font-weight:900;color:${a.c2||a.c};line-height:1">${a.val}</div>
+      ${a.sub?`<div style="font-size:9px;color:${a.c};margin-top:4px">${a.sub}</div>`:''}
+    </div>
+    <div style="display:inline-block;width:31%;margin-right:3%;vertical-align:top;font-size:12px;background:${b.bg};border:2px solid ${b.bd};border-radius:10px;padding:13px;text-align:center">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:${b.c};margin-bottom:5px">${b.lbl}</div>
+      <div style="font-size:20px;font-weight:900;color:${b.c2||b.c};line-height:1">${b.val}</div>
+      ${b.sub?`<div style="font-size:9px;color:${b.c};margin-top:4px">${b.sub}</div>`:''}
+    </div>
+    <div style="display:inline-block;width:31%;vertical-align:top;font-size:12px;background:${c.bg};border:2px solid ${c.bd};border-radius:10px;padding:13px;text-align:center">
+      <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:${c.c};margin-bottom:5px">${c.lbl}</div>
+      <div style="font-size:20px;font-weight:900;color:${c.c2||c.c};line-height:1">${c.val}</div>
+      ${c.sub?`<div style="font-size:9px;color:${c.c};margin-top:4px">${c.sub}</div>`:''}
+    </div>
+  </div>`;
+
+  const hdr=`<div style="border-bottom:2px solid #7c3aed;padding-bottom:8px;margin-bottom:32px"><span style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7c3aed">STUDERIA · RAPPORT ROI IA · ${co.toUpperCase()}</span></div>`;
+
+  const html=`<div style="font-family:Arial,Helvetica,sans-serif;color:#0f172a;background:white">
+
+<!-- PAGE 1 : COUVERTURE -->
+<div style="page-break-after:always;height:297mm;box-sizing:border-box;overflow:hidden;padding:50px 60px 30px;text-align:center;background:white">
+  <div style="background:#0f172a;border-radius:20px;padding:56px 40px 48px;margin-bottom:24px">
+    <div style="font-size:10px;letter-spacing:3px;font-weight:700;color:#a78bfa;margin-bottom:28px">STUDERIA · WORK WITH AI</div>
+    <div style="font-size:48px;font-weight:900;color:white;letter-spacing:-2px;line-height:1.05;margin-bottom:18px">Rapport ROI IA</div>
+    <div style="font-size:26px;font-weight:700;color:#a78bfa;margin-bottom:8px">${co}</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:44px">${sec} · ${emp} collaborateurs · CA ${ca}</div>
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:28px 40px;display:inline-block;min-width:280px">
+      <div style="font-size:9px;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-bottom:8px">ÉCONOMIES NETTES ESTIMÉES / AN</div>
+      <div style="font-size:60px;font-weight:900;color:white;line-height:1;letter-spacing:-2px">${F(nMax*12)} €</div>
+      <div style="font-size:13px;color:#a78bfa;margin-top:8px">${selUC.length} cas d'usage · Payback ${pb<100?pb.toFixed(1)+' mois':'< 1 an'}</div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#94a3b8">Généré le ${date} · Document confidentiel · Estimation à titre indicatif</div>
+</div>
+
+<!-- PAGE 2 : RÉSUMÉ EXÉCUTIF -->
+<div style="page-break-after:always;height:297mm;box-sizing:border-box;overflow:hidden;padding:40px 50px">
+  ${hdr}
+  <div style="font-size:24px;font-weight:900;color:#0f172a;letter-spacing:-1px;margin-bottom:12px">Résumé exécutif</div>
+  <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 8px">Ce rapport analyse le potentiel de transformation par l'intelligence artificielle pour <b>${co}</b>, entreprise du secteur <b>${sec}</b> comptant <b>${emp} collaborateurs</b> et réalisant un chiffre d'affaires annuel de <b>${ca}</b>.</p>
+  <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 8px">Sur la base de <b style="color:#7c3aed">${selUC.length} cas d'usage IA</b> sélectionnés et adaptés à votre secteur, notre modèle projette des <b style="color:#059669">gains bruts compris entre ${F(gn)} € et ${F(gx)} € par mois</b> (${F(gn*12)} – ${F(gx*12)} €/an). Ces gains représentent le temps collaborateur libéré des tâches répétitives, valorisé au coût salarial renseigné (${sal.toLocaleString('fr-FR')} €/mois · ${pct}% du temps en tâches répétitives).</p>
+  <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 16px">Après déduction des coûts d'abonnement aux outils IA (${F(tC)} €/mois), le <b style="color:#7c3aed">ROI net maximal atteint ${F(nMax)} €/mois</b> (${F(nMax*12)} €/an). L'investissement d'implémentation de <b>${F(impl)} €</b> serait amorti en <b>${pb<100?pb.toFixed(1)+' mois':'moins d\'un an'}</b>.</p>
+
+  ${kpi3(
+    {bg:'#f5f3ff',bd:'#ede9fe',c:'#7c3aed',c2:'#5b21b6',lbl:'ROI Net Max / an',val:F(nMax*12)+' €',sub:F(nMax)+' €/mois'},
+    {bg:'#ecfdf5',bd:'#d1fae5',c:'#059669',c2:'#065f46',lbl:'Payback',val:pb<100?pb.toFixed(1)+' mois':'< 1 an',sub:'retour investissement'},
+    {bg:'#fffbeb',bd:'#fde68a',c:'#d97706',c2:'#92400e',lbl:'Multiplicateur ROI',val:'×'+rm.toFixed(1),sub:rm>=5?'Exceptionnel':rm>=3?'Excellent':rm>=2?'Très bon':'Bon'}
+  )}
+
+  <div style="font-size:13px;font-weight:800;color:#0f172a;margin-bottom:8px">Récapitulatif financier</div>
+  <table style="width:100%;border-collapse:collapse;font-size:11px">
+    <thead><tr style="background:#0f172a">
+      <th style="padding:7px 10px;text-align:left;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Indicateur</th>
+      <th style="padding:7px 10px;text-align:right;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Mensuel</th>
+      <th style="padding:7px 10px;text-align:right;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Annuel</th>
+    </tr></thead>
+    <tbody>
+      <tr style="background:${Z(0)}"><td style="padding:6px 10px;border-bottom:1px solid #f1f5f9;color:#334155">Gains bruts (fourchette basse)</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#059669;border-bottom:1px solid #f1f5f9">${F(gn)} €</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#059669;border-bottom:1px solid #f1f5f9">${F(gn*12)} €</td></tr>
+      <tr style="background:${Z(1)}"><td style="padding:6px 10px;border-bottom:1px solid #f1f5f9;color:#334155">Gains bruts (fourchette haute)</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#059669;border-bottom:1px solid #f1f5f9">${F(gx)} €</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#059669;border-bottom:1px solid #f1f5f9">${F(gx*12)} €</td></tr>
+      <tr style="background:${Z(0)}"><td style="padding:6px 10px;border-bottom:1px solid #f1f5f9;color:#334155">Coûts outils IA</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#dc2626;border-bottom:1px solid #f1f5f9">− ${F(tC)} €</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#dc2626;border-bottom:1px solid #f1f5f9">− ${F(tC*12)} €</td></tr>
+      <tr style="background:#f5f3ff"><td style="padding:6px 10px;border-bottom:1px solid #ede9fe;color:#5b21b6;font-weight:700">ROI net (fourchette basse)</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7c3aed;border-bottom:1px solid #ede9fe">${F(nMin)} €</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7c3aed;border-bottom:1px solid #ede9fe">${F(nMin*12)} €</td></tr>
+      <tr style="background:#f5f3ff"><td style="padding:6px 10px;color:#5b21b6;font-weight:700">ROI net (fourchette haute)</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7c3aed">${F(nMax)} €</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7c3aed">${F(nMax*12)} €</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- PAGE 3 : MÉTHODOLOGIE -->
+<div style="page-break-after:always;height:297mm;box-sizing:border-box;overflow:hidden;padding:40px 50px">
+  ${hdr}
+  <div style="font-size:24px;font-weight:900;color:#0f172a;letter-spacing:-1px;margin-bottom:12px">Méthodologie de calcul</div>
+  <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 14px">Notre modèle repose sur une approche par cas d'usage, construite à partir de benchmarks sectoriels. Chaque automatisation est évaluée selon trois dimensions : le <b>gain de temps libéré</b>, le <b>coût mensuel des outils</b>, et le <b>temps d'implémentation</b>.</p>
+  <div style="border-left:4px solid #7c3aed;background:#f5f3ff;padding:11px 16px;margin-bottom:9px">
+    <div style="font-size:11px;font-weight:700;color:#5b21b6;margin-bottom:4px">Calcul des gains bruts</div>
+    <div style="font-size:11px;color:#334155;line-height:1.7">Les gains = temps libéré × valeur salariale. Fourchette min (30-50% adoption) / max (80-95% adoption).<br><b>Paramètres :</b> ${sal.toLocaleString('fr-FR')} €/mois brut · ${pct}% du temps en tâches répétitives.</div>
+  </div>
+  <div style="border-left:4px solid #059669;background:#ecfdf5;padding:11px 16px;margin-bottom:9px">
+    <div style="font-size:11px;font-weight:700;color:#065f46;margin-bottom:4px">Coûts pris en compte</div>
+    <div style="font-size:11px;color:#334155;line-height:1.7"><b>Outils IA :</b> ${F(tC)} €/mois (abonnements LLMs + solutions spécialisées).<br><b>Implémentation :</b> ${tJ} jours × ${RATE} €/j = <b>${F(impl)} €</b> d'investissement initial.</div>
+  </div>
+  <div style="border-left:4px solid #d97706;background:#fffbeb;padding:11px 16px;margin-bottom:14px">
+    <div style="font-size:11px;font-weight:700;color:#92400e;margin-bottom:4px">Payback et multiplicateur ROI</div>
+    <div style="font-size:11px;color:#334155;line-height:1.7"><b>Payback</b> = ${F(impl)} € ÷ ${F(nAvg)} €/mois = <b>${pb<100?pb.toFixed(1)+' mois':'< 1 an'}</b><br><b>Multiplicateur</b> = ${F(nMax*12)} € ÷ ${F(ai)} € = <b>×${rm.toFixed(1)}</b></div>
+  </div>
+  <div style="background:#f8f9fc;border:1px solid #e2e8f0;padding:11px 16px;margin-bottom:16px">
+    <div style="font-size:11px;font-weight:700;color:#0f172a;margin-bottom:5px">Hypothèses et limites</div>
+    <div style="font-size:10px;color:#64748b;line-height:1.8">
+      · Benchmarks sectoriels moyens — résultats réels variables selon le contexte.<br>
+      · Gains supposent un taux d'adoption de 70-90% après formation (non incluse dans les coûts).<br>
+      · Coûts d'implémentation hors gestion du changement organisationnel.<br>
+      · Salaires bruts mensuels — charges patronales non incluses.
+    </div>
+  </div>
+  <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:8px">Bénéfices non-financiers identifiés</div>
+  <div>${[...ben].map(b=>`<span style="display:inline-block;background:#f5f3ff;border:1px solid #ede9fe;padding:4px 10px;font-size:10px;font-weight:600;color:#5b21b6;margin:3px">${b}</span>`).join('')}</div>
+</div>
+
+<!-- PAGE 4 : ANALYSE PAR DOMAINE -->
+<div style="page-break-after:always;height:297mm;box-sizing:border-box;overflow:hidden;padding:40px 50px">
+  ${hdr}
+  <div style="font-size:24px;font-weight:900;color:#0f172a;letter-spacing:-1px;margin-bottom:4px">Analyse par domaine</div>
+  <div style="font-size:11px;color:#64748b;margin-bottom:16px">${Object.keys(byD).length} domaine(s) · ${selUC.length} cas d'usage</div>
+  ${Object.entries(byD).map(([dom,v])=>{
+    const col=DC[dom]||'#7c3aed';
+    const avg=Math.round((v.min+v.max)/2);
+    const net=avg-v.cost;
+    const domInfo=DOMS.find(d=>d.id===dom);
+    const implJ=v.ucs.reduce((s,u)=>s+u.J,0);
+    return`<div style="border:1px solid #e2e8f0;border-top:3px solid ${col};padding:12px 14px;margin-bottom:8px">
+      <div style="overflow:hidden;margin-bottom:7px">
+        <div style="float:right;text-align:right">
+          <div style="font-size:8px;color:#64748b;text-transform:uppercase">Net moy./mois</div>
+          <div style="font-size:18px;font-weight:900;color:${col}">${F(net)} €</div>
+          <div style="font-size:9px;color:#64748b">${F(net*12)} €/an</div>
+        </div>
+        <div>
+          <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:${col};margin-bottom:1px">${dom}</div>
+          <div style="font-size:13px;font-weight:800;color:#0f172a">${domInfo?domInfo.n:dom}</div>
+          <div style="font-size:10px;color:#64748b;margin-top:1px">${v.ucs.length} cas d'usage · ${implJ} jour${implJ>1?'s':''} d'implémentation</div>
+        </div>
+      </div>
+      <div style="font-size:0;clear:both;margin-bottom:7px">
+        <div style="display:inline-block;width:31%;margin-right:3%;font-size:10px;background:#f8f9fc;padding:6px;text-align:center;vertical-align:top">
+          <div style="font-size:8px;color:#64748b;margin-bottom:2px">Gains estimés</div>
+          <div style="font-weight:700;color:#059669">${F(v.min)} – ${F(v.max)} €/mois</div>
+        </div>
+        <div style="display:inline-block;width:31%;margin-right:3%;font-size:10px;background:#f8f9fc;padding:6px;text-align:center;vertical-align:top">
+          <div style="font-size:8px;color:#64748b;margin-bottom:2px">Coûts outils</div>
+          <div style="font-weight:700;color:#dc2626">${F(v.cost)} €/mois</div>
+        </div>
+        <div style="display:inline-block;width:31%;font-size:10px;background:#f8f9fc;padding:6px;text-align:center;vertical-align:top">
+          <div style="font-size:8px;color:#64748b;margin-bottom:2px">ROI net moy.</div>
+          <div style="font-weight:700;color:${col}">${F(net)} €/mois</div>
+        </div>
+      </div>
+      <div style="font-size:9px;color:#64748b;line-height:1.6"><b style="color:#334155">Automatisations :</b> ${v.ucs.map(u=>u.T).join(' · ')}</div>
+    </div>`;
+  }).join('')}
+</div>
+
+<!-- PAGE 5 : DÉTAIL CAS D'USAGE -->
+<div style="padding:40px 50px">
+  ${hdr}
+  <div style="font-size:26px;font-weight:900;color:#0f172a;letter-spacing:-1px;margin-bottom:6px">Détail des cas d'usage</div>
+  <div style="font-size:12px;color:#64748b;margin-bottom:20px">${selUC.length} automatisations analysées</div>
+  <table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:32px">
+    <thead><tr style="background:#0f172a">
+      <th style="padding:8px 10px;text-align:left;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Tâche automatisée</th>
+      <th style="padding:8px 10px;text-align:left;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Domaine</th>
+      <th style="padding:8px 10px;text-align:center;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Diff.</th>
+      <th style="padding:8px 10px;text-align:right;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Gains/mois</th>
+      <th style="padding:8px 10px;text-align:right;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Coût</th>
+      <th style="padding:8px 10px;text-align:right;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Impl.</th>
+    </tr></thead>
+    <tbody>${selUC.map((u,i)=>{
+      const col=DC[u.Dom]||'#7c3aed';
+      return`<tr style="background:${Z(i)}">
+        <td style="padding:7px 10px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:600">${u.T}</td>
+        <td style="padding:7px 10px;border-bottom:1px solid #f1f5f9"><span style="background:${col}22;color:${col};padding:2px 6px;font-size:9px;font-weight:700">${u.Dom.split(' & ')[0]}</span></td>
+        <td style="padding:7px 10px;border-bottom:1px solid #f1f5f9;text-align:center;color:#64748b">${u.D}</td>
+        <td style="padding:7px 10px;border-bottom:1px solid #f1f5f9;text-align:right;color:#059669;font-weight:700">${F(u.Mn)} – ${F(u.Mx)} €</td>
+        <td style="padding:7px 10px;border-bottom:1px solid #f1f5f9;text-align:right;color:#dc2626">${u.C} €</td>
+        <td style="padding:7px 10px;border-bottom:1px solid #f1f5f9;text-align:right;color:#64748b">${u.J}j</td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>
+  <div style="background:#0f172a;border-radius:14px;padding:32px;text-align:center;color:white">
+    <div style="font-size:18px;font-weight:800;margin-bottom:10px">Prochaines étapes</div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:20px;max-width:500px;margin-left:auto;margin-right:auto">Ces résultats sont le point de départ. Un audit approfondi permettra de prioriser les déploiements et affiner les estimations selon votre organisation.</div>
+    <div style="font-size:0">
+      <span style="display:inline-block;font-size:11px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:10px 16px;font-weight:600;color:white;margin:4px">Audit gratuit 30 min</span>
+      <span style="display:inline-block;font-size:11px;background:#7c3aed;padding:10px 16px;font-weight:700;color:white;margin:4px">www.studeria.fr</span>
+      <span style="display:inline-block;font-size:11px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:10px 16px;font-weight:600;color:white;margin:4px">contact@studeria.fr</span>
+    </div>
+  </div>
+</div>
+</div>`;
+
+  const name=document.getElementById('coName').value||'ROI';
+  await html2pdf().set({
+    margin:[0,0,0,0],
+    filename:'Rapport_ROI_'+name.replace(/\s+/g,'_')+'_Studeria.pdf',
+    image:{type:'jpeg',quality:.95},
+    html2canvas:{scale:2,useCORS:true,logging:false,allowTaint:true},
+    jsPDF:{orientation:'portrait',unit:'mm',format:'a4'},
+    pagebreak:{mode:['avoid-all','css','legacy']}
+  }).from(html).save();
+
+  if(btn)btn.innerHTML=orig;
+}
+
+/* ── Modal ── */
+function openMo(){document.getElementById('modal').classList.add('open');}
+function closeMo(){document.getElementById('modal').classList.remove('open');}
+function subContact(){const n=document.getElementById('cN').value,e=document.getElementById('cE').value;if(!n||!e)return alert('Remplissez tous les champs');window.open('https://www.studeria.fr','_blank');closeMo();}
+
+/* ── Example ── */
+function loadExample(){
+  document.getElementById('coName').value='Acme Solutions';
+  sector='Conseil & Services B2B';
+  document.querySelectorAll('.sc').forEach(x=>{x.classList.toggle('sel',x.textContent.includes('Conseil'));});
+  selD=DOMS.map(d=>d.id);selUC=[...UC];
+  renderDoms();renderUC();
+  document.getElementById('s1e').value=60;s1eu(); // ~200 collaborateurs avec la nouvelle échelle
+  document.getElementById('s1c').value=55;s1cu();
+  document.getElementById('sl-sal').value=3800;
+  document.getElementById('sl-pct').value=40;
+  updatePreview();
+}
+
+/* ── Google Sheets live sync ── */
+const SHEET_URL='https://docs.google.com/spreadsheets/d/1cYbyHUggzmKS6Fn19sVcvVTaANe22FTPpMyBp3Vj2vs/export?format=csv&gid=2126654648';
+
+function parseCSVLine(line){
+  const res=[];let cur='',inQ=false;
+  for(let i=0;i<line.length;i++){
+    const c=line[i];
+    if(c==='"'){inQ=!inQ;}
+    else if(c===','&&!inQ){res.push(cur.trim());cur='';}
+    else{cur+=c;}
+  }
+  res.push(cur.trim());return res;
+}
+function parseCSV(text){
+  const lines=text.split('\n').filter(l=>l.trim());
+  const headers=parseCSVLine(lines[0]);
+  return lines.slice(1).map(l=>{
+    const v=parseCSVLine(l),o={};
+    headers.forEach((h,i)=>o[h]=v[i]||'');
+    return o;
+  });
+}
+function cleanEur(v){
+  const s=(v||'').replace(/[€\s\u202f\xa0]/g,'').replace(',','.');
+  const n=parseFloat(s);return isNaN(n)?0:Math.round(n);
+}
+async function syncSheet(){
+  try{
+    const res=await fetch(SHEET_URL);
+    if(!res.ok)return;
+    const rows=parseCSV(await res.text());
+    const fresh=rows
+      .filter(r=>r['f']&&r['f'].startsWith('UC-')&&r['Tâche automatisée'])
+      .map(r=>{
+        const mn=cleanEur(r['Gains min (€/mois)']);
+        const mx=cleanEur(r['Gains max (€/mois)']);
+        let rawDom = r['Domaine'].trim().toUpperCase();
+        if(rawDom==='PROSPECTION'||rawDom==='VENTE') rawDom='PROSPECTION & VENTE';
+        return{
+          ID:r['f'].trim(),
+          Dom:rawDom,
+          T:r['Tâche automatisée'].trim(),
+          D:r['Difficulté'].trim()||'Moyen',
+          G:r['Gains financiers (affichage)'].trim(),
+          Mn:mn||500, Mx:mx||1000,
+          B:r['Gains non-financiers'].trim()||'Efficacité',
+          C:cleanEur(r['Coût outils (€/mois)'])||50,
+          J:cleanEur(r['Jours implémentation'])||2
+        };
+      });
+    if(fresh.length>5){
+      UC.length=0;UC.push(...fresh);
+      renderDoms();renderUC();updatePreview();
+      console.log(`✓ Sheet synced: ${fresh.length} UC chargés`);
+    }
+  }catch(e){console.log('Sheet sync skipped:',e.message);}
+}
+
+/* ── Init ── */
+function init(){
+  renderSectors();
+  renderDoms();
+  ['sl-sal','sl-pct','s1e','s1c'].forEach(id=>slBg(id));
+  s1eu();
+  updatePreview();
+  syncSheet(); // async, ne bloque pas le rendu
+}
+init();
+
+</script>
 </body>
 </html>
