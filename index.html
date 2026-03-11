@@ -93,7 +93,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .ucc:hover{border-color:var(--pll)}.ucc.on{border-color:var(--p);background:var(--p50)}.ucc.hide{display:none}
 .uc-detail{display:none;padding:10px 14px 12px;border-top:1px solid var(--p100);background:var(--p50)}.ucc.det-open .uc-detail{display:block}
 .uc-det-row{font-size:11px;color:var(--t700);line-height:1.7;display:flex;gap:6px;align-items:baseline}.uc-det-row::before{content:'→';color:var(--p);font-weight:700;flex-shrink:0}
-.uc-info-btn{background:none;border:none;cursor:pointer;color:var(--t300);font-size:14px;line-height:1;padding:1px 4px;border-radius:4px;transition:all .15s;flex-shrink:0;font-family:inherit}.uc-info-btn:hover{color:var(--p);background:var(--p100)}.ucc.det-open .uc-info-btn{color:var(--p)}
+.uc-info-btn{background:var(--p50);border:1.5px solid var(--p100);cursor:pointer;color:var(--p);font-size:11px;font-weight:700;line-height:1;padding:3px 7px;border-radius:var(--rf);transition:all .15s;flex-shrink:0;font-family:inherit;white-space:nowrap}.uc-info-btn:hover{background:var(--p);color:white;border-color:var(--p)}.ucc.det-open .uc-info-btn{background:var(--p);color:white;border-color:var(--p)}
 .uchk{width:20px;height:20px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}.ucc.on .uchk{background:var(--p);border-color:var(--p)}
 .uchk svg{display:none;width:11px;height:11px;color:white}.ucc.on .uchk svg{display:block}
 .ucb{flex:1;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
@@ -718,7 +718,7 @@ function renderUC(){
       const ck=selUC.some(s=>s.ID===u.ID);
       const bds=u.Bd?u.Bd.split('·').map(b=>b.trim()).filter(Boolean):[];
       const bdHtml=bds.length?`<div class="uc-detail">${bds.map(b=>`<div class="uc-det-row">${b}</div>`).join('')}</div>`:'';
-      const infoBtn=bds.length?`<button class="uc-info-btn" onclick="togDetail(event,this)" title="Bénéfices détaillés">ⓘ</button>`:'';
+      const infoBtn=bds.length?`<button class="uc-info-btn" onclick="togDetail(event,this)">+ détails</button>`:'';
       h+=`<div class="ucc${ck?' on':''}" data-id="${u.ID}" data-diff="${u.D}" onclick="togUC(this,'${u.ID}')"><div class="ucc-main"><div class="uchk">${CHK}</div><div class="ucb"><div><div class="ucn">${u.T}</div><div class="ucm"><span class="badge ${bCl(u.D)}">${u.D}</span><span class="ucos">Outils : ${u.C}€/mois · ${u.J}j impl.</span></div></div><div style="display:flex;align-items:flex-start;gap:5px"><div class="ucgr"><div class="ucgv">${u.G}</div><div class="ucgl">gains bruts / mois</div></div>${infoBtn}</div></div></div>${bdHtml}</div>`;
     });
     h+='</div>';
