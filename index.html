@@ -88,12 +88,12 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .ucg{margin-bottom:18px}.ucgh{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:8px}
 .ucgt{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--p)}
 .ucgb{font-size:11px;color:var(--p);cursor:pointer;font-weight:600;background:none;border:none;padding:3px 8px;border-radius:6px;transition:all .2s;font-family:inherit}.ucgb:hover{background:var(--p50)}
-.ucc{border:1.5px solid var(--border);border-radius:var(--r12);background:white;cursor:pointer;margin-bottom:5px;transition:all .18s;user-select:none;overflow:hidden}
+.ucc{border:1.5px solid var(--border);border-radius:var(--r12);background:white;cursor:pointer;margin-bottom:5px;transition:all .18s;user-select:none}
 .ucc-main{display:flex;align-items:flex-start;gap:10px;padding:12px 14px}
 .ucc:hover{border-color:var(--pll)}.ucc.on{border-color:var(--p);background:var(--p50)}.ucc.hide{display:none}
 .uc-detail{display:none;padding:10px 14px 12px;border-top:1px solid var(--p100);background:var(--p50)}.ucc.det-open .uc-detail{display:block}
 .uc-det-row{font-size:11px;color:var(--t700);line-height:1.7;display:flex;gap:6px;align-items:baseline}.uc-det-row::before{content:'→';color:var(--p);font-weight:700;flex-shrink:0}
-.uc-info-btn{background:var(--p50);border:1.5px solid var(--p100);cursor:pointer;color:var(--p);font-size:11px;font-weight:700;line-height:1;padding:3px 7px;border-radius:var(--rf);transition:all .15s;flex-shrink:0;font-family:inherit;white-space:nowrap}.uc-info-btn:hover{background:var(--p);color:white;border-color:var(--p)}.ucc.det-open .uc-info-btn{background:var(--p);color:white;border-color:var(--p)}
+.uc-info-btn{background:var(--p);border:1.5px solid var(--p);cursor:pointer;color:white;font-size:11px;font-weight:700;line-height:1;padding:3px 7px;border-radius:var(--rf);transition:all .15s;flex-shrink:0;font-family:inherit;white-space:nowrap}.uc-info-btn:hover{background:var(--pd);border-color:var(--pd)}.ucc.det-open .uc-info-btn{background:var(--pd);border-color:var(--pd)}
 .uchk{width:20px;height:20px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}.ucc.on .uchk{background:var(--p);border-color:var(--p)}
 .uchk svg{display:none;width:11px;height:11px;color:white}.ucc.on .uchk svg{display:block}
 .ucb{flex:1;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
@@ -242,9 +242,10 @@ body.pdf-mode .pdf-cover{display:block!important}
 body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!important}body.pdf-mode .r-cont{max-width:none}body.pdf-mode .pdf-hdr{display:block!important}body.pdf-mode .ctabox{display:none!important}body.pdf-mode canvas.pfh{display:none!important}body.pdf-mode{background:white!important}
 
 /* Responsive */
-@media(max-width:1100px){.split{grid-template-columns:1fr 380px}.lf{padding:40px 40px 120px}}
-@media(max-width:900px){.split{grid-template-columns:1fr}.rs{display:none}.lf{padding:32px 24px 100px}.sc-grid{grid-template-columns:repeat(3,1fr)}.dom-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:640px){.lf-h1{font-size:28px}.sc-grid{grid-template-columns:repeat(2,1fr)}.dom-grid{grid-template-columns:1fr}.hkpis,.kgrid,.crow{grid-template-columns:1fr}.sl2{grid-template-columns:1fr}.lhdr{padding:0 20px}.ucb{flex-direction:column}.ucgr{text-align:left}}
+@media(max-width:1100px){.split{grid-template-columns:1fr 360px}.lf{padding:40px 40px 120px}}
+@media(max-width:900px){.split{grid-template-columns:1fr 320px}.lf{padding:32px 24px 100px}.sc-grid{grid-template-columns:repeat(3,1fr)}.dom-grid{grid-template-columns:repeat(2,1fr)}.rs{margin:8px 8px 8px -8px;padding:20px 16px}.rp-big{font-size:48px}.rp-stat-val{font-size:24px}}
+@media(max-width:700px){.split{grid-template-columns:1fr}.rs{display:none}}
+@media(max-width:640px){.lf-h1{font-size:28px}.sc-grid{grid-template-columns:repeat(2,1fr)}.dom-grid{grid-template-columns:1fr}.hkpis,.kgrid,.crow{grid-template-columns:1fr}.sl2{grid-template-columns:1fr}.lhdr{padding:0 20px}.ucb{flex-direction:column;gap:6px}.ucgr{text-align:left}.ucc-main{padding:10px 12px}.uc-info-btn{align-self:flex-start}}
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
@@ -258,7 +259,7 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
 <div id="landing">
   <header class="lhdr">
     <a class="logo" href="#">
-      <img src="studeria-logo.png" height="34" alt="Studeria" style="display:block">
+      <img src="studeria-logo.png" height="46" alt="Studeria" style="display:block">
     </a>
     <div class="hdr-r">
       <div class="badge-live"><div class="live-dot"></div>Calcul en direct</div>
