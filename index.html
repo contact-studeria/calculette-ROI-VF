@@ -1093,24 +1093,24 @@ function loadExample(){
 /* ── Google Sheets live sync ── */
 const SHEET_URL='https://docs.google.com/spreadsheets/d/1cYbyHUggzmKS6Fn19sVcvVTaANe22FTPpMyBp3Vj2vs/export?format=csv&gid=2126654648';
 
-function parseCSVLine(line){
-  const res=[];let cur='',inQ=false;
-  for(let i=0;i<line.length;i++){
-    const c=line[i];
-    if(c==='"'){inQ=!inQ;}
-    else if(c===','&&!inQ){res.push(cur.trim());cur='';}
-    else{cur+=c;}
-  }
-  res.push(cur.trim());return res;
-}
 function parseCSV(text){
-  const lines=text.split('\n').filter(l=>l.trim());
-  const headers=parseCSVLine(lines[0]);
-  return lines.slice(1).map(l=>{
-    const v=parseCSVLine(l),o={};
-    headers.forEach((h,i)=>o[h]=v[i]||'');
-    return o;
-  });
+  const rows=[];let cur='',inQ=false,fields=[],i=0;
+  while(i<=text.length){
+    const c=i<text.length?text[i]:'';
+    if(c==='"'){
+      if(inQ&&text[i+1]==='"'){cur+='"';i++;}
+      else{inQ=!inQ;}
+    }else if(c===','&&!inQ){fields.push(cur.trim());cur='';}
+    else if((c==='\n'||c==='')&&!inQ){
+      fields.push(cur.trim());cur='';
+      if(fields.some(f=>f)){rows.push(fields);}
+      fields=[];
+    }else{cur+=c;}
+    i++;
+  }
+  if(!rows.length)return[];
+  const headers=rows[0];
+  return rows.slice(1).map(r=>{const o={};headers.forEach((h,j)=>o[h]=r[j]||'');return o;});
 }
 function cleanEur(v){
   const s=(v||'').replace(/[€\s\u202f\xa0]/g,'').replace(',','.');
