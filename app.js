@@ -28,7 +28,6 @@ const UC=[
 {ID:"UC-028",Dom:"RH",T:"Rédaction de contenus RH",D:"Facile",G:"1 000 – 1 800 €/mois",Mn:1000,Mx:1800,B:"Efficacité",C:60,J:1},
 {ID:"UC-029",Dom:"RH",T:"Tri et scoring de CV automatique",D:"Moyen",G:"1 500 – 2 500 €/mois",Mn:1500,Mx:2500,B:"Efficacité",C:120,J:3},
 {ID:"UC-030",Dom:"RH",T:"Chatbot RH interne (questions collaborateurs)",D:"Moyen",G:"1 000 – 1 500 €/mois",Mn:1000,Mx:1500,B:"Satisfaction",C:100,J:2},
-{ID:"UC-030b",Dom:"RH",T:"Création supports post-réunion et rapports RH",D:"Moyen",G:"1 000 – 1 500 €/mois",Mn:1000,Mx:1500,B:"Satisfaction",C:100,J:3},
 {ID:"UC-031",Dom:"FINANCE & ADMINISTRATION",T:"Saisie comptable automatisée (OCR)",D:"Moyen",G:"1 800 – 3 000 €/mois",Mn:1800,Mx:3000,B:"Efficacité",C:120,J:2},
 {ID:"UC-032",Dom:"FINANCE & ADMINISTRATION",T:"Génération et envoi de factures",D:"Facile",G:"1 000 – 1 800 €/mois",Mn:1000,Mx:1800,B:"Efficacité",C:80,J:3},
 {ID:"UC-033",Dom:"FINANCE & ADMINISTRATION",T:"Traitement automatisé notes de frais",D:"Facile",G:"500 – 800 €/mois",Mn:500,Mx:800,B:"Efficacité",C:60,J:2},
@@ -36,8 +35,7 @@ const UC=[
 {ID:"UC-035",Dom:"PRODUCTIVITÉ",T:"Synthèses et comptes-rendus automatiques",D:"Facile",G:"1 000 – 1 500 €/mois",Mn:1000,Mx:1500,B:"Efficacité",C:60,J:1},
 {ID:"UC-036",Dom:"PRODUCTIVITÉ",T:"Tri et gestion intelligente des emails",D:"Facile",G:"800 – 1 200 €/mois",Mn:800,Mx:1200,B:"Efficacité",C:50,J:1},
 {ID:"UC-037",Dom:"PRODUCTIVITÉ",T:"Gestion intelligente de l'agenda",D:"Facile",G:"500 – 800 €/mois",Mn:500,Mx:800,B:"Efficacité",C:30,J:1},
-{ID:"UC-038",Dom:"PRODUCTIVITÉ",T:"Extraction et synthèse de documents longs",D:"Facile",G:"800 – 1 500 €/mois",Mn:800,Mx:1500,B:"Efficacité",C:50,J:1},
-{ID:"UC-039",Dom:"PRODUCTIVITÉ",T:"Automatisation des tâches répétitives",D:"Moyen",G:"1 200 – 2 000 €/mois",Mn:1200,Mx:2000,B:"Efficacité",C:100,J:3}
+{ID:"UC-038",Dom:"PRODUCTIVITÉ",T:"Extraction et synthèse de documents longs",D:"Facile",G:"800 – 1 500 €/mois",Mn:800,Mx:1500,B:"Efficacité",C:50,J:1}
 ];
 const DOMS=[
 {id:"PROSPECTION & VENTE",n:"Trouver + de clients",d:"Prospection, leads, CRM",col:"#7c3aed",bg:"#f5f3ff",ic:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>'},
@@ -264,7 +262,7 @@ function renderROI(){
     const monthly=Math.round(emp*sal*(pct/100)*0.38);
     const tool=Math.round(emp*32);
     gn=monthly*0.8;gx=monthly;tC=tool;
-    DOMS.forEach(d=>{const cnt=UC.filter(u=>u.Dom===d.id).length;byD[d.id]={min:Math.round(gn*cnt/40),max:Math.round(gx*cnt/40),cost:Math.round(tC*cnt/40)};});
+    DOMS.forEach(d=>{const cnt=UC.filter(u=>u.Dom===d.id).length;byD[d.id]={min:Math.round(gn*cnt/UC.length),max:Math.round(gx*cnt/UC.length),cost:Math.round(tC*cnt/UC.length)};});
     ben.add('Productivité');ben.add('Efficacité');ben.add('Qualité');
   }
 
@@ -637,12 +635,9 @@ async function syncSheet(){
         };
       });
     if(fresh.length>5){
-      // Merge: sheet UCs take priority, but keep hardcoded UCs absent from sheet
-      const freshIds=new Set(fresh.map(u=>u.ID));
-      const kept=UC.filter(u=>!freshIds.has(u.ID));
-      UC.length=0;UC.push(...fresh,...kept);
+      UC.length=0;UC.push(...fresh);
       renderDoms();renderUC();updatePreview();
-      console.log(`✓ Sheet synced: ${fresh.length} UC chargés + ${kept.length} UC conservés`);
+      console.log(`✓ Sheet synced: ${fresh.length} UC chargés`);
     }
   }catch(e){console.log('Sheet sync skipped:',e.message);}
 }
