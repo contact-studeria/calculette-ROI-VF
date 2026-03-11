@@ -88,8 +88,12 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .ucg{margin-bottom:18px}.ucgh{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:8px}
 .ucgt{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--p)}
 .ucgb{font-size:11px;color:var(--p);cursor:pointer;font-weight:600;background:none;border:none;padding:3px 8px;border-radius:6px;transition:all .2s;font-family:inherit}.ucgb:hover{background:var(--p50)}
-.ucc{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r12);background:white;cursor:pointer;margin-bottom:5px;transition:all .18s;user-select:none}
+.ucc{border:1.5px solid var(--border);border-radius:var(--r12);background:white;cursor:pointer;margin-bottom:5px;transition:all .18s;user-select:none;overflow:hidden}
+.ucc-main{display:flex;align-items:flex-start;gap:10px;padding:12px 14px}
 .ucc:hover{border-color:var(--pll)}.ucc.on{border-color:var(--p);background:var(--p50)}.ucc.hide{display:none}
+.uc-detail{display:none;padding:10px 14px 12px;border-top:1px solid var(--p100);background:var(--p50)}.ucc.det-open .uc-detail{display:block}
+.uc-det-row{font-size:11px;color:var(--t700);line-height:1.7;display:flex;gap:6px;align-items:baseline}.uc-det-row::before{content:'→';color:var(--p);font-weight:700;flex-shrink:0}
+.uc-info-btn{background:none;border:none;cursor:pointer;color:var(--t300);font-size:14px;line-height:1;padding:1px 4px;border-radius:4px;transition:all .15s;flex-shrink:0;font-family:inherit}.uc-info-btn:hover{color:var(--p);background:var(--p100)}.ucc.det-open .uc-info-btn{color:var(--p)}
 .uchk{width:20px;height:20px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}.ucc.on .uchk{background:var(--p);border-color:var(--p)}
 .uchk svg{display:none;width:11px;height:11px;color:white}.ucc.on .uchk svg{display:block}
 .ucb{flex:1;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
@@ -712,7 +716,10 @@ function renderUC(){
     h+=`<div class="ucg"><div class="ucgh"><div class="ucgt">${dom}</div><button class="ucgb" onclick="grpS('${dom}',this)">Tout sélectionner</button></div>`;
     ucs.forEach(u=>{
       const ck=selUC.some(s=>s.ID===u.ID);
-      h+=`<div class="ucc${ck?' on':''}" data-id="${u.ID}" data-diff="${u.D}" onclick="togUC(this,'${u.ID}')"><div class="uchk">${CHK}</div><div class="ucb"><div><div class="ucn">${u.T}</div><div class="ucm"><span class="badge ${bCl(u.D)}">${u.D}</span><span class="ucos">Outils : ${u.C}€/mois · ${u.J}j impl.</span></div></div><div class="ucgr"><div class="ucgv">${u.G}</div><div class="ucgl">gains bruts / mois</div></div></div></div>`;
+      const bds=u.Bd?u.Bd.split('·').map(b=>b.trim()).filter(Boolean):[];
+      const bdHtml=bds.length?`<div class="uc-detail">${bds.map(b=>`<div class="uc-det-row">${b}</div>`).join('')}</div>`:'';
+      const infoBtn=bds.length?`<button class="uc-info-btn" onclick="togDetail(event,this)" title="Bénéfices détaillés">ⓘ</button>`:'';
+      h+=`<div class="ucc${ck?' on':''}" data-id="${u.ID}" data-diff="${u.D}" onclick="togUC(this,'${u.ID}')"><div class="ucc-main"><div class="uchk">${CHK}</div><div class="ucb"><div><div class="ucn">${u.T}</div><div class="ucm"><span class="badge ${bCl(u.D)}">${u.D}</span><span class="ucos">Outils : ${u.C}€/mois · ${u.J}j impl.</span></div></div><div style="display:flex;align-items:flex-start;gap:5px"><div class="ucgr"><div class="ucgv">${u.G}</div><div class="ucgl">gains bruts / mois</div></div>${infoBtn}</div></div></div>${bdHtml}</div>`;
     });
     h+='</div>';
   }
@@ -720,6 +727,7 @@ function renderUC(){
   document.querySelectorAll('.fc').forEach(c=>{if(c.classList.contains('on'))fD(c.dataset.d,c);});
   updCnt();
 }
+function togDetail(e,btn){e.stopPropagation();btn.closest('.ucc').classList.toggle('det-open');}
 function togUC(card,id){
   const i=selUC.findIndex(s=>s.ID===id);
   if(i>=0){selUC.splice(i,1);card.classList.remove('on');}else{selUC.push(UC.find(u=>u.ID===id));card.classList.add('on');}
@@ -1137,7 +1145,8 @@ async function syncSheet(){
           Mn:mn||500, Mx:mx||1000,
           B:r['Gains non-financiers'].trim()||'Efficacité',
           C:cleanEur(r['Coût outils (€/mois)'])||50,
-          J:cleanEur(r['Jours implémentation'])||2
+          J:cleanEur(r['Jours implémentation'])||2,
+          Bd:(r['Bénéfices détaillés']||'').trim()
         };
       });
     if(fresh.length>5){
