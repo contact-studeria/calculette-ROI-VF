@@ -875,7 +875,7 @@ function renderROI(){
   document.getElementById('dV').innerHTML=`Avec ${ucTxt}, votre entreprise peut économiser entre <strong>${Math.round(gn).toLocaleString('fr-FR')}€</strong> et <strong>${Math.round(gx).toLocaleString('fr-FR')}€ par mois</strong>. L'investissement sera amorti en <strong>${pb<100?pb.toFixed(1)+' mois':'∞'}</strong>.`;
 
   const salV=parseInt(document.getElementById('sl-sal').value)||3200;
-  const chV=((salV+156)/160).toFixed(2).replace('.',',');
+  const chV=(salV/156).toFixed(2).replace('.',',');
   const poleTxt=Object.entries(poleHeads).filter(([k,v])=>v>0).map(([k,v])=>{const p=POLES.find(x=>x.id===k);return p?p.n+' ('+v+' pers.)':'';}).filter(Boolean).join(', ')||'1 personne par défaut';
   document.getElementById('r-method').innerHTML = `<div class="method-box">
     <div class="method-title">Méthodologie de calcul</div>
