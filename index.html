@@ -100,7 +100,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .ball{margin-left:auto;padding:6px 14px;border-radius:var(--rf);font-size:11px;font-weight:700;cursor:pointer;background:white;border:1.5px solid var(--pll);color:var(--p);font-family:inherit;transition:all .2s;text-transform:uppercase;letter-spacing:.3px}.ball:hover{background:var(--p);color:white;border-color:var(--p)}
 .uc-cnt{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-radius:var(--r12);background:var(--p50);border:1px solid var(--p100);margin-bottom:12px;font-size:13px;font-weight:600;color:var(--t700)}.uc-g{color:var(--p);font-weight:800}
 .ucg{margin-bottom:18px}.ucgh{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:8px}
-.ucgt{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--p)}
+.ucgt{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--p)}
 .ucgb{font-size:11px;color:var(--p);cursor:pointer;font-weight:600;background:none;border:none;padding:3px 8px;border-radius:6px;transition:all .2s;font-family:inherit}.ucgb:hover{background:var(--p50)}
 .ucc{border:1.5px solid var(--border);border-radius:var(--r12);background:white;cursor:pointer;margin-bottom:5px;transition:all .18s;user-select:none}
 .ucc-main{display:flex;align-items:flex-start;gap:10px;padding:12px 14px}
@@ -725,7 +725,7 @@ function getUCGain(u,sal){
   const he=Number(u.He)||0; // heures éco / employé / mois (col U)
   const ta=Number(u.Ta)||0.7; // taux adoption (col V)
   const eff=getPoleEff(u.Dom); // effectif du pôle
-  const gain=ch*he*ta*eff;
+  const gain=ch*he*ta*eff*1.2;
   return{gn:Math.round(gain*0.8), gx:Math.round(gain*1.2)};
 }
 function renderPoles(){
@@ -874,7 +874,24 @@ function renderROI(){
   const ucTxt=selUC.length>0?`<strong>${selUC.length} cas d'usage</strong>`:'<strong>tous les domaines</strong>';
   document.getElementById('dV').innerHTML=`Avec ${ucTxt}, votre entreprise peut économiser entre <strong>${Math.round(gn).toLocaleString('fr-FR')}€</strong> et <strong>${Math.round(gx).toLocaleString('fr-FR')}€ par mois</strong>. L'investissement sera amorti en <strong>${pb<100?pb.toFixed(1)+' mois':'∞'}</strong>.`;
 
-  document.getElementById('r-method').innerHTML = '<div class="method-box"><div class="method-title">💡 Comment sont calculés ces chiffres ?</div><div class="method-body">Ces estimations sont basées sur <strong>'+selUC.length+' cas d\'usage IA</strong> sélectionnés. Les <strong>gains</strong> représentent le temps homme libéré valorisé au coût salarial moyen. Les <strong>coûts outils</strong> sont les abonnements mensuels des solutions IA. Le <strong>payback</strong> est le délai pour amortir l\'investissement d\'implémentation ('+impl.toLocaleString('fr-FR')+'€) avec les gains nets mensuels.</div></div>';
+  const salV=parseInt(document.getElementById('sl-sal').value)||3200;
+  const chV=Math.round(salV/160);
+  const poleTxt=Object.entries(poleHeads).filter(([k,v])=>v>0).map(([k,v])=>{const p=POLES.find(x=>x.id===k);return p?p.n+' ('+v+' pers.)':'';}).filter(Boolean).join(', ')||'1 personne par défaut';
+  document.getElementById('r-method').innerHTML = `<div class="method-box">
+    <div class="method-title">Méthodologie de calcul</div>
+    <div class="method-body" style="font-size:13px;line-height:1.8">
+      <p>Chaque cas d'usage est évalué selon une formule basée sur <strong>4 variables personnalisées</strong> à votre entreprise :</p>
+      <div style="background:white;border:1px solid var(--p100);border-radius:10px;padding:16px 20px;margin:12px 0;text-align:center">
+        <div style="font-size:11px;color:var(--t400);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;font-weight:700">Formule de gain mensuel par cas d'usage</div>
+        <div style="font-size:18px;font-weight:800;color:var(--p)">Coût horaire × Heures économisées × Taux d'adoption × Effectif</div>
+      </div>
+      <p><strong>1. Coût horaire</strong> — Salaire brut mensuel (${salV.toLocaleString('fr-FR')}€) ÷ 160h = <strong>${chV}€/h</strong>. C'est la valeur économique d'une heure de travail dans votre entreprise.</p>
+      <p><strong>2. Heures économisées</strong> — Nombre d'heures mensuelles libérées par l'automatisation IA pour chaque cas d'usage, basé sur des benchmarks sectoriels.</p>
+      <p><strong>3. Taux d'adoption</strong> — Pourcentage réaliste d'adoption par vos équipes (généralement 65-80%), tenant compte de la courbe d'apprentissage.</p>
+      <p><strong>4. Effectif concerné</strong> — Nombre de collaborateurs dans le pôle qui bénéficient de l'automatisation. Pôles renseignés : <strong>${poleTxt}</strong>.</p>
+      <p style="margin-top:8px;color:var(--t400);font-size:12px">Une fourchette basse (×0.8) et haute (×1.2) est appliquée pour refléter la variabilité selon le contexte d'implémentation.</p>
+    </div>
+  </div>`;
 
   const pdcCo = document.getElementById('pdc-co');
   const pdcDate = document.getElementById('pdc-date');
