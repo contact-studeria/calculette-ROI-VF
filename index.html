@@ -945,7 +945,7 @@ function renderROI(){
   if(pdcCo) pdcCo.textContent = co + (sector ? ' · ' + sector : '');
   if(pdcDate) pdcDate.textContent = 'Rapport généré le ' + new Date().toLocaleDateString('fr-FR');
 
-  const yrROI=Math.round(nMax*12);
+  const yrROI=Math.round(((gn+gx)/2)*12);
   document.getElementById('hNY').textContent=yrROI.toLocaleString('fr-FR')+' €/an';
   fireConfetti();
   drDonut(byD);drBar(byD);
