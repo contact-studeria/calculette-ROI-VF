@@ -717,10 +717,18 @@ function getPoleEff(dom){
   return poleHeads[pole.id]||1;
 }
 function getUCGain(u,sal){
+  const he=Number(u.He)||0;
+  const ta=Number(u.Ta)||0.7;
+  const ch=sal/160;
   const eff=getPoleEff(u.Dom);
+  if(he>0){
+    const gain=he*ch*eff*ta;
+    return{gn:Math.round(gain*0.8), gx:Math.round(gain*1.2)};
+  }
+  // Fallback si He absent (données fallback)
   const mn=Number(u.Mn)||0;
   const mx=Number(u.Mx)||0;
-  return{gn:Math.round(mn*eff), gx:Math.round(mx*eff)};
+  return{gn:Math.round(mn*eff*ta), gx:Math.round(mx*eff*ta)};
 }
 function renderPoles(){
   document.getElementById('poleGrid').innerHTML=POLES.map(p=>`
@@ -844,17 +852,17 @@ function renderROI(){
   let gn=0,gx=0,tC=0,tJ=0;
   const byD={},ben=new Set();
 
+  const sal=parseInt(document.getElementById('sl-sal').value)||3200;
   if(selUC.length>0){
-    selUC.forEach(u=>{const mn=Number(u.Mn)||0,mx=Number(u.Mx)||0,c=Number(u.C)||0,j=Number(u.J)||0;gn+=mn;gx+=mx;tC+=c;tJ+=j;if(!byD[u.Dom])byD[u.Dom]={min:0,max:0,cost:0};byD[u.Dom].min+=mn;byD[u.Dom].max+=mx;byD[u.Dom].cost+=c;if(u.B)ben.add(u.B);});
+    selUC.forEach(u=>{
+      const {gn:ugn,gx:ugx}=getUCGain(u,sal);
+      const c=Number(u.C)||0, j=Number(u.J)||0;
+      gn+=ugn; gx+=ugx; tC+=c; tJ+=j;
+      if(!byD[u.Dom])byD[u.Dom]={min:0,max:0,cost:0};
+      byD[u.Dom].min+=ugn; byD[u.Dom].max+=ugx; byD[u.Dom].cost+=c;
+      if(u.B)ben.add(u.B);
+    });
   } else {
-    // Fallback: use slider formula
-    const emp=empSlider(document.getElementById('s1e').value);
-    const sal=parseInt(document.getElementById('sl-sal').value);
-    const hWeek=parseInt(document.getElementById('sl-pct').value);
-    const monthly=Math.round(emp*sal*(hWeek/35)*0.38);
-    const tool=Math.round(emp*32);
-    gn=monthly*0.8;gx=monthly;tC=tool;
-    DOMS.forEach(d=>{const cnt=UC.filter(u=>u.Dom===d.id).length;byD[d.id]={min:Math.round(gn*cnt/UC.length),max:Math.round(gx*cnt/UC.length),cost:Math.round(tC*cnt/UC.length)};});
     ben.add('Productivité');ben.add('Efficacité');ben.add('Qualité');
   }
 
