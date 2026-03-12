@@ -732,8 +732,8 @@ function slBgInp(inp){
 }
 function getPoleEff(dom){
   const pole=POLES.find(p=>p.doms.includes(dom));
-  if(!pole) return 0;
-  return poleHeads[pole.id]||0;
+  if(!pole) return 1;
+  return poleHeads[pole.id]||1;
 }
 function getUCGain(u,sal){
   const eff=getPoleEff(u.Dom);
