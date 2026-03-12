@@ -871,8 +871,8 @@ function renderROI(){
     // Fallback: use slider formula
     const emp=empSlider(document.getElementById('s1e').value);
     const sal=parseInt(document.getElementById('sl-sal').value);
-    const pct=parseInt(document.getElementById('sl-pct').value);
-    const monthly=Math.round(emp*sal*(pct/100)*0.38);
+    const hWeek=parseInt(document.getElementById('sl-pct').value);
+    const monthly=Math.round(emp*sal*(hWeek/35)*0.38);
     const tool=Math.round(emp*32);
     gn=monthly*0.8;gx=monthly;tC=tool;
     DOMS.forEach(d=>{const cnt=UC.filter(u=>u.Dom===d.id).length;byD[d.id]={min:Math.round(gn*cnt/UC.length),max:Math.round(gx*cnt/UC.length),cost:Math.round(tC*cnt/UC.length)};});
