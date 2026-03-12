@@ -423,13 +423,9 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
         </div>
       </div>
 
-      <div class="rp-monthly" id="rp-monthly-row" style="display:none">
+      <div class="rp-monthly" id="rp-monthly-row">
         <span class="rp-m-lbl">Gains bruts / mois</span>
         <span class="rp-m-val" id="rp-monthly">—</span>
-      </div>
-      <div class="rp-monthly" id="rp-tool-row" style="display:none">
-        <span class="rp-m-lbl">Coûts outils / mois</span>
-        <span class="rp-m-val" id="rp-tool" style="color:rgba(255,100,100,.8)">—</span>
       </div>
 
       <div class="rp-doms-lbl">Répartition par domaine</div>
@@ -654,10 +650,7 @@ function updatePreview(){
     document.getElementById('rp-sub').textContent='Sélectionnez vos cas d\'usage';
     pbEl.textContent='—';
     document.getElementById('rp-uc').textContent=UC.length;
-    document.getElementById('rp-monthly-row').style.display='flex';
-    document.getElementById('rp-tool-row').style.display='flex';
     document.getElementById('rp-monthly').textContent='—';
-    document.getElementById('rp-tool').textContent='—';
   } else {
     // Calcul basé sur les UC sélectionnés
     const sal=parseInt(document.getElementById('sl-sal').value)||3200;
@@ -666,27 +659,15 @@ function updatePreview(){
       const {gn:ugn,gx:ugx}=getUCGain(u,sal);
       gn+=ugn; gx+=ugx; tC+=(Number(u.C)||0); tJ+=(Number(u.J)||0);
     });
-    const avg=(gn+gx)/2;
-    const net=Math.round(avg-tC);
-    const monthly=Math.round(avg);
-    const impl=tJ*RATE;
-    const pb=net>0?impl/net:999;
-    const yr=net*12;
+    const avg=Math.round((gn+gx)/2);
+    const yr=avg*12;
 
     animN(yrEl,yr,' €');
-    document.getElementById('rp-sub').textContent='d\'économies nettes par an · '+selUC.length+' cas d\'usage';
-
-    if(pb<999){
-      const pbEl2=document.getElementById('rp-pb');
-      pbEl2.classList.remove('num-flash');void pbEl2.offsetWidth;pbEl2.classList.add('num-flash');
-      pbEl2.textContent=pb.toFixed(1)+' mois';
-    } else {pbEl.textContent='∞';}
+    document.getElementById('rp-sub').textContent='d\'économies estimées par an · '+selUC.length+' cas d\'usage';
+    pbEl.textContent=selUC.length+' UC';
 
     animN(document.getElementById('rp-uc'),selUC.length,'');
-    document.getElementById('rp-monthly-row').style.display='flex';
-    document.getElementById('rp-tool-row').style.display='flex';
-    animN(document.getElementById('rp-monthly'),monthly,' €');
-    animN(document.getElementById('rp-tool'),tC,' €');
+    animN(document.getElementById('rp-monthly'),avg,' €');
   }
 
   // Domain bars
