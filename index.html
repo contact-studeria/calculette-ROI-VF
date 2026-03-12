@@ -503,7 +503,7 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
     <div class="dom-summary" id="domSummary"></div>
 
     <div class="sect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5h6"/></svg> Cas d'usage sélectionnés</div>
-    <div class="tw"><table class="st"><thead><tr><th>Tâche</th><th>Domaine</th><th>Diff.</th><th>Gains/mois</th><th>Coût/mois</th><th>Jours</th></tr></thead><tbody id="tblB"></tbody></table></div>
+    <div class="tw"><table class="st"><thead><tr><th>Cas d'usage</th><th>Domaine</th><th>Gains/mois</th><th>Outils recommandés</th><th>Stack technique</th></tr></thead><tbody id="tblB"></tbody></table></div>
 
     <div class="sect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> Bénéfices non-financiers</div>
     <div class="bgrid" id="benL"></div>
@@ -917,7 +917,11 @@ function renderROI(){
     </div>`;
   }).join('');
 
-  document.getElementById('tblB').innerHTML=selUC.map(u=>`<tr style="border-left:3px solid ${DC[u.Dom]||'#7c3aed'}"><td><div style="font-weight:600;color:var(--t900)">${u.T}</div><div style="font-size:11px;color:var(--t400);margin-top:2px">${u.B}</div></td><td><span style="display:inline-block;padding:2px 8px;background:${DC[u.Dom]||'#7c3aed'}22;color:${DC[u.Dom]||'#7c3aed'};border-radius:4px;font-size:10px;font-weight:700">${u.Dom.split(' & ')[0]}</span></td><td><span class="badge ${bCl(u.D)}">${u.D}</span></td><td class="tdg" style="font-weight:800">${u.G}</td><td class="tdc">${u.C}€/mois</td><td>${u.J}j</td></tr>`).join('');
+  const salR=parseInt(document.getElementById('sl-sal').value)||3200;
+  document.getElementById('tblB').innerHTML=selUC.map(u=>{
+    const {gn:ug}=getUCGain(u,salR);
+    return`<tr style="border-left:3px solid ${DC[u.Dom]||'#7c3aed'}"><td><div style="font-weight:600;color:var(--t900)">${u.T}</div>${u.Bd?`<div style="font-size:11px;color:var(--t500);margin-top:4px;line-height:1.5">${u.Bd}</div>`:''}</td><td><span style="display:inline-block;padding:2px 8px;background:${DC[u.Dom]||'#7c3aed'}22;color:${DC[u.Dom]||'#7c3aed'};border-radius:4px;font-size:10px;font-weight:700">${u.Dom.split(' & ')[0]}</span></td><td class="tdg" style="font-weight:800">${ug.toLocaleString('fr-FR')}€</td><td style="font-size:12px">${u.Outil||'—'}</td><td style="font-size:12px">${u.Prereq||'—'}</td></tr>`;
+  }).join('');
   document.getElementById('benL').innerHTML=[...ben].map(b=>`<div class="btag">${b}</div>`).join('');
 }
 function kp(vi,v,si,sv){an(vi,v,'€');document.getElementById(si).textContent=Math.round(sv).toLocaleString('fr-FR')+'€/an';}
@@ -1219,7 +1223,9 @@ async function syncSheet(){
           B:r['Gains non-financiers'].trim()||'Efficacité',
           C:cleanEur(r['Coût outils (€/mois)'])||50,
           J:cleanEur(r['Jours implémentation'])||2,
-          Bd:(r['Détails']||'').trim()
+          Bd:(r['Détails']||'').trim(),
+          Outil:(r['Outils IA identifié ']||'').trim(),
+          Prereq:(r['Prérequis techniques']||'').trim()
         };
       });
     if(fresh.length>5){
