@@ -70,6 +70,20 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .sl-marks{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--t400);font-weight:500}
 .s1v{font-size:28px;font-weight:900;color:var(--p);letter-spacing:-1px;font-variant-numeric:tabular-nums}
 
+/* Pole grid */
+.pole-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.pole-card{padding:12px 14px;border:2px solid var(--border);border-radius:var(--r12);cursor:pointer;background:white;transition:all .2s;display:flex;align-items:center;gap:10px;user-select:none}
+.pole-card:hover{border-color:var(--pll);background:var(--p50)}.pole-card.sel{border-color:var(--p);background:var(--p50);box-shadow:0 0 0 3px rgba(124,58,237,.08)}
+.pole-ico{width:34px;height:34px;border-radius:8px;background:var(--p50);display:flex;align-items:center;justify-content:center;flex-shrink:0}.pole-card.sel .pole-ico{background:var(--p100)}
+.pole-ico svg{width:16px;height:16px;color:var(--pll)}.pole-card.sel .pole-ico svg{color:var(--p)}
+.pole-label{flex:1}.pole-n{font-size:14px;font-weight:700;color:var(--t900);line-height:1.2}.pole-sub{font-size:12px;color:var(--t400);margin-top:2px}.pole-card.sel .pole-n{color:var(--p)}
+.pole-heads{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.pole-head-row{background:var(--p50);border:1px solid var(--p100);border-radius:var(--r12);padding:12px 14px}
+.pole-head-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.pole-head-name{font-size:11px;font-weight:700;color:var(--p);text-transform:uppercase;letter-spacing:.5px}
+.pole-head-val{font-size:22px;font-weight:900;color:var(--p);letter-spacing:-.5px}
+.pole-head-val span{font-size:11px;font-weight:500;color:var(--t400);margin-left:2px}
+
 /* Domain grid */
 .dom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .dom-card{background:var(--bg);border:2px solid var(--border);border-radius:var(--r16);padding:18px 16px;cursor:pointer;transition:all .2s;user-select:none}
@@ -319,10 +333,20 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
         </div>
       </div>
 
-      <!-- Section 03 — Productivité -->
+      <!-- Section 03 — Pôles concernés -->
       <div class="fs">
         <div class="fs-hdr">
           <div class="fs-num">03</div>
+          <div><div class="fs-title">Pôles concernés</div><div class="fs-desc">Combien de personnes par équipe utiliseront l'IA ?</div></div>
+        </div>
+        <div class="pole-grid" id="poleGrid"></div>
+        <div class="pole-heads" id="poleHeadCont"></div>
+      </div>
+
+      <!-- Section 04 — Productivité -->
+      <div class="fs">
+        <div class="fs-hdr">
+          <div class="fs-num">04</div>
           <div><div class="fs-title">Productivité & coûts RH</div><div class="fs-desc">Salaire moyen et tâches répétitives</div></div>
         </div>
         <div class="sl2">
@@ -339,19 +363,19 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
         </div>
       </div>
 
-      <!-- Section 04 — Domaines -->
+      <!-- Section 05 — Domaines -->
       <div class="fs">
         <div class="fs-hdr">
-          <div class="fs-num">04</div>
+          <div class="fs-num">05</div>
           <div><div class="fs-title">Domaines prioritaires</div><div class="fs-desc">Sélectionnez les domaines qui vous concernent</div></div>
         </div>
         <div class="dom-grid" id="domGrid"></div>
       </div>
 
-      <!-- Section 05 — Cas d'usage -->
+      <!-- Section 06 — Cas d'usage -->
       <div class="fs" id="fs-uc-wrap">
         <div class="fs-hdr">
-          <div class="fs-num">05</div>
+          <div class="fs-num">06</div>
           <div><div class="fs-title">Cas d'usage IA</div><div class="fs-desc">Sélectionnez les automatisations applicables</div></div>
         </div>
         <div class="fbar">
@@ -548,13 +572,13 @@ const UC=[
 {ID:"UC-038",Dom:"PRODUCTIVITÉ",T:"Extraction et synthèse de documents longs",D:"Facile",G:"800 – 1 500 €/mois",Mn:800,Mx:1500,B:"Efficacité",C:50,J:1}
 ];
 const DOMS=[
-{id:"PROSPECTION",n:"Trouver des prospects",d:"Leads, ciblage, enrichissement",col:"#7c3aed",bg:"#f5f3ff",ic:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>'},
+{id:"PROSPECTION",n:"Prospection",d:"Leads, ciblage, enrichissement",col:"#7c3aed",bg:"#f5f3ff",ic:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>'},
 {id:"VENTE",n:"Closer & vendre",d:"CRM, devis, closing, suivi",col:"#6d28d9",bg:"#ede9fe",ic:'<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>'},
-{id:"MARKETING & CONTENU",n:"Créer du contenu",d:"Réseaux sociaux, SEO",col:"#db2777",bg:"#fdf2f8",ic:'<path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>'},
-{id:"SAV & RELATION CLIENT",n:"Fidéliser ses clients",d:"Support, satisfaction",col:"#0891b2",bg:"#ecfeff",ic:'<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>'},
-{id:"RH",n:"Gérer les RH",d:"Recrutement, formation",col:"#d97706",bg:"#fffbeb",ic:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'},
-{id:"FINANCE & ADMINISTRATION",n:"Optimiser finance",d:"Facturation, comptabilité",col:"#059669",bg:"#ecfdf5",ic:'<path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>'},
-{id:"PRODUCTIVITÉ",n:"Gagner en productivité",d:"Emails, réunions, auto.",col:"#6366f1",bg:"#eef2ff",ic:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'}
+{id:"MARKETING & CONTENU",n:"Marketing",d:"Réseaux sociaux, SEO",col:"#db2777",bg:"#fdf2f8",ic:'<path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>'},
+{id:"SAV & RELATION CLIENT",n:"Service Client",d:"Support, satisfaction",col:"#0891b2",bg:"#ecfeff",ic:'<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>'},
+{id:"RH",n:"RH",d:"Recrutement, formation",col:"#d97706",bg:"#fffbeb",ic:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'},
+{id:"FINANCE & ADMINISTRATION",n:"Finance",d:"Facturation, comptabilité",col:"#059669",bg:"#ecfdf5",ic:'<path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>'},
+{id:"PRODUCTIVITÉ",n:"Productivité",d:"Emails, réunions, auto.",col:"#6366f1",bg:"#eef2ff",ic:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'}
 ];
 const SECS=[
 {v:"Conseil & Services B2B",i:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>'},
@@ -571,6 +595,15 @@ const SECS=[
 {v:"Autre / Non listé",i:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>'}
 ];
 const DC={'PROSPECTION':'#7c3aed','VENTE':'#6d28d9','MARKETING & CONTENU':'#db2777','SAV & RELATION CLIENT':'#0891b2','RH':'#d97706','FINANCE & ADMINISTRATION':'#059669','PRODUCTIVITÉ':'#6366f1'};
+const POLES=[
+  {id:'commercial',n:'Commercial',sub:'Prospection & vente',doms:['PROSPECTION','VENTE'],ic:'<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>'},
+  {id:'marketing',n:'Marketing',sub:'Contenu & communication',doms:['MARKETING & CONTENU'],ic:'<path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>'},
+  {id:'sav',n:'Service Client',sub:'Support & relation client',doms:['SAV & RELATION CLIENT'],ic:'<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>'},
+  {id:'rh',n:'RH',sub:'Recrutement & formation',doms:['RH'],ic:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>'},
+  {id:'finance',n:'Finance',sub:'Comptabilité & admin',doms:['FINANCE & ADMINISTRATION'],ic:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>'},
+  {id:'ops',n:'Opérations',sub:'Productivité générale',doms:['PRODUCTIVITÉ'],ic:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'},
+];
+let poleHeads={}; // {commercial:8, marketing:3, ...}
 const CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
 const RATE=800;
 let sector='',selD=[],selUC=[],dCh=null,bCh=null;
@@ -628,8 +661,12 @@ function updatePreview(){
     document.getElementById('rp-tool-row').style.display='none';
   } else {
     // Calcul basé sur les UC sélectionnés
+    const sal=parseInt(document.getElementById('sl-sal').value)||3200;
     let gn=0,gx=0,tC=0,tJ=0;
-    selUC.forEach(u=>{gn+=u.Mn;gx+=u.Mx;tC+=u.C;tJ+=u.J;});
+    selUC.forEach(u=>{
+      const {gn:ugn,gx:ugx}=getUCGain(u,sal);
+      gn+=ugn; gx+=ugx; tC+=u.C; tJ+=u.J;
+    });
     const avg=(gn+gx)/2;
     const net=Math.round(avg-tC);
     const monthly=Math.round(avg);
@@ -679,6 +716,58 @@ function backToLanding(){
 }
 
 /* ── Sectors ── */
+/* ── Pôles ── */
+function slBgInp(inp){
+  const p=((inp.value-inp.min)/(inp.max-inp.min))*100;
+  inp.style.background=`linear-gradient(to right,#7c3aed ${p}%,#e2e8f0 ${p}%)`;
+}
+function getPoleEff(dom){
+  const pole=POLES.find(p=>p.doms.includes(dom));
+  return (pole&&poleHeads[pole.id])||1;
+}
+function getUCGain(u,sal){
+  const he=u.He||0;
+  const ta=u.Ta||0.7;
+  const ch=sal/160; // coût horaire
+  const eff=getPoleEff(u.Dom);
+  const base=he*ch*eff*ta*5;
+  return{gn:Math.round(base*0.8), gx:Math.round(base*1.2)};
+}
+function renderPoles(){
+  document.getElementById('poleGrid').innerHTML=POLES.map(p=>`
+    <div class="pole-card${poleHeads[p.id]?' sel':''}" onclick="togPole('${p.id}',this)">
+      <div class="pole-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p.ic}</svg></div>
+      <div class="pole-label"><div class="pole-n">${p.n}</div><div class="pole-sub">${p.sub}</div></div>
+    </div>`).join('');
+  renderPoleHeads();
+}
+function togPole(id,el){
+  if(poleHeads[id]){delete poleHeads[id];}
+  else{poleHeads[id]=1;}
+  el.classList.toggle('sel',!!poleHeads[id]);
+  renderPoleHeads();updatePreview();
+}
+function renderPoleHeads(){
+  const active=POLES.filter(p=>poleHeads[p.id]);
+  document.getElementById('poleHeadCont').innerHTML=active.map(p=>`
+    <div class="pole-head-row">
+      <div class="pole-head-top">
+        <span class="pole-head-name">${p.n}</span>
+        <span class="pole-head-val"><span id="phv-${p.id}">${poleHeads[p.id]}</span><span> pers.</span></span>
+      </div>
+      <input type="range" min="1" max="50" value="${poleHeads[p.id]}" style="width:100%"
+        oninput="setPoleHead('${p.id}',this)">
+    </div>`).join('');
+  document.querySelectorAll('#poleHeadCont input[type=range]').forEach(slBgInp);
+}
+function setPoleHead(id,inp){
+  poleHeads[id]=parseInt(inp.value);
+  const el=document.getElementById('phv-'+id);
+  if(el)el.textContent=inp.value;
+  slBgInp(inp);
+  updatePreview();
+}
+
 function renderSectors(){
   document.getElementById('scGrid').innerHTML=SECS.map(s=>
     `<div class="sc" onclick="pickSec('${s.v}',this)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${s.i}</svg><div class="sc-n">${s.v}</div></div>`
@@ -1134,8 +1223,10 @@ async function syncSheet(){
     const fresh=rows
       .filter(r=>r['f']&&r['f'].startsWith('UC-')&&r['Tâche automatisée'])
       .map(r=>{
-        const mn=cleanEur(r['Gains min (€/mois)']);
+        const mn=cleanEur(r['Gains min/ (€/mois)']);
         const mx=cleanEur(r['Gains max (€/mois)']);
+        const he=parseFloat((r['Heures éco. / employé / mois']||'0').replace('h','').trim())||0;
+        const ta=parseFloat((r['Taux adoption']||'70%').replace('%','').trim())/100||0.7;
         let rawDom = r['Domaine'].trim().toUpperCase();
         return{
           ID:r['f'].trim(),
@@ -1144,6 +1235,8 @@ async function syncSheet(){
           D:r['Difficulté'].trim()||'Moyen',
           G:r['Gains financiers (affichage)'].trim(),
           Mn:mn||500, Mx:mx||1000,
+          He:he,  // heures économisées / employé / mois
+          Ta:ta,  // taux d'adoption (0-1)
           B:r['Gains non-financiers'].trim()||'Efficacité',
           C:cleanEur(r['Coût outils (€/mois)'])||50,
           J:cleanEur(r['Jours implémentation'])||2,
@@ -1161,6 +1254,7 @@ async function syncSheet(){
 /* ── Init ── */
 function init(){
   renderSectors();
+  renderPoles();
   renderDoms();
   ['sl-sal','sl-pct','s1e','s1c'].forEach(id=>slBg(id));
   s1eu();
