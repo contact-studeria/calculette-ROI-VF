@@ -892,7 +892,6 @@ function renderROI(){
   an('hN',nMax,'€');document.getElementById('hNY').textContent=(nMax*12).toLocaleString('fr-FR')+'€/an';
   document.getElementById('hM').textContent=tJ+'j';document.getElementById('hML').textContent='~'+impl.toLocaleString('fr-FR')+'€';
   document.getElementById('hP').textContent=pb<100?pb.toFixed(1)+' mois':'∞';
-  document.getElementById('kDy').textContent=tJ+'j';document.getElementById('kIm').textContent='~'+impl.toLocaleString('fr-FR')+'€';
   drDonut(byD);drBar(byD);
 
   document.getElementById('domSummary').innerHTML = Object.entries(byD).map(([dom,v])=>{
