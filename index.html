@@ -730,7 +730,7 @@ function getUCGain(u,sal){
   const ta=u.Ta||0.7;
   const ch=sal/160; // coût horaire
   const eff=getPoleEff(u.Dom);
-  const base=he*ch*eff*ta*7.5;
+  const base=he*ch*eff*ta*6.75;
   return{gn:Math.round(base*0.8), gx:Math.round(base*1.2)};
 }
 function renderPoles(){
