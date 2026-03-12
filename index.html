@@ -199,10 +199,11 @@ body.pdf-mode .pdf-cover{display:block!important}
 .dhero{background:white;border:1px solid var(--border);border-radius:var(--r24);padding:40px;margin-bottom:24px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.04)}
 .dco{font-size:26px;font-weight:800;color:var(--t900);margin-bottom:4px}.dsec{font-size:14px;color:var(--t400);margin-bottom:18px}
 .dverd{font-size:15px;color:var(--t500);line-height:1.75;max-width:600px;margin:0 auto 28px}.dverd strong{color:var(--p);font-weight:700}
-.hkpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.hkpi{background:var(--bg);border-radius:var(--r16);padding:24px 16px;border:1px solid var(--borderl)}
-.hkl{font-size:10px;color:var(--t400);text-transform:uppercase;letter-spacing:.8px;font-weight:700;margin-bottom:7px}
-.hkv{font-size:32px;font-weight:900;color:var(--p);letter-spacing:-.5px;font-variant-numeric:tabular-nums}.hkv.g{color:var(--green)}.hks{font-size:11px;color:var(--t400);margin-top:4px}
+.roi-hero-box{position:relative;background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:2px solid #059669;border-radius:var(--r24);padding:40px 20px;text-align:center;overflow:hidden}
+.roi-hero-label{font-size:12px;color:#065f46;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:10px}
+.roi-hero-val{font-size:56px;font-weight:900;color:#059669;letter-spacing:-2px;font-variant-numeric:tabular-nums;animation:roiPop .6s ease-out}
+@keyframes roiPop{0%{transform:scale(0.3);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+#confettiCanvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
 .sect{font-size:16px;font-weight:700;color:var(--t900);margin:28px 0 14px;display:flex;align-items:center;gap:8px}.sect svg{width:16px;height:16px;color:var(--p);flex-shrink:0}
 .kgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px}
 .kcard{background:white;border:1px solid var(--border);border-radius:var(--r12);padding:18px;text-align:center}
@@ -475,10 +476,10 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
     <div class="dhero">
       <div class="dco" id="dCo">—</div><div class="dsec" id="dSec">—</div>
       <p class="dverd" id="dV"></p>
-      <div class="hkpis">
-        <div class="hkpi"><div class="hkl">ROI Net Max / mois</div><div class="hkv g" id="hN">0€</div><div class="hks" id="hNY">0€/an</div></div>
-        <div class="hkpi"><div class="hkl">Implémentation</div><div class="hkv" id="hM">0j</div><div class="hks" id="hML">estimé</div></div>
-        <div class="hkpi"><div class="hkl">Payback</div><div class="hkv" id="hP">—</div><div class="hks">amortissement</div></div>
+      <div class="roi-hero-box" id="roiHeroBox">
+        <div class="roi-hero-label">Économies estimées par an</div>
+        <div class="roi-hero-val" id="hNY">0 €</div>
+        <canvas id="confettiCanvas"></canvas>
       </div>
     </div>
 
@@ -836,6 +837,35 @@ function updCnt(){
 function bCl(d){return 'b'+d[0].toLowerCase();}
 
 /* ── ROI Report ── */
+function fireConfetti(){
+  const canvas=document.getElementById('confettiCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  const colors=['#059669','#7c3aed','#ec4899','#d97706','#6366f1','#0891b2'];
+  const particles=[];
+  for(let i=0;i<80;i++){
+    particles.push({x:canvas.width/2,y:canvas.height/2,vx:(Math.random()-0.5)*12,vy:Math.random()*-10-3,size:Math.random()*6+3,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*360,rv:(Math.random()-0.5)*10,life:1});
+  }
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    let alive=false;
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.vy+=0.25;p.rot+=p.rv;p.life-=0.012;
+      if(p.life<=0)return;
+      alive=true;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
+      ctx.globalAlpha=p.life;
+      ctx.fillStyle=p.color;
+      ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+      ctx.restore();
+    });
+    if(alive&&frame<120){frame++;requestAnimationFrame(draw);}
+    else{ctx.clearRect(0,0,canvas.width,canvas.height);}
+  }
+  draw();
+}
 function renderROI(){
   const co=document.getElementById('coName').value||'Votre entreprise';
   let gn=0,gx=0,tC=0,tJ=0;
@@ -890,9 +920,9 @@ function renderROI(){
   if(pdcCo) pdcCo.textContent = co + (sector ? ' · ' + sector : '');
   if(pdcDate) pdcDate.textContent = 'Rapport généré le ' + new Date().toLocaleDateString('fr-FR');
 
-  an('hN',nMax,'€');document.getElementById('hNY').textContent=(nMax*12).toLocaleString('fr-FR')+'€/an';
-  document.getElementById('hM').textContent=tJ+'j';document.getElementById('hML').textContent='~'+impl.toLocaleString('fr-FR')+'€';
-  document.getElementById('hP').textContent=pb<100?pb.toFixed(1)+' mois':'∞';
+  const yrROI=Math.round(nMax*12);
+  document.getElementById('hNY').textContent=yrROI.toLocaleString('fr-FR')+' €/an';
+  fireConfetti();
   drDonut(byD);drBar(byD);
 
   document.getElementById('domSummary').innerHTML = Object.entries(byD).map(([dom,v])=>{
