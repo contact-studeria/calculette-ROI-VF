@@ -737,11 +737,16 @@ function getPoleEff(dom){
 }
 function getUCGain(u,sal){
   const he=u.He||0;
-  const ta=u.Ta||0.7;
-  const ch=sal/160; // coût horaire
+  if(he>0){
+    const ta=u.Ta||0.7;
+    const ch=sal/160;
+    const eff=getPoleEff(u.Dom);
+    const base=he*ch*eff*ta*6.75;
+    return{gn:Math.round(base*0.8), gx:Math.round(base*1.2)};
+  }
+  // Fallback sur Mn/Mx si He absent
   const eff=getPoleEff(u.Dom);
-  const base=he*ch*eff*ta*6.75;
-  return{gn:Math.round(base*0.8), gx:Math.round(base*1.2)};
+  return{gn:Math.round((u.Mn||0)*eff), gx:Math.round((u.Mx||0)*eff)};
 }
 function renderPoles(){
   document.getElementById('poleGrid').innerHTML=POLES.map(p=>`
