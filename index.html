@@ -664,7 +664,9 @@ function updatePreview(){
 
     animN(yrEl,yr,' €');
     document.getElementById('rp-sub').textContent='d\'économies estimées par an · '+selUC.length+' cas d\'usage';
-    pbEl.textContent=selUC.length+' UC';
+    const impl=tJ*RATE;
+    const pb=avg>0?impl/avg:0;
+    pbEl.textContent=pb>0?pb.toFixed(1)+' mois':'—';
 
     animN(document.getElementById('rp-uc'),selUC.length,'');
     animN(document.getElementById('rp-monthly'),avg,' €');
