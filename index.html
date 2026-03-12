@@ -664,7 +664,7 @@ function updatePreview(){
     let gn=0,gx=0,tC=0,tJ=0;
     selUC.forEach(u=>{
       const {gn:ugn,gx:ugx}=getUCGain(u,sal);
-      gn+=ugn; gx+=ugx; tC+=u.C; tJ+=u.J;
+      gn+=ugn; gx+=ugx; tC+=(Number(u.C)||0); tJ+=(Number(u.J)||0);
     });
     const avg=(gn+gx)/2;
     const net=Math.round(avg-tC);
@@ -736,18 +736,10 @@ function getPoleEff(dom){
   return poleHeads[pole.id]||0;
 }
 function getUCGain(u,sal){
-  const he=u.He||0;
-  const ta=u.Ta||0.7;
-  const ch=sal/160;
   const eff=getPoleEff(u.Dom);
-  if(he>0){
-    const base=he*ch*eff*ta*6.75;
-    console.log('getUCGain',u.ID,'he=',he,'ch=',ch,'eff=',eff,'ta=',ta,'base=',base,'gn=',Math.round(base*0.8),'gx=',Math.round(base*1.2));
-    return{gn:Math.round(base*0.8), gx:Math.round(base*1.2)};
-  }
-  const gn=Math.round((u.Mn||0)*eff), gx=Math.round((u.Mx||0)*eff);
-  console.log('getUCGain FALLBACK',u.ID,'Mn=',u.Mn,'Mx=',u.Mx,'eff=',eff,'gn=',gn,'gx=',gx);
-  return{gn, gx};
+  const mn=Number(u.Mn)||0;
+  const mx=Number(u.Mx)||0;
+  return{gn:Math.round(mn*eff), gx:Math.round(mx*eff)};
 }
 function renderPoles(){
   document.getElementById('poleGrid').innerHTML=POLES.map(p=>`
@@ -872,7 +864,7 @@ function renderROI(){
   const byD={},ben=new Set();
 
   if(selUC.length>0){
-    selUC.forEach(u=>{gn+=u.Mn;gx+=u.Mx;tC+=u.C;tJ+=u.J;if(!byD[u.Dom])byD[u.Dom]={min:0,max:0,cost:0};byD[u.Dom].min+=u.Mn;byD[u.Dom].max+=u.Mx;byD[u.Dom].cost+=u.C;if(u.B)ben.add(u.B);});
+    selUC.forEach(u=>{const mn=Number(u.Mn)||0,mx=Number(u.Mx)||0,c=Number(u.C)||0,j=Number(u.J)||0;gn+=mn;gx+=mx;tC+=c;tJ+=j;if(!byD[u.Dom])byD[u.Dom]={min:0,max:0,cost:0};byD[u.Dom].min+=mn;byD[u.Dom].max+=mx;byD[u.Dom].cost+=c;if(u.B)ben.add(u.B);});
   } else {
     // Fallback: use slider formula
     const emp=empSlider(document.getElementById('s1e').value);
