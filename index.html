@@ -650,14 +650,14 @@ function updatePreview(){
   const pbEl=document.getElementById('rp-pb');
 
   if(selUC.length===0){
-    yrEl.textContent='0 €';
+    yrEl.textContent='—';
     document.getElementById('rp-sub').textContent='Sélectionnez vos cas d\'usage';
-    pbEl.textContent='0 mois';
+    pbEl.textContent='—';
     document.getElementById('rp-uc').textContent=UC.length;
     document.getElementById('rp-monthly-row').style.display='flex';
     document.getElementById('rp-tool-row').style.display='flex';
-    document.getElementById('rp-monthly').textContent='0 €';
-    document.getElementById('rp-tool').textContent='0 €';
+    document.getElementById('rp-monthly').textContent='—';
+    document.getElementById('rp-tool').textContent='—';
   } else {
     // Calcul basé sur les UC sélectionnés
     const sal=parseInt(document.getElementById('sl-sal').value)||3200;
