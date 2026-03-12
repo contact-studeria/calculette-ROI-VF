@@ -21,8 +21,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .badge-live{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:var(--rf);background:var(--p50);border:1px solid var(--p100);color:var(--p);font-size:11px;font-weight:700;letter-spacing:.5px}
 .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.8s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-.btn-ghost{padding:9px 20px;border:2px solid var(--border);border-radius:var(--r12);font-size:13px;font-weight:700;color:var(--t700);background:white;cursor:pointer;font-family:inherit;transition:all .2s}
-.btn-ghost:hover{border-color:var(--pll);color:var(--p)}
+.btn-ghost{padding:9px 20px;border:none;border-radius:var(--r12);font-size:13px;font-weight:700;color:white;background:var(--p);cursor:pointer;font-family:inherit;transition:all .2s}
+.btn-ghost:hover{background:var(--pd)}
 
 /* ── SPLIT LAYOUT ────────────────────────────────────── */
 #landing{background:white}
@@ -105,7 +105,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .ucc{border:1.5px solid var(--border);border-radius:var(--r12);background:white;cursor:pointer;margin-bottom:5px;transition:all .18s;user-select:none}
 .ucc-main{display:flex;align-items:flex-start;gap:10px;padding:12px 14px}
 .ucc:hover{border-color:var(--pll)}.ucc.on{border-color:var(--p);background:var(--p50)}.ucc.hide{display:none}
-.uc-detail{display:none;padding:10px 14px 12px;border-top:1px solid var(--p100);background:var(--p50)}.ucc.det-open .uc-detail{display:block}
+.uc-detail-open{padding:4px 0 2px;}
 .uc-det-row{font-size:11px;color:var(--t700);line-height:1.7;display:flex;gap:6px;align-items:baseline}.uc-det-row::before{content:'→';color:var(--p);font-weight:700;flex-shrink:0}
 .uc-info-btn{background:var(--p);border:1.5px solid var(--p);cursor:pointer;color:white;font-size:11px;font-weight:700;line-height:1;padding:3px 7px;border-radius:var(--rf);transition:all .15s;flex-shrink:0;font-family:inherit;white-space:nowrap}.uc-info-btn:hover{background:var(--pd);border-color:var(--pd)}.ucc.det-open .uc-info-btn{background:var(--pd);border-color:var(--pd)}
 .uchk{width:20px;height:20px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s}.ucc.on .uchk{background:var(--p);border-color:var(--p)}
@@ -356,9 +356,9 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
             <div class="sl-marks"><span>2 000 €</span><span>5 000 €</span><span>8 000 €</span></div>
           </div>
           <div class="sl-block">
-            <div class="sl-hdr"><span class="sl-lbl">Temps tâches répétitives</span><span class="sl-val" id="v-pct">35%</span></div>
-            <input type="range" id="sl-pct" min="10" max="70" step="5" value="35" oninput="updatePreview()">
-            <div class="sl-marks"><span>10%</span><span>40%</span><span>70%</span></div>
+            <div class="sl-hdr"><span class="sl-lbl">Heures de tâches répétitives / semaine</span><span class="sl-val" id="v-pct">12h</span></div>
+            <input type="range" id="sl-pct" min="0" max="35" step="1" value="12" oninput="updatePreview()">
+            <div class="sl-marks"><span>0h</span><span>17h</span><span>35h</span></div>
           </div>
         </div>
       </div>
@@ -379,10 +379,6 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
           <div><div class="fs-title">Cas d'usage IA</div><div class="fs-desc">Sélectionnez les automatisations applicables</div></div>
         </div>
         <div class="fbar">
-          <button class="fc on" data-d="all" onclick="fD('all',this)">Tous</button>
-          <button class="fc" data-d="Facile" onclick="fD('Facile',this)">Facile</button>
-          <button class="fc" data-d="Moyen" onclick="fD('Moyen',this)">Moyen</button>
-          <button class="fc" data-d="Avancé" onclick="fD('Avancé',this)">Avancé</button>
           <button class="ball" onclick="togAll()">Tout sélectionner</button>
         </div>
         <div class="uc-cnt"><span id="ucTxt">0 cas d'usage sélectionnés</span><span class="uc-g" id="ucG"></span></div>
@@ -647,7 +643,7 @@ function updatePreview(){
   const sal=parseInt(document.getElementById('sl-sal').value);
   const pct=parseInt(document.getElementById('sl-pct').value);
   document.getElementById('v-sal').textContent=sal.toLocaleString('fr-FR')+' €';
-  document.getElementById('v-pct').textContent=pct+'%';
+  document.getElementById('v-pct').textContent=pct+'h';
   ['sl-sal','sl-pct'].forEach(id=>slBg(id));
 
   const yrEl=document.getElementById('rp-year');
@@ -821,14 +817,12 @@ function renderUC(){
     ucs.forEach(u=>{
       const ck=selUC.some(s=>s.ID===u.ID);
       const bds=u.Bd?u.Bd.split('·').map(b=>b.trim()).filter(Boolean):[];
-      const bdHtml=bds.length?`<div class="uc-detail">${bds.map(b=>`<div class="uc-det-row">${b}</div>`).join('')}</div>`:'';
-      const infoBtn=bds.length?`<button class="uc-info-btn" onclick="togDetail(event,this)">+ détails</button>`:'';
-      h+=`<div class="ucc${ck?' on':''}" data-id="${u.ID}" data-diff="${u.D}" onclick="togUC(this,'${u.ID}')"><div class="ucc-main"><div class="uchk">${CHK}</div><div class="ucb"><div><div class="ucn">${u.T}</div><div class="ucm"><span class="badge ${bCl(u.D)}">${u.D}</span><span class="ucos">Outils : ${u.C}€/mois · ${u.J}j impl.</span></div></div><div style="display:flex;align-items:flex-start;gap:5px"><div class="ucgr"><div class="ucgv">${u.G}</div><div class="ucgl">gains bruts / mois</div></div>${infoBtn}</div></div></div>${bdHtml}</div>`;
+      const bdHtml=bds.length?`<div class="uc-detail-open">${bds.map(b=>`<div class="uc-det-row">${b}</div>`).join('')}</div>`:'';
+      h+=`<div class="ucc${ck?' on':''}" data-id="${u.ID}" onclick="togUC(this,'${u.ID}')"><div class="ucc-main"><div class="uchk">${CHK}</div><div class="ucb"><div><div class="ucn">${u.T}</div>${bdHtml}</div><div class="ucgr"><div class="ucgv">${u.G}</div><div class="ucgl">gains bruts / mois</div></div></div></div></div>`;
     });
     h+='</div>';
   }
   document.getElementById('ucCont').innerHTML=h;
-  document.querySelectorAll('.fc').forEach(c=>{if(c.classList.contains('on'))fD(c.dataset.d,c);});
   updCnt();
 }
 function togDetail(e,btn){e.stopPropagation();btn.closest('.ucc').classList.toggle('det-open');}
@@ -1169,7 +1163,7 @@ function loadExample(){
   document.getElementById('s1e').value=60;s1eu(); // ~200 collaborateurs avec la nouvelle échelle
   document.getElementById('s1c').value=55;s1cu();
   document.getElementById('sl-sal').value=3800;
-  document.getElementById('sl-pct').value=40;
+  document.getElementById('sl-pct').value=15;
   updatePreview();
 }
 
