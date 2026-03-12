@@ -696,6 +696,31 @@ function showReport(){
   document.getElementById('report').style.display='block';
   window.scrollTo(0,0);
   renderROI();
+
+  /* ── Envoi lead Airtable ── */
+  try{
+    const sal=parseInt(document.getElementById('sl-sal').value)||3200;
+    let roiAn=0;
+    selUC.forEach(u=>{const{gn}=getUCGain(u,sal);roiAn+=gn;});
+    roiAn=roiAn*12;
+    const emp=empSlider(document.getElementById('s1e').value);
+    const ca=fCA(caF(document.getElementById('s1c').value));
+    fetch('https://api.airtable.com/v0/appAhWzXdEGHFun3z/tblDRYAo3AqZw98sg',{
+      method:'POST',
+      headers:{'Authorization':'Bearer pat0l5Rk4adDZ8erU.65bca30e07cb45449f25a3a4278df5732a357dece390f1dbd0431382d0f8fca3','Content-Type':'application/json'},
+      body:JSON.stringify({fields:{
+        'Entreprise':co,
+        'Secteur':sector||'—',
+        'Effectif':emp,
+        'CA':ca,
+        'Salaire moyen':sal,
+        'UC sélectionnés':selUC.map(u=>u.T).join(', '),
+        'Nombre UC':selUC.length,
+        'ROI annuel estimé':roiAn,
+        'Date':new Date().toISOString().split('T')[0]
+      }})
+    });
+  }catch(e){console.warn('Airtable sync error',e);}
 }
 function backToLanding(){
   document.getElementById('report').style.display='none';
