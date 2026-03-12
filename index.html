@@ -476,22 +476,13 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
       <p class="dverd" id="dV"></p>
       <div class="hkpis">
         <div class="hkpi"><div class="hkl">ROI Net Max / mois</div><div class="hkv g" id="hN">0€</div><div class="hks" id="hNY">0€/an</div></div>
-        <div class="hkpi"><div class="hkl">Multiplicateur ROI</div><div class="hkv" id="hM">x0</div><div class="hks" id="hML">—</div></div>
+        <div class="hkpi"><div class="hkl">Implémentation</div><div class="hkv" id="hM">0j</div><div class="hks" id="hML">estimé</div></div>
         <div class="hkpi"><div class="hkl">Payback</div><div class="hkv" id="hP">—</div><div class="hks">amortissement</div></div>
       </div>
     </div>
 
     <div class="r-methodology" id="r-method"></div>
 
-    <div class="sect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg> Détail financier</div>
-    <div class="kgrid">
-      <div class="kcard"><div class="kl">Gains min/mois</div><div class="kv pos" id="kGn">0€</div><div class="ks" id="kGnY">0€/an</div></div>
-      <div class="kcard"><div class="kl">Gains max/mois</div><div class="kv pos" id="kGx">0€</div><div class="ks" id="kGxY">0€/an</div></div>
-      <div class="kcard"><div class="kl">Coûts outils/mois</div><div class="kv neg" id="kCo">0€</div><div class="ks" id="kCoY">0€/an</div></div>
-      <div class="kcard"><div class="kl">ROI net min/mois</div><div class="kv neu" id="kNn">0€</div><div class="ks" id="kNnY">0€/an</div></div>
-      <div class="kcard"><div class="kl">ROI net max/mois</div><div class="kv neu" id="kNx">0€</div><div class="ks" id="kNxY">0€/an</div></div>
-      <div class="kcard"><div class="kl">Implémentation</div><div class="kv neu" id="kDy">0j</div><div class="ks" id="kIm">~0€</div></div>
-    </div>
 
     <div class="sect"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg> Analyse par domaine</div>
     <div class="crow">
@@ -899,9 +890,8 @@ function renderROI(){
   if(pdcDate) pdcDate.textContent = 'Rapport généré le ' + new Date().toLocaleDateString('fr-FR');
 
   an('hN',nMax,'€');document.getElementById('hNY').textContent=(nMax*12).toLocaleString('fr-FR')+'€/an';
-  an('hM',rm,'','x',true);document.getElementById('hML').textContent=rm>=5?'Exceptionnel':rm>=3?'Excellent':rm>=2?'Très bon':rm>=1?'Bon':'À évaluer';
+  document.getElementById('hM').textContent=tJ+'j';document.getElementById('hML').textContent='~'+impl.toLocaleString('fr-FR')+'€';
   document.getElementById('hP').textContent=pb<100?pb.toFixed(1)+' mois':'∞';
-  kp('kGn',gn,'kGnY',gn*12);kp('kGx',gx,'kGxY',gx*12);kp('kCo',tC,'kCoY',tC*12);kp('kNn',nMin,'kNnY',nMin*12);kp('kNx',nMax,'kNxY',nMax*12);
   document.getElementById('kDy').textContent=tJ+'j';document.getElementById('kIm').textContent='~'+impl.toLocaleString('fr-FR')+'€';
   drDonut(byD);drBar(byD);
 
