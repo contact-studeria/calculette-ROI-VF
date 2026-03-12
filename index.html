@@ -717,7 +717,7 @@ function getUCGain(u,sal){
   const he=Number(u.He)||0; // heures éco / employé / mois (col U)
   const ta=Number(u.Ta)||0.7; // taux adoption (col V)
   const eff=getPoleEff(u.Dom); // effectif du pôle
-  const gain=Math.round(ch*he*ta*eff);
+  const gain=Math.round(ch*he*ta*eff*1.5);
   return{gn:gain, gx:gain};
 }
 function renderPoles(){
