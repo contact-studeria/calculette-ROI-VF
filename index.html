@@ -263,7 +263,6 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
@@ -277,7 +276,7 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
     </a>
     <div class="hdr-r">
       <div class="badge-live"><div class="live-dot"></div>Calcul en direct</div>
-      <button class="btn-ghost" onclick="loadExample()">Voir un exemple</button>
+      <a class="btn-ghost" href="https://www.studeria.fr" target="_blank" style="text-decoration:none">Découvre Studeria ici</a>
     </div>
   </header>
 
@@ -288,6 +287,7 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
         <div class="lf-badge">✦ Simulateur ROI IA</div>
         <h1 class="lf-h1">Combien l'IA peut vous<br>faire <span class="grad">économiser ?</span></h1>
         <p class="lf-sub">Remplissez les infos de votre entreprise et votre ROI s'actualise instantanément à droite.</p>
+        <a href="https://meetings.hubspot.com/matthieu-baranez/vsl-studeria-booking-link-entreprise" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:12px 24px;background:var(--p);color:white;border-radius:var(--r12);font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:var(--shp)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Prendre rendez-vous</a>
       </div>
 
       <!-- Section 01 — Entreprise -->
@@ -392,12 +392,13 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
       <!-- CTA -->
       <div class="lf-cta">
         <div class="lf-cta-t">Prêt à voir votre rapport complet ?</div>
-        <p class="lf-cta-d">Graphiques, projections, détail par cas d'usage, export PDF...</p>
+        <p class="lf-cta-d">Graphiques, projections et détail par cas d'usage.</p>
         <button class="btn-report" onclick="showReport()">
           Voir mon rapport ROI détaillé
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
-        <p class="btn-report-sub">Analyse complète · Gratuit · Export PDF</p>
+        <p class="btn-report-sub">Analyse complète · Gratuit</p>
+        <a href="https://meetings.hubspot.com/matthieu-baranez/vsl-studeria-booking-link-entreprise" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;padding:14px 32px;background:white;color:var(--p);border:2px solid var(--p);border-radius:var(--r12);font-size:15px;font-weight:700;text-decoration:none;transition:all .2s;width:100%"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Prendre rendez-vous</a>
       </div>
     </div>
 
@@ -443,7 +444,7 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
           Voir mon rapport ROI
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
-        <p class="rp-cta-note">Graphiques · Projections · PDF</p>
+        <p class="rp-cta-note">Graphiques · Projections</p>
       </div>
     </div>
   </div>
@@ -453,16 +454,18 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
      REPORT PAGE
 ════════════════════════════════════════════════════ -->
 <div id="report">
-  <header class="r-hdr"><div class="r-inn">
-    <button class="r-back" onclick="backToLanding()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Modifier les paramètres
-    </button>
+  <header class="lhdr">
     <a class="logo" href="#">
-      <svg width="22" height="22" viewBox="0 0 32 32" fill="none"><circle cx="11" cy="16" r="8" stroke="#7c3aed" stroke-width="2.5" fill="none"/><circle cx="21" cy="16" r="8" stroke="#a78bfa" stroke-width="2.5" fill="none"/></svg>
-      <span class="logo-text" style="font-size:16px">studeria</span>
+      <img src="studeria-logo.png" height="100" alt="Studeria" style="display:block">
     </a>
-  </div></header>
+    <div class="hdr-r">
+      <button class="btn-ghost" onclick="backToLanding()" style="display:flex;align-items:center;gap:6px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Modifier les paramètres
+      </button>
+      <a class="btn-ghost" href="https://www.studeria.fr" target="_blank" style="text-decoration:none">Découvre Studeria ici</a>
+    </div>
+  </header>
 
   <div class="r-main"><div class="r-cont">
     <div class="pdf-cover">
@@ -651,13 +654,14 @@ function updatePreview(){
   const pbEl=document.getElementById('rp-pb');
 
   if(selUC.length===0){
-    // Aucun cas d'usage sélectionné → on n'affiche rien de financier
-    yrEl.textContent='—';
+    yrEl.textContent='0 €';
     document.getElementById('rp-sub').textContent='Sélectionnez vos cas d\'usage';
-    pbEl.textContent='—';
+    pbEl.textContent='0 mois';
     document.getElementById('rp-uc').textContent=UC.length;
-    document.getElementById('rp-monthly-row').style.display='none';
-    document.getElementById('rp-tool-row').style.display='none';
+    document.getElementById('rp-monthly-row').style.display='flex';
+    document.getElementById('rp-tool-row').style.display='flex';
+    document.getElementById('rp-monthly').textContent='0 €';
+    document.getElementById('rp-tool').textContent='0 €';
   } else {
     // Calcul basé sur les UC sélectionnés
     const sal=parseInt(document.getElementById('sl-sal').value)||3200;
@@ -953,37 +957,8 @@ function drBar(byD){
     plugins:{legend:{labels:{color:'#64748b',font:{size:10},usePointStyle:true}},tooltip:{backgroundColor:'#1e293b',padding:10,cornerRadius:8}}}});
 }
 
-/* ── PDF ── */
-async function genPDF(){
-  const btn=document.querySelector('.btn.bg');
-  const orig=btn?btn.innerHTML:'';
-  if(btn)btn.innerHTML='⏳ Génération...';
-
-  const co=document.getElementById('coName').value||'Votre entreprise';
-  const sec=sector||'—';
-  const emp=fEmpS(empSlider(document.getElementById('s1e').value));
-  const ca=fCA(caF(document.getElementById('s1c').value));
-  const sal=parseInt(document.getElementById('sl-sal').value);
-  const pct=parseInt(document.getElementById('sl-pct').value);
-  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
-
-  let gn=0,gx=0,tC=0,tJ=0;
-  const byD={},ben=new Set();
-  if(selUC.length>0){
-    selUC.forEach(u=>{
-      gn+=u.Mn;gx+=u.Mx;tC+=u.C;tJ+=u.J;
-      if(!byD[u.Dom])byD[u.Dom]={min:0,max:0,cost:0,ucs:[]};
-      byD[u.Dom].min+=u.Mn;byD[u.Dom].max+=u.Mx;byD[u.Dom].cost+=u.C;
-      byD[u.Dom].ucs.push(u);
-      if(u.B)ben.add(u.B);
-    });
-  }
-  const nMin=gn-tC,nMax=gx-tC,nAvg=(nMin+nMax)/2;
-  const impl=tJ*RATE||Math.round(empSlider(document.getElementById('s1e').value)*480);
-  const pb=nAvg>0?impl/nAvg:Infinity;
-  const ai=impl+tC*12,rm=ai>0?(nMax*12)/ai:0;
-
-  const F=n=>Math.round(n).toLocaleString('fr-FR');
+/* ── (PDF removed) ── */
+/* genPDF start removed
   const Z=i=>i%2===0?'white':'#f8f9fc';
 
   // 3-column helper using inline-block (html2canvas-safe, no flex/grid)
@@ -1177,8 +1152,7 @@ async function genPDF(){
     pagebreak:{mode:['avoid-all','css','legacy']}
   }).from(html).save();
 
-  if(btn)btn.innerHTML=orig;
-}
+genPDF end removed */
 
 /* ── Modal ── */
 function openMo(){document.getElementById('modal').classList.add('open');}
