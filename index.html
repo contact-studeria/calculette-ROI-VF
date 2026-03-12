@@ -875,7 +875,7 @@ function renderROI(){
   document.getElementById('dV').innerHTML=`Avec ${ucTxt}, votre entreprise peut économiser entre <strong>${Math.round(gn).toLocaleString('fr-FR')}€</strong> et <strong>${Math.round(gx).toLocaleString('fr-FR')}€ par mois</strong>. L'investissement sera amorti en <strong>${pb<100?pb.toFixed(1)+' mois':'∞'}</strong>.`;
 
   const salV=parseInt(document.getElementById('sl-sal').value)||3200;
-  const chV=Math.round(salV/160);
+  const chV=((salV+156)/160).toFixed(2).replace('.',',');
   const poleTxt=Object.entries(poleHeads).filter(([k,v])=>v>0).map(([k,v])=>{const p=POLES.find(x=>x.id===k);return p?p.n+' ('+v+' pers.)':'';}).filter(Boolean).join(', ')||'1 personne par défaut';
   document.getElementById('r-method').innerHTML = `<div class="method-box">
     <div class="method-title">Méthodologie de calcul</div>
@@ -885,7 +885,7 @@ function renderROI(){
         <div style="font-size:11px;color:var(--t400);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;font-weight:700">Formule de gain mensuel par cas d'usage</div>
         <div style="font-size:18px;font-weight:800;color:var(--p)">Coût horaire × Heures économisées × Taux d'adoption × Effectif</div>
       </div>
-      <p><strong>1. Coût horaire</strong> — Salaire brut mensuel (${salV.toLocaleString('fr-FR')}€) ÷ 160h = <strong>${chV}€/h</strong>. C'est la valeur économique d'une heure de travail dans votre entreprise.</p>
+      <p><strong>1. Coût horaire</strong> — (${salV.toLocaleString('fr-FR')}€ + 156) ÷ 160 = <strong>${chV}€/h</strong>. C'est la valeur économique d'une heure de travail dans votre entreprise.</p>
       <p><strong>2. Heures économisées</strong> — Nombre d'heures mensuelles libérées par l'automatisation IA pour chaque cas d'usage, basé sur des benchmarks sectoriels.</p>
       <p><strong>3. Taux d'adoption</strong> — Pourcentage réaliste d'adoption par vos équipes (généralement 65-80%), tenant compte de la courbe d'apprentissage.</p>
       <p><strong>4. Effectif concerné</strong> — Nombre de collaborateurs dans le pôle qui bénéficient de l'automatisation. Pôles renseignés : <strong>${poleTxt}</strong>.</p>
@@ -1224,7 +1224,7 @@ async function syncSheet(){
           C:cleanEur(r['Coût outils (€/mois)'])||50,
           J:cleanEur(r['Jours implémentation'])||2,
           Bd:(r['Détails']||'').trim(),
-          Outil:(r['Outils IA identifié ']||'').trim(),
+          Outil:(r['Outils IA identifié']||'').trim(),
           Prereq:(r['Prérequis techniques']||'').trim()
         };
       });
