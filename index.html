@@ -717,18 +717,12 @@ function getPoleEff(dom){
   return poleHeads[pole.id]||1;
 }
 function getUCGain(u,sal){
-  const he=Number(u.He)||0;
-  const ta=Number(u.Ta)||0.7;
-  const ch=sal/160;
-  const eff=getPoleEff(u.Dom);
-  if(he>0){
-    const gain=he*ch*eff*ta;
-    return{gn:Math.round(gain*0.8), gx:Math.round(gain*1.2)};
-  }
-  // Fallback si He absent (données fallback)
-  const mn=Number(u.Mn)||0;
-  const mx=Number(u.Mx)||0;
-  return{gn:Math.round(mn*eff*ta), gx:Math.round(mx*eff*ta)};
+  const ch=sal/160; // coût horaire
+  const he=Number(u.He)||0; // heures éco / employé / mois (col U)
+  const ta=Number(u.Ta)||0.7; // taux adoption (col V)
+  const eff=getPoleEff(u.Dom); // effectif du pôle
+  const gain=ch*he*ta*eff;
+  return{gn:Math.round(gain*0.8), gx:Math.round(gain*1.2)};
 }
 function renderPoles(){
   document.getElementById('poleGrid').innerHTML=POLES.map(p=>`
