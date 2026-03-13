@@ -4,13 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculateur ROI IA — Studeria</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/gilroy-bold">
 <style>
-:root{--p:#7c3aed;--pd:#5b21b6;--pl:#8b5cf6;--pll:#a78bfa;--p100:#ede9fe;--p50:#f5f3ff;--pink:#ec4899;--bg:#f8f9fc;--white:#fff;--t900:#0f172a;--t700:#334155;--t500:#64748b;--t400:#94a3b8;--t300:#cbd5e1;--border:#e2e8f0;--borderl:#f1f5f9;--green:#059669;--greenl:#d1fae5;--red:#dc2626;--redl:#fef2f2;--yellow:#d97706;--yellowl:#fffbeb;--shp:0 4px 24px rgba(124,58,237,.2);--r8:8px;--r12:12px;--r16:16px;--r24:24px;--rf:9999px;--hdr:64px}
+:root{--p:#7123CE;--pd:#0D0035;--pl:#D58FFF;--pll:#D58FFF;--p100:#f0e0ff;--p50:#f9f2ff;--pink:#D58FFF;--bg:#f8f9fc;--white:#fff;--t900:#0D0035;--t700:#334155;--t500:#64748b;--t400:#94a3b8;--t300:#cbd5e1;--border:#e2e8f0;--borderl:#f1f5f9;--green:#059669;--greenl:#d1fae5;--red:#dc2626;--redl:#fef2f2;--yellow:#d97706;--yellowl:#fffbeb;--shp:0 4px 24px rgba(113,35,206,.2);--r8:8px;--r12:12px;--r16:16px;--r24:24px;--rf:9999px;--hdr:64px}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--t700);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:'Gilroy',sans-serif;background:var(--bg);color:var(--t700);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 /* ── HEADER ─────────────────────────────────────────── */
 .lhdr{position:sticky;top:0;z-index:200;height:var(--hdr);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 48px}
@@ -38,7 +36,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 
 /* Form sections */
 .fs{background:white;border:1px solid var(--border);border-radius:var(--r24);padding:36px;margin-bottom:20px;transition:box-shadow .2s}
-.fs:focus-within{box-shadow:0 4px 32px rgba(124,58,237,.08);border-color:var(--p100)}
+.fs:focus-within{box-shadow:0 4px 32px rgba(113,35,206,.08);border-color:var(--p100)}
 .fs-hdr{display:flex;align-items:center;gap:14px;margin-bottom:28px}
 .fs-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--pd));color:white;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .fs-title{font-size:18px;font-weight:800;color:var(--t900);letter-spacing:-.3px}
@@ -47,14 +45,14 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 /* Inputs */
 .fl{font-size:11px;font-weight:700;color:var(--t500);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px}
 .txt{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:var(--r12);font-size:15px;font-family:inherit;color:var(--t900);background:white;outline:none;transition:all .25s}
-.txt:focus{border-color:var(--p);box-shadow:0 0 0 4px rgba(124,58,237,.08)}
+.txt:focus{border-color:var(--p);box-shadow:0 0 0 4px rgba(113,35,206,.08)}
 .txt::placeholder{color:var(--t300)}
 .field{margin-bottom:24px}
 
 /* Sector grid */
 .sc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .sc{padding:14px 6px;border:2px solid var(--border);border-radius:var(--r12);text-align:center;cursor:pointer;background:white;transition:all .2s;user-select:none}
-.sc:hover{border-color:var(--pll);background:var(--p50)}.sc.sel{border-color:var(--p);background:var(--p50);box-shadow:0 0 0 3px rgba(124,58,237,.08)}
+.sc:hover{border-color:var(--pll);background:var(--p50)}.sc.sel{border-color:var(--p);background:var(--p50);box-shadow:0 0 0 3px rgba(113,35,206,.08)}
 .sc svg{display:block;margin:0 auto 6px;color:var(--pll)}.sc.sel svg{color:var(--p)}.sc-n{font-size:12px;font-weight:700;color:var(--t700);line-height:1.3}.sc.sel .sc-n{color:var(--p)}
 
 /* Sliders */
@@ -64,8 +62,8 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
 .sl-lbl{font-size:13px;font-weight:600;color:var(--t500)}
 .sl-val{font-size:26px;font-weight:900;color:var(--p);letter-spacing:-.5px;font-variant-numeric:tabular-nums}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:3px;outline:none;cursor:pointer;background:var(--border)}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--p);cursor:pointer;box-shadow:0 2px 8px rgba(124,58,237,.3);transition:box-shadow .15s,transform .15s}
-input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 4px 16px rgba(124,58,237,.4);transform:scale(1.12)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--p);cursor:pointer;box-shadow:0 2px 8px rgba(113,35,206,.3);transition:box-shadow .15s,transform .15s}
+input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 4px 16px rgba(113,35,206,.4);transform:scale(1.12)}
 input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:white;border:3px solid var(--p);cursor:pointer}
 .sl-marks{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--t400);font-weight:500}
 .s1v{font-size:28px;font-weight:900;color:var(--p);letter-spacing:-1px;font-variant-numeric:tabular-nums}
@@ -73,7 +71,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 /* Pole grid */
 .pole-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
 .pole-card{padding:12px 14px;border:2px solid var(--border);border-radius:var(--r12);cursor:pointer;background:white;transition:all .2s;display:flex;align-items:center;gap:10px;user-select:none}
-.pole-card:hover{border-color:var(--pll);background:var(--p50)}.pole-card.sel{border-color:var(--p);background:var(--p50);box-shadow:0 0 0 3px rgba(124,58,237,.08)}
+.pole-card:hover{border-color:var(--pll);background:var(--p50)}.pole-card.sel{border-color:var(--p);background:var(--p50);box-shadow:0 0 0 3px rgba(113,35,206,.08)}
 .pole-ico{width:34px;height:34px;border-radius:8px;background:var(--p50);display:flex;align-items:center;justify-content:center;flex-shrink:0}.pole-card.sel .pole-ico{background:var(--p100)}
 .pole-ico svg{width:16px;height:16px;color:var(--pll)}.pole-card.sel .pole-ico svg{color:var(--p)}
 .pole-label{flex:1}.pole-n{font-size:14px;font-weight:700;color:var(--t900);line-height:1.2}.pole-sub{font-size:12px;color:var(--t400);margin-top:2px}.pole-card.sel .pole-n{color:var(--p)}
@@ -88,7 +86,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .dom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .dom-card{background:var(--bg);border:2px solid var(--border);border-radius:var(--r16);padding:18px 16px;cursor:pointer;transition:all .2s;user-select:none}
 .dom-card:hover{border-color:var(--pll);background:white;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.dom-card.sel{border-color:var(--p);background:white;box-shadow:0 0 0 3px rgba(124,58,237,.08)}
+.dom-card.sel{border-color:var(--p);background:white;box-shadow:0 0 0 3px rgba(113,35,206,.08)}
 .dom-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
 .dom-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .dom-chk{width:20px;height:20px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}.dom-card.sel .dom-chk{background:var(--p);border-color:var(--p)}
@@ -122,11 +120,11 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .lf-cta-t{font-size:20px;font-weight:800;color:var(--t900);margin-bottom:8px}
 .lf-cta-d{font-size:14px;color:var(--t500);margin-bottom:24px}
 .btn-report{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:17px 40px;background:linear-gradient(135deg,var(--p),var(--pd));color:white;border:none;border-radius:var(--r12);font-size:16px;font-weight:700;cursor:pointer;box-shadow:var(--shp);transition:all .3s;font-family:inherit;width:100%}
-.btn-report:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(124,58,237,.32)}
+.btn-report:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(113,35,206,.32)}
 .btn-report-sub{font-size:12px;color:var(--t400);margin-top:12px}
 
 /* ── RIGHT STICKY PANEL ───────────────────────────────── */
-.rs{position:sticky;top:var(--hdr);margin:12px 12px 12px -16px;border-radius:20px;height:calc(100vh - var(--hdr) - 24px);overflow-y:auto;background:linear-gradient(160deg,#0f0620 0%,#1a0835 50%,#0d041a 100%);display:flex;flex-direction:column;padding:32px 28px}
+.rs{position:sticky;top:var(--hdr);margin:12px 12px 12px -16px;border-radius:20px;height:calc(100vh - var(--hdr) - 24px);overflow-y:auto;background:linear-gradient(160deg,#0D0035 0%,#150040 50%,#0A0025 100%);display:flex;flex-direction:column;padding:32px 28px}
 .rs::-webkit-scrollbar{width:4px}.rs::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
 
 /* Company name in panel */
@@ -138,7 +136,7 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 .rp-main{text-align:center;padding:8px 0 24px;border-bottom:1px solid rgba(255,255,255,.08)}
 .rp-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:16px}
 .rp-big{font-size:64px;font-weight:900;color:white;letter-spacing:-3px;line-height:1;font-variant-numeric:tabular-nums;transition:color .3s}
-.rp-big.pos{color:#a78bfa}
+.rp-big.pos{color:#D58FFF}
 .rp-currency{font-size:28px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:0;vertical-align:super;margin-left:2px}
 .rp-sub{font-size:14px;font-weight:500;color:rgba(255,255,255,.4);margin-top:10px;letter-spacing:.2px}
 
@@ -166,8 +164,8 @@ input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;bac
 
 /* CTA in panel */
 .rp-cta-wrap{margin-top:auto;padding-top:24px}
-.rp-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px 24px;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;border:none;border-radius:var(--r12);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .3s;box-shadow:0 4px 24px rgba(124,58,237,.4)}
-.rp-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,58,237,.5);background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+.rp-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px 24px;background:linear-gradient(135deg,#7123CE,#0D0035);color:white;border:none;border-radius:var(--r12);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .3s;box-shadow:0 4px 24px rgba(113,35,206,.4)}
+.rp-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(113,35,206,.5);background:linear-gradient(135deg,#D58FFF,#5a1ca3)}
 .rp-cta-note{text-align:center;font-size:11px;color:rgba(255,255,255,.3);margin-top:10px}
 
 /* Number pop animation */
@@ -219,11 +217,11 @@ body.pdf-mode .pdf-cover{display:block!important}
 .st td{padding:10px 14px;border-bottom:1px solid var(--borderl);color:var(--t700)}.st tr:last-child td{border-bottom:none}.st tr:hover td{background:var(--p50)}
 .tdg{color:var(--green);font-weight:700}.tdc{color:var(--red);font-weight:600}
 .bgrid{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}.btag{background:var(--p50);border:1px solid var(--p100);border-radius:var(--rf);padding:8px 16px;font-size:13px;color:var(--pd);font-weight:600}
-.ctabox{background:linear-gradient(135deg,#0f0620,#1a0835);border-radius:var(--r24);padding:40px;text-align:center;margin-top:28px;color:white}
+.ctabox{background:linear-gradient(135deg,#0D0035,#150040);border-radius:var(--r24);padding:40px;text-align:center;margin-top:28px;color:white}
 .ctat{font-size:22px;font-weight:800;color:white;margin-bottom:8px}.ctad{font-size:14px;color:rgba(255,255,255,.55);margin-bottom:28px}
 .ctabs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn{padding:13px 28px;border:none;border-radius:var(--r12);font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;font-family:inherit;display:inline-flex;align-items:center;gap:8px}
-.bp{background:linear-gradient(135deg,var(--p),var(--pd));color:white;box-shadow:var(--shp)}.bp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,58,237,.28)}
+.bp{background:linear-gradient(135deg,var(--p),var(--pd));color:white;box-shadow:var(--shp)}.bp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(113,35,206,.28)}
 .bs{background:rgba(255,255,255,.1);color:white;border:1.5px solid rgba(255,255,255,.15)}.bs:hover{background:rgba(255,255,255,.18)}
 .bg{background:var(--green);color:white;box-shadow:0 4px 16px rgba(5,150,105,.2)}.bg:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(5,150,105,.28)}
 
@@ -233,12 +231,12 @@ body.pdf-mode .pdf-cover{display:block!important}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .mo{background:white;border-radius:var(--r24);padding:36px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.15)}
 .mo h3{font-size:20px;font-weight:800;color:var(--t900);margin-bottom:8px}.mo p{font-size:14px;color:var(--t500);margin-bottom:22px;line-height:1.7}
-.mi{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:var(--r12);font-size:14px;margin-bottom:12px;font-family:inherit;color:var(--t900);outline:none;transition:border-color .2s}.mi:focus{border-color:var(--p);box-shadow:0 0 0 4px rgba(124,58,237,.08)}.mi::placeholder{color:var(--t300)}
+.mi{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:var(--r12);font-size:14px;margin-bottom:12px;font-family:inherit;color:var(--t900);outline:none;transition:border-color .2s}.mi:focus{border-color:var(--p);box-shadow:0 0 0 4px rgba(113,35,206,.08)}.mi::placeholder{color:var(--t300)}
 .moa{display:flex;gap:10px}.moa .btn{flex:1}.moa .bs{background:var(--bg);color:var(--t700);border-color:var(--border)}.moa .bs:hover{border-color:var(--pll);color:var(--p);background:var(--p50)}
 
 /* Methodology box */
 .r-methodology{margin-bottom:24px}
-.method-box{background:linear-gradient(135deg,#f5f3ff,#fdf4fc);border:1px solid var(--p100);border-radius:var(--r16);padding:20px 24px}
+.method-box{background:linear-gradient(135deg,#f9f2ff,#fdf4fc);border:1px solid var(--p100);border-radius:var(--r16);padding:20px 24px}
 .method-title{font-size:13px;font-weight:700;color:var(--p);margin-bottom:8px}
 .method-body{font-size:13px;color:var(--t500);line-height:1.7}
 .method-body strong{color:var(--t900);font-weight:700}
@@ -561,13 +559,13 @@ const UC=[
 {ID:"UC-038",Dom:"PRODUCTIVITÉ",T:"Extraction et synthèse de documents longs",D:"Facile",G:"800 – 1 500 €/mois",Mn:800,Mx:1500,B:"Efficacité",C:50,J:1}
 ];
 const DOMS=[
-{id:"PROSPECTION",n:"Prospection",d:"Leads, ciblage, enrichissement",col:"#7c3aed",bg:"#f5f3ff",ic:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>'},
-{id:"VENTE",n:"Vente",d:"CRM, devis, closing, suivi",col:"#6d28d9",bg:"#ede9fe",ic:'<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>'},
-{id:"MARKETING & CONTENU",n:"Marketing",d:"Réseaux sociaux, SEO",col:"#db2777",bg:"#fdf2f8",ic:'<path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>'},
+{id:"PROSPECTION",n:"Prospection",d:"Leads, ciblage, enrichissement",col:"#7123CE",bg:"#f9f2ff",ic:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>'},
+{id:"VENTE",n:"Vente",d:"CRM, devis, closing, suivi",col:"#5a1ca3",bg:"#f0e0ff",ic:'<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>'},
+{id:"MARKETING & CONTENU",n:"Marketing",d:"Réseaux sociaux, SEO",col:"#D58FFF",bg:"#fdf4ff",ic:'<path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>'},
 {id:"SAV & RELATION CLIENT",n:"Service Client",d:"Support, satisfaction",col:"#0891b2",bg:"#ecfeff",ic:'<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/>'},
 {id:"RH",n:"RH",d:"Recrutement, formation",col:"#d97706",bg:"#fffbeb",ic:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'},
 {id:"FINANCE & ADMINISTRATION",n:"Finance",d:"Facturation, comptabilité",col:"#059669",bg:"#ecfdf5",ic:'<path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>'},
-{id:"PRODUCTIVITÉ",n:"Productivité",d:"Emails, réunions, auto.",col:"#6366f1",bg:"#eef2ff",ic:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'}
+{id:"PRODUCTIVITÉ",n:"Productivité",d:"Emails, réunions, auto.",col:"#7123CE",bg:"#f9f2ff",ic:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'}
 ];
 const SECS=[
 {v:"Conseil & Services B2B",i:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>'},
@@ -583,7 +581,7 @@ const SECS=[
 {v:"Artisanat",i:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'},
 {v:"Autre / Non listé",i:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>'}
 ];
-const DC={'PROSPECTION':'#7c3aed','VENTE':'#6d28d9','MARKETING & CONTENU':'#db2777','SAV & RELATION CLIENT':'#0891b2','RH':'#d97706','FINANCE & ADMINISTRATION':'#059669','PRODUCTIVITÉ':'#6366f1'};
+const DC={'PROSPECTION':'#7123CE','VENTE':'#5a1ca3','MARKETING & CONTENU':'#D58FFF','SAV & RELATION CLIENT':'#0891b2','RH':'#d97706','FINANCE & ADMINISTRATION':'#059669','PRODUCTIVITÉ':'#7123CE'};
 const POLES=[
   {id:'commercial',n:'Commercial',sub:'Prospection & vente',doms:['PROSPECTION','VENTE'],ic:'<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>'},
   {id:'marketing',n:'Marketing',sub:'Contenu & communication',doms:['MARKETING & CONTENU'],ic:'<path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>'},
@@ -603,7 +601,7 @@ function fEmpS(n){if(n>=1000)return'1 000+';if(n>=100)return''+Math.round(n/10)*
 function s1eu(){document.getElementById('s1ev').textContent=fEmpS(empSlider(document.getElementById('s1e').value));slBg('s1e');}
 function caF(v){const a=Math.log(1e5),b=Math.log(1e9+1);return Math.round(Math.exp(a+(b-a)*parseInt(v)/100));}
 function fCA(n){if(n>1e9)return'1 Md€+';if(n>=1e6)return(n<1e7?(n/1e6).toFixed(1):Math.round(n/1e6))+'M€';return Math.round(n/1000)+'K€';}
-function slBg(id){const e=document.getElementById(id);if(!e)return;const p=((e.value-e.min)/(e.max-e.min))*100;e.style.background=`linear-gradient(to right,#7c3aed ${p}%,#e2e8f0 ${p}%)`;}
+function slBg(id){const e=document.getElementById(id);if(!e)return;const p=((e.value-e.min)/(e.max-e.min))*100;e.style.background=`linear-gradient(to right,#7123CE ${p}%,#e2e8f0 ${p}%)`;}
 function s1cu(){document.getElementById('s1cv').textContent=fCA(caF(document.getElementById('s1c').value));slBg('s1c');}
 
 /* ── Number animation (slot machine feel) ── */
@@ -615,12 +613,12 @@ function animN(el,target,suffix='',prefix=''){
   void el.offsetWidth;
   el.classList.add('num-flash');
   const dur=500,steps=20;let i=0;
-  clearInterval(el._iv);
-  el._iv=setInterval(()=>{
+  clearGilroyval(el._iv);
+  el._iv=setGilroyval(()=>{
     i++;const p=Math.min(i/steps,1),ease=1-Math.pow(1-p,3);
     const v=prev+(target-prev)*ease;
     el.textContent=prefix+Math.round(v).toLocaleString('fr-FR')+suffix;
-    if(p>=1)clearInterval(el._iv);
+    if(p>=1)clearGilroyval(el._iv);
   },dur/steps);
 }
 
@@ -731,7 +729,7 @@ function backToLanding(){
 /* ── Pôles ── */
 function slBgInp(inp){
   const p=((inp.value-inp.min)/(inp.max-inp.min))*100;
-  inp.style.background=`linear-gradient(to right,#7c3aed ${p}%,#e2e8f0 ${p}%)`;
+  inp.style.background=`linear-gradient(to right,#7123CE ${p}%,#e2e8f0 ${p}%)`;
 }
 function getPoleEff(dom){
   const pole=POLES.find(p=>p.doms.includes(dom));
@@ -867,7 +865,7 @@ function fireConfetti(){
   if(!canvas)return;
   const ctx=canvas.getContext('2d');
   canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
-  const colors=['#059669','#7c3aed','#ec4899','#d97706','#6366f1','#0891b2'];
+  const colors=['#7123CE','#D58FFF','#0D0035','#059669','#d97706','#0891b2'];
   const particles=[];
   for(let i=0;i<80;i++){
     particles.push({x:canvas.width/2,y:canvas.height/2,vx:(Math.random()-0.5)*12,vy:Math.random()*-10-3,size:Math.random()*6+3,color:colors[Math.floor(Math.random()*colors.length)],rot:Math.random()*360,rv:(Math.random()-0.5)*10,life:1});
@@ -951,7 +949,7 @@ function renderROI(){
   drDonut(byD);drBar(byD);
 
   document.getElementById('domSummary').innerHTML = Object.entries(byD).map(([dom,v])=>{
-    const col=DC[dom]||'#7c3aed';
+    const col=DC[dom]||'#7123CE';
     const avg=Math.round((v.min+v.max)/2);
     const net=avg-v.cost;
     return`<div class="dom-sum-card" style="border-top:3px solid ${col}">
@@ -965,7 +963,7 @@ function renderROI(){
   const salR=parseInt(document.getElementById('sl-sal').value)||3200;
   document.getElementById('tblB').innerHTML=selUC.map(u=>{
     const {gn:ug}=getUCGain(u,salR);
-    return`<tr style="border-left:3px solid ${DC[u.Dom]||'#7c3aed'}"><td><div style="font-weight:600;color:var(--t900)">${u.T}</div>${u.Bd?`<div style="font-size:11px;color:var(--t500);margin-top:4px;line-height:1.5">${u.Bd}</div>`:''}</td><td><span style="display:inline-block;padding:2px 8px;background:${DC[u.Dom]||'#7c3aed'}22;color:${DC[u.Dom]||'#7c3aed'};border-radius:4px;font-size:10px;font-weight:700">${u.Dom.split(' & ')[0]}</span></td><td class="tdg" style="font-weight:800">${ug.toLocaleString('fr-FR')}€</td><td style="font-size:12px">${u.Outil||'—'}</td><td style="font-size:12px">${u.Prereq||'—'}</td></tr>`;
+    return`<tr style="border-left:3px solid ${DC[u.Dom]||'#7123CE'}"><td><div style="font-weight:600;color:var(--t900)">${u.T}</div>${u.Bd?`<div style="font-size:11px;color:var(--t500);margin-top:4px;line-height:1.5">${u.Bd}</div>`:''}</td><td><span style="display:inline-block;padding:2px 8px;background:${DC[u.Dom]||'#7123CE'}22;color:${DC[u.Dom]||'#7123CE'};border-radius:4px;font-size:10px;font-weight:700">${u.Dom.split(' & ')[0]}</span></td><td class="tdg" style="font-weight:800">${ug.toLocaleString('fr-FR')}€</td><td style="font-size:12px">${u.Outil||'—'}</td><td style="font-size:12px">${u.Prereq||'—'}</td></tr>`;
   }).join('');
   document.getElementById('benL').innerHTML=[...ben].map(b=>`<div class="btag">${b}</div>`).join('');
 }
@@ -974,7 +972,7 @@ function an(id,target,sf='',pr='',isF=false){
   const el=document.getElementById(id);if(!el)return;
   const fmt=v=>isF?pr+v.toFixed(1)+sf:pr+Math.round(v).toLocaleString('fr-FR')+sf;
   const dur=800,steps=24;let i=0;
-  const iv=setInterval(()=>{i++;const p=Math.min(i/steps,1),e=1-Math.pow(1-p,3);el.textContent=fmt(e*target);if(p>=1)clearInterval(iv);},dur/steps);
+  const iv=setGilroyval(()=>{i++;const p=Math.min(i/steps,1),e=1-Math.pow(1-p,3);el.textContent=fmt(e*target);if(p>=1)clearGilroyval(iv);},dur/steps);
 }
 
 /* ── Charts ── */
@@ -982,19 +980,19 @@ function drDonut(byD){
   const ctx=document.getElementById('donutChart').getContext('2d');if(dCh)dCh.destroy();
   const lb=Object.keys(byD),dt=lb.map(d=>Math.round((byD[d].min+byD[d].max)/2));
   const tot=dt.reduce((a,b)=>a+b,0);
-  dCh=new Chart(ctx,{type:'doughnut',data:{labels:lb,datasets:[{data:dt,backgroundColor:lb.map(d=>DC[d]||'#7c3aed'),borderWidth:0,hoverOffset:8}]},
+  dCh=new Chart(ctx,{type:'doughnut',data:{labels:lb,datasets:[{data:dt,backgroundColor:lb.map(d=>DC[d]||'#7123CE'),borderWidth:0,hoverOffset:8}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'64%',
-      plugins:{legend:{position:'bottom',labels:{color:'#64748b',font:{family:'Inter',size:10},padding:8,usePointStyle:true}},
+      plugins:{legend:{position:'bottom',labels:{color:'#64748b',font:{family:'Gilroy',size:10},padding:8,usePointStyle:true}},
         tooltip:{backgroundColor:'#1e293b',padding:10,cornerRadius:8,callbacks:{label:c=>' '+c.label+': '+c.parsed.toLocaleString('fr-FR')+'€/mois'}}},
-      plugins:[{id:'ct',beforeDraw(chart){const{ctx:c,width:w,height:h}=chart;c.save();c.font='800 18px Inter';c.fillStyle='#0f172a';c.textAlign='center';c.textBaseline='middle';c.fillText(tot.toLocaleString('fr-FR')+'€',w/2,h/2-8);c.font='500 10px Inter';c.fillStyle='#94a3b8';c.fillText('moy./mois',w/2,h/2+10);c.restore();}}]
+      plugins:[{id:'ct',beforeDraw(chart){const{ctx:c,width:w,height:h}=chart;c.save();c.font='800 18px Gilroy';c.fillStyle='#0f172a';c.textAlign='center';c.textBaseline='middle';c.fillText(tot.toLocaleString('fr-FR')+'€',w/2,h/2-8);c.font='500 10px Gilroy';c.fillStyle='#94a3b8';c.fillText('moy./mois',w/2,h/2+10);c.restore();}}]
     }});
 }
 function drBar(byD){
   const ctx=document.getElementById('barChart').getContext('2d');if(bCh)bCh.destroy();
   const e=Object.entries(byD).sort((a,b)=>b[1].max-a[1].max);
   bCh=new Chart(ctx,{type:'bar',data:{labels:e.map(([d])=>d.length>18?d.slice(0,16)+'…':d),datasets:[
-    {label:'Gains max',data:e.map(([,v])=>v.max),backgroundColor:'rgba(124,58,237,.75)',borderRadius:4},
-    {label:'Gains min',data:e.map(([,v])=>v.min),backgroundColor:'rgba(124,58,237,.35)',borderRadius:4},
+    {label:'Gains max',data:e.map(([,v])=>v.max),backgroundColor:'rgba(113,35,206,.75)',borderRadius:4},
+    {label:'Gains min',data:e.map(([,v])=>v.min),backgroundColor:'rgba(113,35,206,.35)',borderRadius:4},
     {label:'Coûts',data:e.map(([,v])=>v.cost),backgroundColor:'rgba(220,38,38,.55)',borderRadius:4}
   ]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',
     scales:{x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{color:'#94a3b8',font:{size:9},callback:v=>v.toLocaleString('fr-FR')+'€'}},y:{grid:{display:false},ticks:{color:'#334155',font:{size:9}}}},
@@ -1024,21 +1022,21 @@ function drBar(byD){
     </div>
   </div>`;
 
-  const hdr=`<div style="border-bottom:2px solid #7c3aed;padding-bottom:8px;margin-bottom:32px"><span style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7c3aed">STUDERIA · RAPPORT ROI IA · ${co.toUpperCase()}</span></div>`;
+  const hdr=`<div style="border-bottom:2px solid #7123CE;padding-bottom:8px;margin-bottom:32px"><span style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7123CE">STUDERIA · RAPPORT ROI IA · ${co.toUpperCase()}</span></div>`;
 
   const html=`<div style="font-family:Arial,Helvetica,sans-serif;color:#0f172a;background:white">
 
 <!-- PAGE 1 : COUVERTURE -->
 <div style="page-break-after:always;height:297mm;box-sizing:border-box;overflow:hidden;padding:50px 60px 30px;text-align:center;background:white">
   <div style="background:#0f172a;border-radius:20px;padding:56px 40px 48px;margin-bottom:24px">
-    <div style="font-size:10px;letter-spacing:3px;font-weight:700;color:#a78bfa;margin-bottom:28px">STUDERIA · WORK WITH AI</div>
+    <div style="font-size:10px;letter-spacing:3px;font-weight:700;color:#D58FFF;margin-bottom:28px">STUDERIA · WORK WITH AI</div>
     <div style="font-size:48px;font-weight:900;color:white;letter-spacing:-2px;line-height:1.05;margin-bottom:18px">Rapport ROI IA</div>
-    <div style="font-size:26px;font-weight:700;color:#a78bfa;margin-bottom:8px">${co}</div>
+    <div style="font-size:26px;font-weight:700;color:#D58FFF;margin-bottom:8px">${co}</div>
     <div style="font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:44px">${sec} · ${emp} collaborateurs · CA ${ca}</div>
     <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:28px 40px;display:inline-block;min-width:280px">
       <div style="font-size:9px;letter-spacing:1.5px;color:rgba(255,255,255,0.35);margin-bottom:8px">ÉCONOMIES NETTES ESTIMÉES / AN</div>
       <div style="font-size:60px;font-weight:900;color:white;line-height:1;letter-spacing:-2px">${F(nMax*12)} €</div>
-      <div style="font-size:13px;color:#a78bfa;margin-top:8px">${selUC.length} cas d'usage · Payback ${pb<100?pb.toFixed(1)+' mois':'< 1 an'}</div>
+      <div style="font-size:13px;color:#D58FFF;margin-top:8px">${selUC.length} cas d'usage · Payback ${pb<100?pb.toFixed(1)+' mois':'< 1 an'}</div>
     </div>
   </div>
   <div style="font-size:11px;color:#94a3b8">Généré le ${date} · Document confidentiel · Estimation à titre indicatif</div>
@@ -1049,11 +1047,11 @@ function drBar(byD){
   ${hdr}
   <div style="font-size:24px;font-weight:900;color:#0f172a;letter-spacing:-1px;margin-bottom:12px">Résumé exécutif</div>
   <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 8px">Ce rapport analyse le potentiel de transformation par l'intelligence artificielle pour <b>${co}</b>, entreprise du secteur <b>${sec}</b> comptant <b>${emp} collaborateurs</b> et réalisant un chiffre d'affaires annuel de <b>${ca}</b>.</p>
-  <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 8px">Sur la base de <b style="color:#7c3aed">${selUC.length} cas d'usage IA</b> sélectionnés et adaptés à votre secteur, notre modèle projette des <b style="color:#059669">gains bruts compris entre ${F(gn)} € et ${F(gx)} € par mois</b> (${F(gn*12)} – ${F(gx*12)} €/an). Ces gains représentent le temps collaborateur libéré des tâches répétitives, valorisé au coût salarial renseigné (${sal.toLocaleString('fr-FR')} €/mois · ${pct}% du temps en tâches répétitives).</p>
-  <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 16px">Après déduction des coûts d'abonnement aux outils IA (${F(tC)} €/mois), le <b style="color:#7c3aed">ROI net maximal atteint ${F(nMax)} €/mois</b> (${F(nMax*12)} €/an). L'investissement d'implémentation de <b>${F(impl)} €</b> serait amorti en <b>${pb<100?pb.toFixed(1)+' mois':'moins d\'un an'}</b>.</p>
+  <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 8px">Sur la base de <b style="color:#7123CE">${selUC.length} cas d'usage IA</b> sélectionnés et adaptés à votre secteur, notre modèle projette des <b style="color:#059669">gains bruts compris entre ${F(gn)} € et ${F(gx)} € par mois</b> (${F(gn*12)} – ${F(gx*12)} €/an). Ces gains représentent le temps collaborateur libéré des tâches répétitives, valorisé au coût salarial renseigné (${sal.toLocaleString('fr-FR')} €/mois · ${pct}% du temps en tâches répétitives).</p>
+  <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 16px">Après déduction des coûts d'abonnement aux outils IA (${F(tC)} €/mois), le <b style="color:#7123CE">ROI net maximal atteint ${F(nMax)} €/mois</b> (${F(nMax*12)} €/an). L'investissement d'implémentation de <b>${F(impl)} €</b> serait amorti en <b>${pb<100?pb.toFixed(1)+' mois':'moins d\'un an'}</b>.</p>
 
   ${kpi3(
-    {bg:'#f5f3ff',bd:'#ede9fe',c:'#7c3aed',c2:'#5b21b6',lbl:'ROI Net Max / an',val:F(nMax*12)+' €',sub:F(nMax)+' €/mois'},
+    {bg:'#f9f2ff',bd:'#f0e0ff',c:'#7123CE',c2:'#0D0035',lbl:'ROI Net Max / an',val:F(nMax*12)+' €',sub:F(nMax)+' €/mois'},
     {bg:'#ecfdf5',bd:'#d1fae5',c:'#059669',c2:'#065f46',lbl:'Payback',val:pb<100?pb.toFixed(1)+' mois':'< 1 an',sub:'retour investissement'},
     {bg:'#fffbeb',bd:'#fde68a',c:'#d97706',c2:'#92400e',lbl:'Multiplicateur ROI',val:'×'+rm.toFixed(1),sub:rm>=5?'Exceptionnel':rm>=3?'Excellent':rm>=2?'Très bon':'Bon'}
   )}
@@ -1069,8 +1067,8 @@ function drBar(byD){
       <tr style="background:${Z(0)}"><td style="padding:6px 10px;border-bottom:1px solid #f1f5f9;color:#334155">Gains bruts (fourchette basse)</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#059669;border-bottom:1px solid #f1f5f9">${F(gn)} €</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#059669;border-bottom:1px solid #f1f5f9">${F(gn*12)} €</td></tr>
       <tr style="background:${Z(1)}"><td style="padding:6px 10px;border-bottom:1px solid #f1f5f9;color:#334155">Gains bruts (fourchette haute)</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#059669;border-bottom:1px solid #f1f5f9">${F(gx)} €</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#059669;border-bottom:1px solid #f1f5f9">${F(gx*12)} €</td></tr>
       <tr style="background:${Z(0)}"><td style="padding:6px 10px;border-bottom:1px solid #f1f5f9;color:#334155">Coûts outils IA</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#dc2626;border-bottom:1px solid #f1f5f9">− ${F(tC)} €</td><td style="padding:6px 10px;text-align:right;font-weight:700;color:#dc2626;border-bottom:1px solid #f1f5f9">− ${F(tC*12)} €</td></tr>
-      <tr style="background:#f5f3ff"><td style="padding:6px 10px;border-bottom:1px solid #ede9fe;color:#5b21b6;font-weight:700">ROI net (fourchette basse)</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7c3aed;border-bottom:1px solid #ede9fe">${F(nMin)} €</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7c3aed;border-bottom:1px solid #ede9fe">${F(nMin*12)} €</td></tr>
-      <tr style="background:#f5f3ff"><td style="padding:6px 10px;color:#5b21b6;font-weight:700">ROI net (fourchette haute)</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7c3aed">${F(nMax)} €</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7c3aed">${F(nMax*12)} €</td></tr>
+      <tr style="background:#f9f2ff"><td style="padding:6px 10px;border-bottom:1px solid #f0e0ff;color:#0D0035;font-weight:700">ROI net (fourchette basse)</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7123CE;border-bottom:1px solid #f0e0ff">${F(nMin)} €</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7123CE;border-bottom:1px solid #f0e0ff">${F(nMin*12)} €</td></tr>
+      <tr style="background:#f9f2ff"><td style="padding:6px 10px;color:#0D0035;font-weight:700">ROI net (fourchette haute)</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7123CE">${F(nMax)} €</td><td style="padding:6px 10px;text-align:right;font-weight:800;color:#7123CE">${F(nMax*12)} €</td></tr>
     </tbody>
   </table>
 </div>
@@ -1080,8 +1078,8 @@ function drBar(byD){
   ${hdr}
   <div style="font-size:24px;font-weight:900;color:#0f172a;letter-spacing:-1px;margin-bottom:12px">Méthodologie de calcul</div>
   <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 14px">Notre modèle repose sur une approche par cas d'usage, construite à partir de benchmarks sectoriels. Chaque automatisation est évaluée selon trois dimensions : le <b>gain de temps libéré</b>, le <b>coût mensuel des outils</b>, et le <b>temps d'implémentation</b>.</p>
-  <div style="border-left:4px solid #7c3aed;background:#f5f3ff;padding:11px 16px;margin-bottom:9px">
-    <div style="font-size:11px;font-weight:700;color:#5b21b6;margin-bottom:4px">Calcul des gains bruts</div>
+  <div style="border-left:4px solid #7123CE;background:#f9f2ff;padding:11px 16px;margin-bottom:9px">
+    <div style="font-size:11px;font-weight:700;color:#0D0035;margin-bottom:4px">Calcul des gains bruts</div>
     <div style="font-size:11px;color:#334155;line-height:1.7">Les gains = temps libéré × valeur salariale. Fourchette min (30-50% adoption) / max (80-95% adoption).<br><b>Paramètres :</b> ${sal.toLocaleString('fr-FR')} €/mois brut · ${pct}% du temps en tâches répétitives.</div>
   </div>
   <div style="border-left:4px solid #059669;background:#ecfdf5;padding:11px 16px;margin-bottom:9px">
@@ -1102,7 +1100,7 @@ function drBar(byD){
     </div>
   </div>
   <div style="font-size:12px;font-weight:700;color:#0f172a;margin-bottom:8px">Bénéfices non-financiers identifiés</div>
-  <div>${[...ben].map(b=>`<span style="display:inline-block;background:#f5f3ff;border:1px solid #ede9fe;padding:4px 10px;font-size:10px;font-weight:600;color:#5b21b6;margin:3px">${b}</span>`).join('')}</div>
+  <div>${[...ben].map(b=>`<span style="display:inline-block;background:#f9f2ff;border:1px solid #f0e0ff;padding:4px 10px;font-size:10px;font-weight:600;color:#0D0035;margin:3px">${b}</span>`).join('')}</div>
 </div>
 
 <!-- PAGE 4 : ANALYSE PAR DOMAINE -->
@@ -1111,7 +1109,7 @@ function drBar(byD){
   <div style="font-size:24px;font-weight:900;color:#0f172a;letter-spacing:-1px;margin-bottom:4px">Analyse par domaine</div>
   <div style="font-size:11px;color:#64748b;margin-bottom:16px">${Object.keys(byD).length} domaine(s) · ${selUC.length} cas d'usage</div>
   ${Object.entries(byD).map(([dom,v])=>{
-    const col=DC[dom]||'#7c3aed';
+    const col=DC[dom]||'#7123CE';
     const avg=Math.round((v.min+v.max)/2);
     const net=avg-v.cost;
     const domInfo=DOMS.find(d=>d.id===dom);
@@ -1163,7 +1161,7 @@ function drBar(byD){
       <th style="padding:8px 10px;text-align:right;color:white;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Impl.</th>
     </tr></thead>
     <tbody>${selUC.map((u,i)=>{
-      const col=DC[u.Dom]||'#7c3aed';
+      const col=DC[u.Dom]||'#7123CE';
       return`<tr style="background:${Z(i)}">
         <td style="padding:7px 10px;border-bottom:1px solid #f1f5f9;color:#0f172a;font-weight:600">${u.T}</td>
         <td style="padding:7px 10px;border-bottom:1px solid #f1f5f9"><span style="background:${col}22;color:${col};padding:2px 6px;font-size:9px;font-weight:700">${u.Dom.split(' & ')[0]}</span></td>
@@ -1179,7 +1177,7 @@ function drBar(byD){
     <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.8;margin-bottom:20px;max-width:500px;margin-left:auto;margin-right:auto">Ces résultats sont le point de départ. Un audit approfondi permettra de prioriser les déploiements et affiner les estimations selon votre organisation.</div>
     <div style="font-size:0">
       <span style="display:inline-block;font-size:11px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:10px 16px;font-weight:600;color:white;margin:4px">Audit gratuit 30 min</span>
-      <span style="display:inline-block;font-size:11px;background:#7c3aed;padding:10px 16px;font-weight:700;color:white;margin:4px">www.studeria.fr</span>
+      <span style="display:inline-block;font-size:11px;background:#7123CE;padding:10px 16px;font-weight:700;color:white;margin:4px">www.studeria.fr</span>
       <span style="display:inline-block;font-size:11px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:10px 16px;font-weight:600;color:white;margin:4px">contact@studeria.fr</span>
     </div>
   </div>
