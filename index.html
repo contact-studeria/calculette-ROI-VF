@@ -613,12 +613,12 @@ function animN(el,target,suffix='',prefix=''){
   void el.offsetWidth;
   el.classList.add('num-flash');
   const dur=500,steps=20;let i=0;
-  clearGilroyval(el._iv);
-  el._iv=setGilroyval(()=>{
+  clearInterval(el._iv);
+  el._iv=setInterval(()=>{
     i++;const p=Math.min(i/steps,1),ease=1-Math.pow(1-p,3);
     const v=prev+(target-prev)*ease;
     el.textContent=prefix+Math.round(v).toLocaleString('fr-FR')+suffix;
-    if(p>=1)clearGilroyval(el._iv);
+    if(p>=1)clearInterval(el._iv);
   },dur/steps);
 }
 
@@ -972,7 +972,7 @@ function an(id,target,sf='',pr='',isF=false){
   const el=document.getElementById(id);if(!el)return;
   const fmt=v=>isF?pr+v.toFixed(1)+sf:pr+Math.round(v).toLocaleString('fr-FR')+sf;
   const dur=800,steps=24;let i=0;
-  const iv=setGilroyval(()=>{i++;const p=Math.min(i/steps,1),e=1-Math.pow(1-p,3);el.textContent=fmt(e*target);if(p>=1)clearGilroyval(iv);},dur/steps);
+  const iv=setInterval(()=>{i++;const p=Math.min(i/steps,1),e=1-Math.pow(1-p,3);el.textContent=fmt(e*target);if(p>=1)clearInterval(iv);},dur/steps);
 }
 
 /* ── Charts ── */
