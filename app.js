@@ -275,7 +275,7 @@ function renderROI(){
   document.getElementById('dSec').textContent=[sector||'—',fEmpS(empSlider(document.getElementById('s1e').value))+' collaborateurs · CA '+fCA(caF(document.getElementById('s1c').value))].join(' · ');
   document.getElementById('pdfDate').textContent=new Date().toLocaleDateString('fr-FR');
   const ucTxt=selUC.length>0?`<strong>${selUC.length} cas d'usage</strong>`:'<strong>tous les domaines</strong>';
-  document.getElementById('dV').innerHTML=`Avec ${ucTxt}, votre entreprise peut économiser entre <strong>${Math.round(gn).toLocaleString('fr-FR')}€</strong> et <strong>${Math.round(gx).toLocaleString('fr-FR')}€ par mois</strong>. L'investissement sera amorti en <strong>${pb<100?pb.toFixed(1)+' mois':'∞'}</strong>.`;
+  document.getElementById('dV').innerHTML=`Avec ${ucTxt}, votre entreprise peut économiser <strong>${Math.round(gx).toLocaleString('fr-FR')}€ par mois</strong>. L'investissement sera amorti en <strong>${pb<100?pb.toFixed(1)+' mois':'∞'}</strong>.`;
 
   document.getElementById('r-method').innerHTML = '<div class="method-box"><div class="method-title">💡 Comment sont calculés ces chiffres ?</div><div class="method-body">Ces estimations sont basées sur <strong>'+selUC.length+' cas d\'usage IA</strong> sélectionnés. Les <strong>gains</strong> représentent le temps homme libéré valorisé au coût salarial moyen. Les <strong>coûts outils</strong> sont les abonnements mensuels des solutions IA. Le <strong>payback</strong> est le délai pour amortir l\'investissement d\'implémentation ('+impl.toLocaleString('fr-FR')+'€) avec les gains nets mensuels.</div></div>';
 
@@ -415,7 +415,7 @@ async function genPDF(){
   ${hdr}
   <div style="font-size:24px;font-weight:900;color:#0f172a;letter-spacing:-1px;margin-bottom:12px">Résumé exécutif</div>
   <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 8px">Ce rapport analyse le potentiel de transformation par l'intelligence artificielle pour <b>${co}</b>, entreprise du secteur <b>${sec}</b> comptant <b>${emp} collaborateurs</b> et réalisant un chiffre d'affaires annuel de <b>${ca}</b>.</p>
-  <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 8px">Sur la base de <b style="color:#7c3aed">${selUC.length} cas d'usage IA</b> sélectionnés et adaptés à votre secteur, notre modèle projette des <b style="color:#059669">gains bruts compris entre ${F(gn)} € et ${F(gx)} € par mois</b> (${F(gn*12)} – ${F(gx*12)} €/an). Ces gains représentent le temps collaborateur libéré des tâches répétitives, valorisé au coût salarial renseigné (${sal.toLocaleString('fr-FR')} €/mois · ${pct}% du temps en tâches répétitives).</p>
+  <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 8px">Sur la base de <b style="color:#7c3aed">${selUC.length} cas d'usage IA</b> sélectionnés et adaptés à votre secteur, notre modèle projette des <b style="color:#059669">gains bruts estimés à ${F(gx)} € par mois</b> (${F(gx*12)} €/an). Ces gains représentent le temps collaborateur libéré des tâches répétitives, valorisé au coût salarial renseigné (${sal.toLocaleString('fr-FR')} €/mois · ${pct}% du temps en tâches répétitives).</p>
   <p style="font-size:12px;line-height:1.7;color:#334155;margin:0 0 16px">Après déduction des coûts d'abonnement aux outils IA (${F(tC)} €/mois), le <b style="color:#7c3aed">ROI net maximal atteint ${F(nMax)} €/mois</b> (${F(nMax*12)} €/an). L'investissement d'implémentation de <b>${F(impl)} €</b> serait amorti en <b>${pb<100?pb.toFixed(1)+' mois':'moins d\'un an'}</b>.</p>
 
   ${kpi3(
