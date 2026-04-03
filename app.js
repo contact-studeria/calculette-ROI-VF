@@ -565,11 +565,6 @@ async function genPDF(){
   if(btn)btn.innerHTML=orig;
 }
 
-/* ── Modal ── */
-function openMo(){document.getElementById('modal').classList.add('open');}
-function closeMo(){document.getElementById('modal').classList.remove('open');}
-function subContact(){const n=document.getElementById('cN').value,e=document.getElementById('cE').value;if(!n||!e)return alert('Remplissez tous les champs');window.open('https://www.studeria.fr','_blank');closeMo();}
-
 /* ── Example ── */
 function loadExample(){
   document.getElementById('coName').value='Acme Solutions';

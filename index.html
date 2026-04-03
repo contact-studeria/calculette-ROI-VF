@@ -503,20 +503,11 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
       <div class="ctat">Prêt à transformer votre entreprise ?</div>
       <p class="ctad">Nos experts Studeria vous accompagnent de l'audit à l'implémentation.</p>
       <div class="ctabs">
-<a class="btn bp" href="https://meetings.hubspot.com/matthieu-baranez/vsl-studeria-booking-link-entreprise" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Prendre rendez-vous</a>
       </div>
     </div>
   </div></div>
 </div>
 
-<!-- Modal -->
-<div class="mov" id="modal"><div class="mo">
-  <h3>Prendre rendez-vous</h3>
-  <p>Discutez de votre projet IA avec nos experts Studeria.</p>
-  <input type="text" id="cN" class="mi" placeholder="Votre nom">
-  <input type="email" id="cE" class="mi" placeholder="Votre email">
-  <div class="moa"><button class="btn bs" onclick="closeMo()">Annuler</button><button class="btn bp" onclick="subContact()">Envoyer</button></div>
-</div></div>
 
 <script>
 // Données initiales (fallback si le sheet est inaccessible)
@@ -1195,11 +1186,6 @@ function drBar(byD){
   }).from(html).save();
 
 genPDF end removed */
-
-/* ── Modal ── */
-function openMo(){document.getElementById('modal').classList.add('open');}
-function closeMo(){document.getElementById('modal').classList.remove('open');}
-function subContact(){const n=document.getElementById('cN').value,e=document.getElementById('cE').value;if(!n||!e)return alert('Remplissez tous les champs');window.open('https://www.studeria.fr','_blank');closeMo();}
 
 /* ── Example ── */
 function loadExample(){
