@@ -11,6 +11,43 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Missing Airtable configuration' });
   }
 
+  const body = req.body || {};
+  const clean = (v) => (typeof v === 'string' ? v.trim() : v);
+
+  const prenom = clean(body.prenom);
+  const nom = clean(body.nom);
+  const email = clean(body.email);
+  const tel = clean(body.tel);
+  const entreprise = clean(body.Entreprise);
+
+  const missing = [];
+  if (!prenom) missing.push('prenom');
+  if (!nom) missing.push('nom');
+  if (!email) missing.push('email');
+  if (!tel) missing.push('tel');
+  if (!entreprise) missing.push('Entreprise');
+
+  if (missing.length) {
+    return res.status(400).json({
+      error: 'Missing required fields',
+      fields: missing
+    });
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Invalid email format' });
+  }
+
+  const fields = {
+    ...body,
+    prenom,
+    nom,
+    email,
+    tel,
+    Entreprise: entreprise
+  };
+
   try {
     const response = await fetch(
       `https://api.airtable.com/v0/${base}/${encodeURIComponent(table)}`,
@@ -20,7 +57,7 @@ module.exports = async function handler(req, res) {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ fields: req.body })
+        body: JSON.stringify({ fields })
       }
     );
 
