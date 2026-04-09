@@ -293,8 +293,28 @@ body.pdf-mode .r-hdr{display:none!important}body.pdf-mode .r-main{padding:0!impo
           <div class="fs-num">01</div>
           <div><div class="fs-title">Votre entreprise</div><div class="fs-desc">Nom et secteur d'activité</div></div>
         </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+          <div>
+            <div class="fl">Prénom *</div>
+            <input type="text" id="leadPrenom" class="txt" placeholder="Ex : Jean" required>
+          </div>
+          <div>
+            <div class="fl">Nom *</div>
+            <input type="text" id="leadNom" class="txt" placeholder="Ex : Dupont" required>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+          <div>
+            <div class="fl">Email professionnel *</div>
+            <input type="email" id="leadEmail" class="txt" placeholder="Ex : jean@acme.fr" required>
+          </div>
+          <div>
+            <div class="fl">Téléphone *</div>
+            <input type="tel" id="leadTel" class="txt" placeholder="Ex : 06 12 34 56 78" required>
+          </div>
+        </div>
         <div class="field">
-          <div class="fl">Nom de l'entreprise</div>
+          <div class="fl">Nom de l'entreprise *</div>
           <input type="text" id="coName" class="txt" placeholder="Ex : Acme Solutions" oninput="updatePreview()">
         </div>
         <div class="field" style="margin-bottom:0">
@@ -667,16 +687,27 @@ function updatePreview(){
 
 /* ── Navigation ── */
 function showReport(){
-  const co=document.getElementById('coName').value.trim();
-  if(!co){
-    const inp=document.getElementById('coName');
-    inp.focus();
-    inp.style.borderColor='#ef4444';
-    inp.placeholder='⚠ Veuillez renseigner le nom de votre entreprise';
-    setTimeout(()=>{inp.style.borderColor='';inp.placeholder='Ex : Acme Solutions';},3000);
-    inp.scrollIntoView({behavior:'smooth',block:'center'});
-    return;
+  const leadFields=[
+    {id:'leadPrenom',label:'votre prénom',ph:'Ex : Jean'},
+    {id:'leadNom',label:'votre nom',ph:'Ex : Dupont'},
+    {id:'leadEmail',label:'votre email',ph:'Ex : jean@acme.fr'},
+    {id:'leadTel',label:'votre téléphone',ph:'Ex : 06 12 34 56 78'},
+    {id:'coName',label:'le nom de votre entreprise',ph:'Ex : Acme Solutions'}
+  ];
+  for(const f of leadFields){
+    const inp=document.getElementById(f.id);
+    const v=inp.value.trim();
+    if(!v||(f.id==='leadEmail'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))){
+      inp.focus();
+      inp.style.borderColor='#ef4444';
+      const msg=f.id==='leadEmail'&&v?'⚠ Email invalide':'⚠ Veuillez renseigner '+f.label;
+      inp.placeholder=msg;
+      setTimeout(()=>{inp.style.borderColor='';inp.placeholder=f.ph;},3000);
+      inp.scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
   }
+  const co=document.getElementById('coName').value.trim();
   document.getElementById('landing').style.display='none';
   document.getElementById('report').style.display='block';
   window.scrollTo(0,0);
@@ -690,10 +721,14 @@ function showReport(){
     roiAn=roiAn*12;
     const emp=empSlider(document.getElementById('s1e').value);
     const ca=fCA(caF(document.getElementById('s1c').value));
-    fetch('https://api.airtable.com/v0/appAhWzXdEGHFun3z/tblDRYAo3AqZw98sg',{
+    fetch('/api/lead',{
       method:'POST',
-      headers:{'Authorization':'Bearer pat0l5Rk4adDZ8erU.65bca30e07cb45449f25a3a4278df5732a357dece390f1dbd0431382d0f8fca3','Content-Type':'application/json'},
-      body:JSON.stringify({fields:{
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        'prenom':document.getElementById('leadPrenom').value.trim(),
+        'nom':document.getElementById('leadNom').value.trim(),
+        'email':document.getElementById('leadEmail').value.trim(),
+        'tel':document.getElementById('leadTel').value.trim(),
         'Entreprise':co,
         'Secteur':sector||'—',
         'Effectif':emp,
@@ -703,7 +738,7 @@ function showReport(){
         'Nombre UC':selUC.length,
         'ROI annuel estimé':roiAn,
         'Date':new Date().toISOString().split('T')[0]
-      }})
+      })
     });
   }catch(e){console.warn('Airtable sync error',e);}
 }
